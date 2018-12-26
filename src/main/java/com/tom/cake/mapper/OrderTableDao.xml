@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.OrderTableDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.OrderTable">
+        <result column="order_id" property="order_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="money" property="money"/>
+        <result column="status" property="status"/>
+        <result column="time" property="time"/>
+        <result column="address_id" property="address_id"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `order_id`,
+        `user_id`,
+        `money`,
+        `status`,
+        `time`,
+        `address_id`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.order_id">
+        INSERT INTO order_table (
+            `order_id`,
+            `user_id`,
+            `money`,
+            `status`,
+            `time`,
+            `address_id`
+        ) VALUES (
+            #{pojo.order_id},
+            #{pojo.user_id},
+            #{pojo.money},
+            #{pojo.status},
+            #{pojo.time},
+            #{pojo.address_id}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.order_id">
+        INSERT INTO order_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.order_id!=null"> `order_id`,</if>
+            <if test="pojo.user_id!=null"> `user_id`,</if>
+            <if test="pojo.money!=null"> `money`,</if>
+            <if test="pojo.status!=null"> `status`,</if>
+            <if test="pojo.time!=null"> `time`,</if>
+            <if test="pojo.address_id!=null"> `address_id`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.order_id!=null">#{pojo.order_id},</if>
+            <if test="pojo.user_id!=null">#{pojo.user_id},</if>
+            <if test="pojo.money!=null">#{pojo.money},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.time!=null">#{pojo.time},</if>
+            <if test="pojo.address_id!=null">#{pojo.address_id},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO order_table (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.order_id},
+            #{pojo.user_id},
+            #{pojo.money},
+            #{pojo.status},
+            #{pojo.time},
+            #{pojo.address_id}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE order_table
+        <set>
+            <if test="pojo.order_id != null"> `order_id` = #{pojo.order_id}, </if>
+            <if test="pojo.user_id != null"> `user_id` = #{pojo.user_id}, </if>
+            <if test="pojo.money != null"> `money` = #{pojo.money}, </if>
+            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
+            <if test="pojo.time != null"> `time` = #{pojo.time}, </if>
+            <if test="pojo.address_id != null"> `address_id` = #{pojo.address_id} </if>
+        </set>
+        WHERE order_id = #{pojo.order_id}
+    </update>
+</mapper>
+

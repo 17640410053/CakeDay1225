@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.UsersDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.Users">
+        <result column="user_id" property="user_id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <result column="mail" property="mail"/>
+        <result column="birth" property="birth"/>
+        <result column="gender" property="gender"/>
+        <result column="image" property="image"/>
+        <result column="token" property="token"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `user_id`,
+        `username`,
+        `password`,
+        `phone`,
+        `mail`,
+        `birth`,
+        `gender`,
+        `image`,
+        `token`,
+        `create_time`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.user_id">
+        INSERT INTO users (
+            `user_id`,
+            `username`,
+            `password`,
+            `phone`,
+            `mail`,
+            `birth`,
+            `gender`,
+            `image`,
+            `token`,
+            `create_time`
+        ) VALUES (
+            #{pojo.user_id},
+            #{pojo.username},
+            #{pojo.password},
+            #{pojo.phone},
+            #{pojo.mail},
+            #{pojo.birth},
+            #{pojo.gender},
+            #{pojo.image},
+            #{pojo.token},
+            #{pojo.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.user_id">
+        INSERT INTO users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.user_id!=null">`user_id`,</if>
+            <if test="pojo.username!=null">`username`,</if>
+            <if test="pojo.password!=null">`password`,</if>
+            <if test="pojo.phone!=null">`phone`,</if>
+            <if test="pojo.mail!=null">`mail`,</if>
+            <if test="pojo.birth!=null">`birth`,</if>
+            <if test="pojo.gender!=null">`gender`,</if>
+            <if test="pojo.image!=null">`image`,</if>
+            <if test="pojo.token!=null">`token`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.user_id!=null">#{pojo.user_id},</if>
+            <if test="pojo.username!=null">#{pojo.username},</if>
+            <if test="pojo.password!=null">#{pojo.password},</if>
+            <if test="pojo.phone!=null">#{pojo.phone},</if>
+            <if test="pojo.mail!=null">#{pojo.mail},</if>
+            <if test="pojo.birth!=null">#{pojo.birth},</if>
+            <if test="pojo.gender!=null">#{pojo.gender},</if>
+            <if test="pojo.image!=null">#{pojo.image},</if>
+            <if test="pojo.token!=null">#{pojo.token},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO users (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.user_id},
+            #{pojo.username},
+            #{pojo.password},
+            #{pojo.phone},
+            #{pojo.mail},
+            #{pojo.birth},
+            #{pojo.gender},
+            #{pojo.image},
+            #{pojo.token},
+            #{pojo.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE users
+        <set>
+            <if test="pojo.user_id != null">`user_id` = #{pojo.user_id},</if>
+            <if test="pojo.username != null">`username` = #{pojo.username},</if>
+            <if test="pojo.password != null">`password` = #{pojo.password},</if>
+            <if test="pojo.phone != null">`phone` = #{pojo.phone},</if>
+            <if test="pojo.mail != null">`mail` = #{pojo.mail},</if>
+            <if test="pojo.birth != null">`birth` = #{pojo.birth},</if>
+            <if test="pojo.gender != null">`gender` = #{pojo.gender},</if>
+            <if test="pojo.image != null">`image` = #{pojo.image},</if>
+            <if test="pojo.token != null">`token` = #{pojo.token},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime}</if>
+        </set>
+        WHERE user_id = #{pojo.user_id}
+    </update>
+
+
+    <select id="selectOne" resultType="Users">
+        select * from users where username=#{username} and password=#{password}
+    </select>
+
+    <select id="selectByMailAndPassword" resultType="Users">
+        select * from users where mail=#{mail}  and password=#{password}
+
+    </select>
+
+    <select id="selectByMail" resultType="Users">
+        select * from users where mail=#{mail}
+   </select>
+
+</mapper>
+

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.attrDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.Attr">
+        <result column="attr_id" property="attr_id"/>
+        <result column="name" property="name"/>
+        <result column="parent_id" property="parent_id"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `attr_id`,
+        `name`,
+        `parent_id`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.attr_id">
+        INSERT INTO attr (
+            `attr_id`,
+            `name`,
+            `parent_id`
+        ) VALUES (
+            #{pojo.attr_id},
+            #{pojo.name},
+            #{pojo.parent_id}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.attr_id">
+        INSERT INTO attr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.attr_id!=null"> `attr_id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.parent_id!=null"> `parent_id`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.attr_id!=null">#{pojo.attr_id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.parent_id!=null">#{pojo.parent_id},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO attr (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.attr_id},
+            #{pojo.name},
+            #{pojo.parent_id}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE attr
+        <set>
+            <if test="pojo.attr_id != null"> `attr_id` = #{pojo.attr_id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
+            <if test="pojo.parent_id != null"> `parent_id` = #{pojo.parent_id} </if>
+        </set>
+        WHERE attr_id = #{pojo.attr_id}
+    </update>
+</mapper>
+

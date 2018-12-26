@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.CommentDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.Comment">
+        <result column="comm_id" property="comm_id"/>
+        <result column="content" property="content"/>
+        <result column="user_id" property="user_id"/>
+        <result column="goods_id" property="goods_id"/>
+        <result column="star" property="star"/>
+        <result column="img" property="img"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `comm_id`,
+        `content`,
+        `user_id`,
+        `goods_id`,
+        `star`,
+        `img`,
+        `create_time`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.comm_id">
+        INSERT INTO comment (
+            `comm_id`,
+            `content`,
+            `user_id`,
+            `goods_id`,
+            `star`,
+            `img`,
+            `create_time`
+        ) VALUES (
+            #{pojo.comm_id},
+            #{pojo.content},
+            #{pojo.user_id},
+            #{pojo.goods_id},
+            #{pojo.star},
+            #{pojo.img},
+            #{pojo.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.comm_id">
+        INSERT INTO comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.comm_id!=null"> `comm_id`,</if>
+            <if test="pojo.content!=null"> `content`,</if>
+            <if test="pojo.user_id!=null"> `user_id`,</if>
+            <if test="pojo.goods_id!=null"> `goods_id`,</if>
+            <if test="pojo.star!=null"> `star`,</if>
+            <if test="pojo.img!=null"> `img`,</if>
+            <if test="pojo.createTime!=null"> `create_time`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.comm_id!=null">#{pojo.comm_id},</if>
+            <if test="pojo.content!=null">#{pojo.content},</if>
+            <if test="pojo.user_id!=null">#{pojo.user_id},</if>
+            <if test="pojo.goods_id!=null">#{pojo.goods_id},</if>
+            <if test="pojo.star!=null">#{pojo.star},</if>
+            <if test="pojo.img!=null">#{pojo.img},</if>
+            <if test="pojo.createTime!=null">#{pojo.createTime},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO comment (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.comm_id},
+            #{pojo.content},
+            #{pojo.user_id},
+            #{pojo.goods_id},
+            #{pojo.star},
+            #{pojo.img},
+            #{pojo.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE comment
+        <set>
+            <if test="pojo.comm_id != null"> `comm_id` = #{pojo.comm_id}, </if>
+            <if test="pojo.content != null"> `content` = #{pojo.content}, </if>
+            <if test="pojo.user_id != null"> `user_id` = #{pojo.user_id}, </if>
+            <if test="pojo.goods_id != null"> `goods_id` = #{pojo.goods_id}, </if>
+            <if test="pojo.star != null"> `star` = #{pojo.star}, </if>
+            <if test="pojo.img != null"> `img` = #{pojo.img}, </if>
+            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime} </if>
+        </set>
+        WHERE comm_id = #{pojo.comm_id}
+    </update>
+</mapper>
+

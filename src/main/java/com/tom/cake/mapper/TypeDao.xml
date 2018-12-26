@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.TypeDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.Type">
+        <result column="type_id" property="type_id"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="parent_id" property="parent_id"/>
+    </resultMap>
+
+    <resultMap id="ResultMapForChild" type="TypeVo">
+        <id column="type_id" property="type_id"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="parent_id" property="parent_id"/>
+        <collection property="typesList" ofType="Type">
+            <id column="child_id" property="type_id"/>
+            <result column="child_name" property="name"/>
+            <result column="child_level" property="level"/>
+            <result column="child_parent" property="parent_id"/>
+        </collection>
+    </resultMap>
+
+
+    <resultMap id="ResultMapForGoods" type="TypeVo">
+        <id column="type_id" property="type_id"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="parent_id" property="parent_id"/>
+        <collection property="goodsList" ofType="Goods">
+            <id column="goods_id" property="goods_id"/>
+            <result column="goodsname" property="name"/>
+            <result column="createtime" property="createtime"/>
+            <result column="detail" property="detail"/>
+            <result column="img" property="img"/>
+            <result column="price" property="price"/>
+            <result column="status" property="status"/>
+            <result column="typeid" property="type_id"/>
+        </collection>
+    </resultMap>
+    <!--写好了，你调用一下-->
+
+
+    <select id="selectTypes" resultType="Type">
+        SELECT *
+        FROM type
+        WHERE parent_id = 0
+    </select>
+
+    <select id="selectByParentId" resultType="Type" parameterType="Type">
+        select *
+        from cake_day1225.type
+        where parent_id = #{parent_id}
+    </select>
+
+    <select id="selectTypesForChild" resultMap="ResultMapForChild">
+        SELECT t1.type_id,
+               t1.name,
+               t1.level,
+               t1.parent_id,
+               t2.type_id   child_id,
+               t2.name      child_name,
+               t2.level     child_level,
+               t2.parent_id child_parent
+        FROM type AS t1,
+             type AS t2
+        WHERE t1.type_id = t2.parent_id
+    </select>
+
+    <select id="selectTypesForGoods" resultMap="ResultMapForGoods">
+        select t.type_id,
+               t.`name`,
+               t.`level`,
+               t.parent_id,
+               g.goods_id   goods_id,
+               g.`name`     goodsname,
+               g.createtime createtime,
+               g.detail     detail,
+               g.img        img,
+               g.price      price,
+               g.star       satr,
+               g.`status`   status,
+               g.type_id    typeid
+        from type t
+                 inner join goods g
+                     on t.type_id = (select distinct t1.parent_id from type t1 where t1.type_id = g.type_id);
+    </select>
+
+    <select id="selectHotGoods" resultType="Goods">
+        select *
+        from cake_day1225.goods
+        where star >= #{star}
+    </select>
+    <!--ResultMapForChild-->
+    <!--auto generated Code-->
+    <!-- <sql id="all_column">
+         `type_id`,
+         `name`,
+         `level`,
+         `parent_id`
+     </sql>
+
+     &lt;!&ndash;auto generated Code&ndash;&gt;
+     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.type_id">
+         INSERT INTO type (`type_id`, `name`, `level`, `parent_id`)
+         VALUES (#{pojo.type_id}, #{pojo.name}, #{pojo.level}, #{pojo.parent_id})
+     </insert>
+
+     &lt;!&ndash;auto generated Code&ndash;&gt;
+     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.type_id">
+         INSERT INTO type
+         <trim prefix="(" suffix=")" suffixOverrides=",">
+             <if test="pojo.type_id!=null">`type_id`,</if>
+             <if test="pojo.name!=null">`name`,</if>
+             <if test="pojo.level!=null">`level`,</if>
+             <if test="pojo.parent_id!=null">`parent_id`,</if>
+         </trim>
+         VALUES
+         <trim prefix="(" suffix=")" suffixOverrides=",">
+             <if test="pojo.type_id!=null">#{pojo.type_id},</if>
+             <if test="pojo.name!=null">#{pojo.name},</if>
+             <if test="pojo.level!=null">#{pojo.level},</if>
+             <if test="pojo.parent_id!=null">#{pojo.parent_id},</if>
+         </trim>
+     </insert>
+
+     &lt;!&ndash;auto generated Code&ndash;&gt;
+     <insert id="insertList">
+         INSERT INTO type (
+         <include refid="all_column"/>
+         )VALUES
+         <foreach collection="pojos" item="pojo" index="index" separator=",">
+             (
+             #{pojo.type_id},
+             #{pojo.name},
+             #{pojo.level},
+             #{pojo.parent_id}
+             )
+         </foreach>
+     </insert>
+
+     &lt;!&ndash;auto generated Code&ndash;&gt;
+     <update id="update">
+         UPDATE type
+         <set>
+             <if test="pojo.type_id != null">`type_id` = #{pojo.type_id},</if>
+             <if test="pojo.name != null">`name` = #{pojo.name},</if>
+             <if test="pojo.level != null">`level` = #{pojo.level},</if>
+             <if test="pojo.parent_id != null">`parent_id` = #{pojo.parent_id}</if>
+         </set>
+         WHERE type_id = #{pojo.type_id}
+     </update>
+ -->
+</mapper>
+

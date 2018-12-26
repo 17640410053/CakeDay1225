@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.GoodsDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.Goods">
+        <result column="goods_id" property="goods_id"/>
+        <result column="name" property="name"/>
+        <result column="detail" property="detail"/>
+        <result column="price" property="price"/>
+        <result column="status" property="status"/>
+        <result column="createtime" property="createtime"/>
+        <result column="type_id" property="type_id"/>
+        <result column="img" property="img"/>
+        <result column="star" property="star"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `goods_id`,
+        `name`,
+        `detail`,
+        `price`,
+        `status`,
+        `createtime`,
+        `type_id`,
+        `img`,
+        `star`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.goods_id">
+        INSERT INTO goods (`goods_id`, `name`, `detail`, `price`, `status`, `createtime`, `type_id`, `img`, `star`)
+        VALUES (#{pojo.goods_id},
+                #{pojo.name},
+                #{pojo.detail},
+                #{pojo.price},
+                #{pojo.status},
+                #{pojo.createtime},
+                #{pojo.type_id},
+                #{pojo.img},
+                #{pojo.star})
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.goods_id">
+        INSERT INTO goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.goods_id!=null">`goods_id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.detail!=null">`detail`,</if>
+            <if test="pojo.price!=null">`price`,</if>
+            <if test="pojo.status!=null">`status`,</if>
+            <if test="pojo.createtime!=null">`createtime`,</if>
+            <if test="pojo.type_id!=null">`type_id`,</if>
+            <if test="pojo.img!=null">`img`,</if>
+            <if test="pojo.star!=null">`star`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.goods_id!=null">#{pojo.goods_id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.detail!=null">#{pojo.detail},</if>
+            <if test="pojo.price!=null">#{pojo.price},</if>
+            <if test="pojo.status!=null">#{pojo.status},</if>
+            <if test="pojo.createtime!=null">#{pojo.createtime},</if>
+            <if test="pojo.type_id!=null">#{pojo.type_id},</if>
+            <if test="pojo.img!=null">#{pojo.img},</if>
+            <if test="pojo.star!=null">#{pojo.star},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO goods (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.goods_id},
+            #{pojo.name},
+            #{pojo.detail},
+            #{pojo.price},
+            #{pojo.status},
+            #{pojo.createtime},
+            #{pojo.type_id},
+            #{pojo.img},
+            #{pojo.star}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE goods
+        <set>
+            <if test="pojo.goods_id != null">`goods_id` = #{pojo.goods_id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.detail != null">`detail` = #{pojo.detail},</if>
+            <if test="pojo.price != null">`price` = #{pojo.price},</if>
+            <if test="pojo.status != null">`status` = #{pojo.status},</if>
+            <if test="pojo.createtime != null">`createtime` = #{pojo.createtime},</if>
+            <if test="pojo.type_id != null">`type_id` = #{pojo.type_id},</if>
+            <if test="pojo.img != null">`img` = #{pojo.img},</if>
+            <if test="pojo.star != null">`star` = #{pojo.star}</if>
+        </set>
+        WHERE goods_id = #{pojo.goods_id}
+    </update>
+
+
+    <select id="selectByType" parameterType="Goods" resultType="Goods">
+        select *
+        from cake_day1225.goods
+        where type_id = #{type_id}
+    </select>
+    <!--
+     &lt; < 小于号
+     &gt; > 大于号
+     &amp; & 和
+     &apos; ' 单引号
+     &quot; " 双引号
+    -->
+
+    <select id="selectByStar" resultType="Goods">
+        select *
+        from cake_day1225.goods
+        where star &gt;=#{star}
+    </select>
+</mapper>
+
