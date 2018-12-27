@@ -1,7 +1,11 @@
 package com.tom.cake.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.tom.cake.model.Address;
 import com.tom.cake.model.Goods;
 import com.tom.cake.model.Type;
+import com.tom.cake.model.Users;
+import com.tom.cake.service.AddressService;
 import com.tom.cake.service.GoodsService;
 import com.tom.cake.service.TypeService;
 import com.tom.cake.service.UsersService;
@@ -11,19 +15,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class IndexController {
 
-    @Autowired
-    private UsersService usersService;
 
     @Autowired
     private TypeService typeService;
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private AddressService addressService;
 
     /**
      * 主页
@@ -95,14 +101,37 @@ public class IndexController {
 
         goods.setStar(8);
         List<Goods> byStar = goodsService.findByStar(goods);
-        mv.addObject("byStar0",byStar.get(0));
-        mv.addObject("byStar1",byStar.get(1));
-        mv.addObject("byStar2",byStar.get(2));
-        mv.addObject("byStar3",byStar.get(3));
-        mv.addObject("byStar4",byStar.get(4));
+        mv.addObject("byStar0", byStar.get(0));
+        mv.addObject("byStar1", byStar.get(1));
+        mv.addObject("byStar2", byStar.get(2));
+        mv.addObject("byStar3", byStar.get(3));
+        mv.addObject("byStar4", byStar.get(4));
         mv.addObject("byStar5", byStar.get(5));
         mv.addObject("byStar6", byStar.get(6));
         mv.addObject("byStar7", byStar.get(7));
         return mv;
+    }
+
+    @RequestMapping("/details")
+    public ModelAndView details(Goods goods, HttpSession session) {
+        ModelAndView mv = new ModelAndView("details");
+        Users user = (Users) session.getAttribute("user");
+        goods = goodsService.findByGoods(goods);
+        goods.setStar(8);
+        List<Goods> byStar = goodsService.findByStar(goods);
+        if (user != null) {
+            Address address = new Address();
+            address.setUser_id(user.getUser_id());
+            address = addressService.findByUsersId(address);
+            mv.addObject("address", address);
+        }
+        mv.addObject("byStar", byStar);
+        mv.addObject("goods", goods);
+        return mv;
+    }
+
+    @RequestMapping("/test")
+    public ModelAndView test() {
+        return new ModelAndView("test1");
     }
 }

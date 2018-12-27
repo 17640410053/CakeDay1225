@@ -16,7 +16,7 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
                     <a href="buytoday.html">今日团购</a>
                     <a href="information.html">母婴资讯</a>
                     <a href="about.html">关于我们</a>
@@ -50,7 +50,7 @@
         </div>
         <div class="category-banner">
             <div class="w1200">
-                <img src="/res/static/img/banner1.jpg">
+                <img src="<c:url value="/res/static/img/banner1.jpg"/>">
             </div>
         </div>
     </div>
@@ -67,27 +67,31 @@
                         <div carousel-item>
                             <div class="item-box">
                                 <c:forEach items="${goodsList2}" var="goods">
-                                    <div class="item">
-                                        <a href="javascript:;"><img src="/cakeImg/${goods.img}"></a>
+                                    <div class="item"><a href="<c:url value="/details?goods_id=${goods.goods_id}"/>">
+                                        <%--<a href="javascript:;">--%>
+                                            <img src="/cakeImg/${goods.img}">
+                                        <%--</a>--%>
                                         <div class="title">${goods.name}</div>
                                         <div class="price">
                                             <span>￥${goods.price}</span>
                                             <del>￥299.00</del>
                                         </div>
-                                    </div>
+                                    </a></div>
                                 </c:forEach>
 
                             </div>
                             <div class="item-box">
                                 <c:forEach items="${goodsList}" var="goods" begin="0" end="5">
-                                    <div class="item">
-                                        <a href="javascript:;"><img src="/cakeImg/${goods.img}"></a>
+                                    <div class="item"><a href="<c:url value="/details?goods_id=${goods.goods_id}"/>">
+                                        <%--<a href="javascript:;">--%>
+                                            <img src="/cakeImg/${goods.img}">
+                                        <%--</a>--%>
                                         <div class="title">${goods.name}</div>
                                         <div class="price">
                                             <span>￥${goods.price}</span>
                                             <del>￥299.00</del>
                                         </div>
-                                    </div>
+                                    </a></div>
                                 </c:forEach>
 
                             </div>
@@ -122,7 +126,7 @@
             </div>
             <div class="item item1 margin0 padding0">
                 <a href="javascript:;"><img src="/cakeImg/${byStar6.img}" style="width: 390px; height: 242px;"></a>
-                <a href="javascript:;"><img src="/cakeImg/${byStar7.img}" style="width: 390px; height: 242px;"></a>
+                <a href="javascript:;"><img src="/cakeImg/${byStar7.img}" style="width: 390px; height: 242px;margin-top: 15px"></a>
             </div>
         </div>
     </div>
@@ -156,12 +160,12 @@
             <h4>更多推荐</h4>
             <div class="product-item-box layui-clear">
                 <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
+                    <a href="javascript:;"><img src="<c:url value="/res/static/img/more1.jpg"/>"></a>
                     <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
                     <span>￥100.00</span>
                 </div>
                 <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
+                    <a href="javascript:;"><img src="<c:url value="/res/static/img/more2.jpg"/>"></a>
                     <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
                     <span>￥100.00</span>
                 </div>

@@ -1,17 +1,18 @@
 package com.tom.cake.service.impl;
 
 import com.tom.cake.model.Address;
+import com.tom.cake.service.AddressService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-import com.tom.cake.mapper.addressDao;
+import com.tom.cake.mapper.AddressDao;
 
 @Service
-public class addressService{
+public class AddressServiceImpl implements AddressService {
 
     @Resource
-    private addressDao addressDao;
+    private AddressDao addressDao;
 
     public int insert(Address pojo){
         return addressDao.insert(pojo);
@@ -27,5 +28,10 @@ public class addressService{
 
     public int update(Address pojo){
         return addressDao.update(pojo);
+    }
+
+    @Override
+    public Address findByUsersId(Address address) {
+        return addressDao.selectByUsersId(address);
     }
 }

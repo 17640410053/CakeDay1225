@@ -40,4 +40,9 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> findByStar(Goods goods) {
         return goodsDao.selectByStar(goods);
     }
+
+    @Override
+    public Goods findByGoods(Goods goods) {
+        return goodsDao.selectById(goods);
+    }
 }

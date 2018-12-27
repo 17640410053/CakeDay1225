@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.CartDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.Cart">
+        <result column="cart_id" property="cart_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="cgid" property="goods_id"/>
+        <result column="num" property="num"/>
+        <result column="money" property="money"/>
+    </resultMap>
+    <resultMap id="ResultMapForUsersCart" type="com.tom.cake.vo.CartVo">
+        <result column="cart_id" property="cart_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="goods_id" property="goods_id"/>
+        <result column="num" property="num"/>
+        <result column="money" property="money"/>
+        <collection property="goodsList" ofType="Goods">
+            <result column="goods_id" property="goods_id"/>
+            <result column="name" property="name"/>
+            <result column="detail" property="detail"/>
+            <result column="price" property="price"/>
+            <result column="status" property="status"/>
+            <result column="createtime" property="createtime"/>
+            <result column="type_id" property="type_id"/>
+            <result column="img" property="img"/>
+            <result column="star" property="star"/>
+        </collection>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `cart_id`,
+        `user_id`,
+        `goods_id`,
+        `num`,
+        `money`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.cart_id">
+        INSERT INTO cart (`cart_id`, `user_id`, `goods_id`, `num`, `money`)
+        VALUES (#{pojo.cart_id}, #{pojo.user_id}, #{pojo.goods_id}, #{pojo.num}, #{pojo.money})
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.cart_id">
+        INSERT INTO cart
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.cart_id!=null">`cart_id`,</if>
+            <if test="pojo.user_id!=null">`user_id`,</if>
+            <if test="pojo.goods_id!=null">`goods_id`,</if>
+            <if test="pojo.num!=null">`num`,</if>
+            <if test="pojo.money!=null">`money`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.cart_id!=null">#{pojo.cart_id},</if>
+            <if test="pojo.user_id!=null">#{pojo.user_id},</if>
+            <if test="pojo.goods_id!=null">#{pojo.goods_id},</if>
+            <if test="pojo.num!=null">#{pojo.num},</if>
+            <if test="pojo.money!=null">#{pojo.money},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO cart (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.cart_id},
+            #{pojo.user_id},
+            #{pojo.goods_id},
+            #{pojo.num},
+            #{pojo.money}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE cart
+        <set>
+            <if test="pojo.cart_id != null">`cart_id` = #{pojo.cart_id},</if>
+            <if test="pojo.user_id != null">`user_id` = #{pojo.user_id},</if>
+            <if test="pojo.goods_id != null">`goods_id` = #{pojo.goods_id},</if>
+            <if test="pojo.num != null">`num` = #{pojo.num},</if>
+            <if test="pojo.money != null">`money` = #{pojo.money}</if>
+        </set>
+        WHERE cart_id = #{pojo.cart_id}
+    </update>
+
+
+    <select id="selectByGIdAndUId" parameterType="Cart" resultType="Cart">
+        select *
+        from cake_day1225.cart
+        where goods_id = #{goods_id}
+          and user_id = #{user_id}
+    </select>
+
+    <insert id="insertCart">
+        insert into cake_day1225.cart (`user_id`, `goods_id`, `num`, `money`)
+        VALUES (#{user_id}, #{goods_id}, #{num}, #{money})
+    </insert>
+    <update id="updateCart">
+        update cake_day1225 . cart
+        set num   = #{num},
+            money = #{money}
+        where user_id = #{user_id}
+          and goods_id = #{goods_id}
+    </update>
+
+    <select id="selectForUsersCart" parameterType="CartVo" resultMap="ResultMapForUsersCart">
+        SELECT cake_day1225.goods.goods_id,
+               cake_day1225.goods.`name`,
+               cake_day1225.goods.detail,
+               cake_day1225.goods.price,
+               cake_day1225.goods.`status`,
+               cake_day1225.goods.createtime,
+               cake_day1225.goods.type_id,
+               cake_day1225.goods.img,
+               cake_day1225.goods.star,
+               cake_day1225.cart.num,
+               cake_day1225.cart.money,
+               cake_day1225.cart.cart_id,
+               cake_day1225.cart.user_id,
+               cake_day1225.cart.goods_id AS cgid
+        FROM cake_day1225.goods
+                 INNER JOIN cake_day1225.cart ON cake_day1225.cart.goods_id = cake_day1225.goods.goods_id
+        WHERE cake_day1225.cart.user_id = #{user_id}
+    </select>
+
+    <delete id="delete">
+        delete
+        from cake_day1225.cart
+        where user_id = #{user_id}
+          and goods_id = #{goods_id}
+    </delete>
+</mapper>
+

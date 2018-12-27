@@ -26,7 +26,7 @@
     </div>
     <div class="login-bg">
         <div class="login-cont w1200">
-            <div class="form-box">
+            <div class="form-box" style="width: 380px;"><%--改登录框的宽度--%>
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">用邮箱验证码登录</li>
@@ -104,7 +104,7 @@
                                 <div class="layui-form-item">
                                     <div class="layui-inline iphone">
                                         <div class="layui-input-inline">
-                                            <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                            <i class="layui-icon layui-icon-username iphone-icon"></i>
                                             <input type="text" name="username" lay-verify="required"
                                                    placeholder="请输入用户名" autocomplete="off" class="layui-input">
                                         </div>

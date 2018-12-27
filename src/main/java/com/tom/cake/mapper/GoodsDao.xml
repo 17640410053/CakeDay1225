@@ -125,5 +125,12 @@
         from cake_day1225.goods
         where star &gt;=#{star}
     </select>
+
+
+    <select id="selectById" resultType="Goods">
+        select *
+        from cake_day1225.goods
+        where goods_id = #{goods_id}
+    </select>
 </mapper>
 

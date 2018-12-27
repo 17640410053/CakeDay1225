@@ -21,4 +21,6 @@ public interface GoodsDao {
 
     List<Goods> selectByStar(Goods goods);
 
+    Goods selectById(Goods goods);
+
 }

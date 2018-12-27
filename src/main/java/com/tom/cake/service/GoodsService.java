@@ -8,4 +8,6 @@ public interface GoodsService {
     List<Goods> findByType(Goods goods);
 
     List<Goods> findByStar(Goods goods);
+
+    Goods findByGoods(Goods goods);
 }

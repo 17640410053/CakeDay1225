@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tom.cake.mapper.addressDao">
+<mapper namespace="com.tom.cake.mapper.AddressDao">
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.tom.cake.model.Address">
         <result column="address_id" property="address_id"/>
@@ -25,36 +25,27 @@
 
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.address_id">
-        INSERT INTO address (
-            `address_id`,
-            `name`,
-            `phone`,
-            `user_id`,
-            `level`,
-            `create_time`,
-            `default_address`
-        ) VALUES (
-            #{pojo.address_id},
-            #{pojo.name},
-            #{pojo.phone},
-            #{pojo.user_id},
-            #{pojo.level},
-            #{pojo.createTime},
-            #{pojo.defaultAddress}
-        )
+        INSERT INTO address (`address_id`, `name`, `phone`, `user_id`, `level`, `create_time`, `default_address`)
+        VALUES (#{pojo.address_id},
+                #{pojo.name},
+                #{pojo.phone},
+                #{pojo.user_id},
+                #{pojo.level},
+                #{pojo.createTime},
+                #{pojo.defaultAddress})
     </insert>
 
     <!--auto generated Code-->
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.address_id">
         INSERT INTO address
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.address_id!=null"> `address_id`,</if>
-            <if test="pojo.name!=null"> `name`,</if>
-            <if test="pojo.phone!=null"> `phone`,</if>
-            <if test="pojo.user_id!=null"> `user_id`,</if>
-            <if test="pojo.level!=null"> `level`,</if>
-            <if test="pojo.createTime!=null"> `create_time`,</if>
-            <if test="pojo.defaultAddress!=null"> `default_address`,</if>
+            <if test="pojo.address_id!=null">`address_id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.phone!=null">`phone`,</if>
+            <if test="pojo.user_id!=null">`user_id`,</if>
+            <if test="pojo.level!=null">`level`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
+            <if test="pojo.defaultAddress!=null">`default_address`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -90,15 +81,22 @@
     <update id="update">
         UPDATE address
         <set>
-            <if test="pojo.address_id != null"> `address_id` = #{pojo.address_id}, </if>
-            <if test="pojo.name != null"> `name` = #{pojo.name}, </if>
-            <if test="pojo.phone != null"> `phone` = #{pojo.phone}, </if>
-            <if test="pojo.user_id != null"> `user_id` = #{pojo.user_id}, </if>
-            <if test="pojo.level != null"> `level` = #{pojo.level}, </if>
-            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime}, </if>
-            <if test="pojo.defaultAddress != null"> `default_address` = #{pojo.defaultAddress} </if>
+            <if test="pojo.address_id != null">`address_id` = #{pojo.address_id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.phone != null">`phone` = #{pojo.phone},</if>
+            <if test="pojo.user_id != null">`user_id` = #{pojo.user_id},</if>
+            <if test="pojo.level != null">`level` = #{pojo.level},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime},</if>
+            <if test="pojo.defaultAddress != null">`default_address` = #{pojo.defaultAddress}</if>
         </set>
         WHERE address_id = #{pojo.address_id}
     </update>
+
+
+    <select id="selectByUsersId" resultType="Address">
+        select *
+        from cake_day1225.address
+        where user_id = #{user_id} and defaultAddress=1
+    </select>
 </mapper>
 

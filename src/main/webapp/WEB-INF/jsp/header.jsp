@@ -7,40 +7,41 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-
-<html>
+<!DOCTYPE html>
+<%--少了个这个--%>
+<html lang="en">
 <head>
-    <head>
-        <meta charset="UTF-8">
-        <title>Document</title>
-        <link rel="stylesheet" type="text/css" href="<c:url value="/res/static/css/main.css"/>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/res/layui/css/layui.css"/>">
-        <script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    </head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/res/static/css/main.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/res/layui/css/layui.css"/>">
+    <script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+</head>
+<%--有啥不一样啊--%>
 
 <body id="list-cont">
 <div class="site-nav-bg">
     <div class="site-nav w1200">
         <p class="sn-back-home">
             <i class="layui-icon layui-icon-home"></i>
-            <a href="#">首页</a>
+            <a href="/index">首页</a>
         </p>
 
         <c:if test="${sessionScope.user!=null}">
             <div class="sn-quick-menu">
                 <div class="login"><a href="/user/self_info">${sessionScope.user.username}</a></div>
                 <div class="login"><a href="/user/register">我的订单</a></div>
-                <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
+                <div class="sp-cart"><a href="/shopcart">购物车</a><span>2</span></div>
             </div>
         </c:if>
         <c:if test="${user==null}">
             <div class="sn-quick-menu">
                 <div class="login"><a href="/user/login">登录</a></div>
                 <div class="login"><a href="/user/register">注册</a></div>
-                <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
+                <div class="sp-cart"><a href="/shopcart">购物车</a><span>2</span></div>
             </div>
         </c:if>
 
