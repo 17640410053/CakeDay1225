@@ -21,30 +21,19 @@
 
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.orderDetail_id">
-        INSERT INTO order_detail (
-            `order_detail_id`,
-            `order_id`,
-            `goods_id`,
-            `num`,
-            `money`
-        ) VALUES (
-            #{pojo.orderDetail_id},
-            #{pojo.order_id},
-            #{pojo.goods_id},
-            #{pojo.num},
-            #{pojo.money}
-        )
+        INSERT INTO order_detail (`order_detail_id`, `order_id`, `goods_id`, `num`, `money`)
+        VALUES (#{pojo.orderDetail_id}, #{pojo.order_id}, #{pojo.goods_id}, #{pojo.num}, #{pojo.money})
     </insert>
 
     <!--auto generated Code-->
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.orderDetail_id">
         INSERT INTO order_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.orderDetail_id!=null"> `order_detail_id`,</if>
-            <if test="pojo.order_id!=null"> `order_id`,</if>
-            <if test="pojo.goods_id!=null"> `goods_id`,</if>
-            <if test="pojo.num!=null"> `num`,</if>
-            <if test="pojo.money!=null"> `money`,</if>
+            <if test="pojo.orderDetail_id!=null">`order_detail_id`,</if>
+            <if test="pojo.order_id!=null">`order_id`,</if>
+            <if test="pojo.goods_id!=null">`goods_id`,</if>
+            <if test="pojo.num!=null">`num`,</if>
+            <if test="pojo.money!=null">`money`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -76,13 +65,19 @@
     <update id="update">
         UPDATE order_detail
         <set>
-            <if test="pojo.orderDetail_id != null"> `order_detail_id` = #{pojo.orderDetail_id}, </if>
-            <if test="pojo.order_id != null"> `order_id` = #{pojo.order_id}, </if>
-            <if test="pojo.goods_id != null"> `goods_id` = #{pojo.goods_id}, </if>
-            <if test="pojo.num != null"> `num` = #{pojo.num}, </if>
-            <if test="pojo.money != null"> `money` = #{pojo.money} </if>
+            <if test="pojo.orderDetail_id != null">`order_detail_id` = #{pojo.orderDetail_id},</if>
+            <if test="pojo.order_id != null">`order_id` = #{pojo.order_id},</if>
+            <if test="pojo.goods_id != null">`goods_id` = #{pojo.goods_id},</if>
+            <if test="pojo.num != null">`num` = #{pojo.num},</if>
+            <if test="pojo.money != null">`money` = #{pojo.money}</if>
         </set>
         WHERE order_detail_id = #{pojo.orderDetail_id}
     </update>
+
+
+    <insert id="addOrderDetails">
+        insert into cake_day1225.orderdetail (order_id, goods_id, num, money)
+        VALUES (#{order_id}, #{goods_id}, #{num}, #{money})
+    </insert>
 </mapper>
 

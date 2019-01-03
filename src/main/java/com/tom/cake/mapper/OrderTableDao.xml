@@ -11,6 +11,35 @@
         <result column="address_id" property="address_id"/>
     </resultMap>
 
+
+    <resultMap type="OrderTableVo" id="orderTableMapper">
+        <id column="order_id" property="order_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="money" property="money"/>
+        <result column="status" property="status"/>
+        <result column="time" property="time"/>
+        <result column="addressName" property="addressName"/>
+        <result column="phone" property="phone"/>
+        <collection property="orderDetailList" ofType="OrderDetailVo">
+            <id column="orderDetail_id" property="orderDetail_id"/>
+            <result column="orderId" property="order_id"/>
+            <result column="goods_id" property="goods_id"/>
+            <result column="num" property="num"/>
+            <result column="orderMoney" property="money"/>
+            <association property="goods" javaType="Goods">
+                <id column="goodsId" property="goods_id"/>
+                <result column="goodsName" property="name"/>
+                <result column="detail" property="detail"/>
+                <result column="price" property="price"/>
+                <result column="goodsStatus" property="status"/>
+                <result column="createtime" property="createtime"/>
+                <result column="type_id" property="type_id"/>
+                <result column="img" property="img"/>
+                <result column="star" property="star"/>
+            </association>
+        </collection>
+    </resultMap>
+    <!--晕了，我来，-->
     <!--auto generated Code-->
     <sql id="all_column">
         `order_id`,
@@ -23,33 +52,20 @@
 
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.order_id">
-        INSERT INTO order_table (
-            `order_id`,
-            `user_id`,
-            `money`,
-            `status`,
-            `time`,
-            `address_id`
-        ) VALUES (
-            #{pojo.order_id},
-            #{pojo.user_id},
-            #{pojo.money},
-            #{pojo.status},
-            #{pojo.time},
-            #{pojo.address_id}
-        )
+        INSERT INTO order_table (`order_id`, `user_id`, `money`, `status`, `time`, `address_id`)
+        VALUES (#{pojo.order_id}, #{pojo.user_id}, #{pojo.money}, #{pojo.status}, #{pojo.time}, #{pojo.address_id})
     </insert>
 
     <!--auto generated Code-->
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.order_id">
         INSERT INTO order_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.order_id!=null"> `order_id`,</if>
-            <if test="pojo.user_id!=null"> `user_id`,</if>
-            <if test="pojo.money!=null"> `money`,</if>
-            <if test="pojo.status!=null"> `status`,</if>
-            <if test="pojo.time!=null"> `time`,</if>
-            <if test="pojo.address_id!=null"> `address_id`,</if>
+            <if test="pojo.order_id!=null">`order_id`,</if>
+            <if test="pojo.user_id!=null">`user_id`,</if>
+            <if test="pojo.money!=null">`money`,</if>
+            <if test="pojo.status!=null">`status`,</if>
+            <if test="pojo.time!=null">`time`,</if>
+            <if test="pojo.address_id!=null">`address_id`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,14 +99,126 @@
     <update id="update">
         UPDATE order_table
         <set>
-            <if test="pojo.order_id != null"> `order_id` = #{pojo.order_id}, </if>
-            <if test="pojo.user_id != null"> `user_id` = #{pojo.user_id}, </if>
-            <if test="pojo.money != null"> `money` = #{pojo.money}, </if>
-            <if test="pojo.status != null"> `status` = #{pojo.status}, </if>
-            <if test="pojo.time != null"> `time` = #{pojo.time}, </if>
-            <if test="pojo.address_id != null"> `address_id` = #{pojo.address_id} </if>
+            <if test="pojo.order_id != null">`order_id` = #{pojo.order_id},</if>
+            <if test="pojo.user_id != null">`user_id` = #{pojo.user_id},</if>
+            <if test="pojo.money != null">`money` = #{pojo.money},</if>
+            <if test="pojo.status != null">`status` = #{pojo.status},</if>
+            <if test="pojo.time != null">`time` = #{pojo.time},</if>
+            <if test="pojo.address_id != null">`address_id` = #{pojo.address_id}</if>
         </set>
         WHERE order_id = #{pojo.order_id}
     </update>
+
+    <insert id="addOrder">
+        insert into cake_day1225.ordertable (order_id, user_id, money, `status`, address_id)
+        values (#{order_id}, #{user_id}, #{money}, #{status}, #{address_id})
+    </insert>
+
+
+    <select id="selectByOrderId" resultType="OrderTable">
+        select *
+        from cake_day1225.ordertable
+        where order_id = #{order_id}
+    </select>
+
+    <update id="updateStatus">
+        update cake_day1225 . ordertable
+        set `status` = #{status}
+        where order_id = #{order_id}
+    </update>
+
+    <select id="selectAllOrdersByUId" resultType="OrderTable">
+        SELECT ordertable.order_id,
+               ordertable.user_id,
+               ordertable.money,
+               ordertable.`status`,
+               ordertable.time,
+               ordertable.address_id
+        FROM ordertable
+        WHERE ordertable.user_id = #{user_id}
+    </select>
+
+ <!--   <resultMap type="Student" id="studentMapper">
+        <id column="sid" property="sid"/>
+        <result column="sname" property="sname"/>
+        <collection property="courses" ofType="Course">
+            <id column="cid" property="cid"/>
+            <result column="cname" property="cname"/>
+        </collection>
+    </resultMap>
+    <select id="selectById" resultMap="studentMapper">
+        select sid, sname, cid, cname
+
+        from student,
+             middle,
+             course
+        where sid = studentId
+          and courseId = cid
+          and sid = #{xxxx}
+    </select>
+-->
+
+
+ <!--   <select id="selectManyByOrderId" resultMap="orderTableMapper">
+        SELECT
+               orderdetail.num as num,
+               goods.goods_id AS goodsId,
+               goods.`name`,
+               goods.detail,
+               goods.price,
+               goods.`status` AS goods_status,
+               goods.createtime,
+               goods.type_id,
+               goods.img,
+               goods.star,
+               ordertable.address_id,
+               ordertable.time,
+               ordertable.order_id,
+               ordertable.user_id,
+               ordertable.money,
+               ordertable.`status`,
+               address.`name` addressName,
+               address.phone
+        FROM
+             ordertable
+                 INNER JOIN orderdetail ON orderdetail.order_id = ordertable.order_id
+                 INNER JOIN goods ON orderdetail.goods_id = goods.goods_id
+                 INNER JOIN address ON ordertable.address_id = address.address_id
+        WHERE
+                ordertable.order_id = #{order_id}
+    </select>-->
+   <select id="selectManyByOrderId" resultMap="orderTableMapper">
+       SELECT
+              address.`name` addressName,
+              address.phone,
+              goods.goods_id,
+              goods.`name` goodsName,
+              goods.detail,
+              goods.price,
+              goods.`status` goodsStatus,
+              goods.createtime,
+              goods.type_id,
+              goods.img,
+              goods.star,
+              ordertable.order_id orderId,
+              ordertable.user_id,
+              ordertable.money,
+              ordertable.`status`,
+              ordertable.time,
+              orderdetail.orderDetail_id,
+              orderdetail.order_id,
+              orderdetail.goods_id,
+              orderdetail.num,
+              orderdetail.money orderMoney
+       FROM
+            orderdetail
+                INNER JOIN ordertable ON orderdetail.order_id = ordertable.order_id
+                INNER JOIN goods ON orderdetail.goods_id = goods.goods_id
+                INNER JOIN address ON ordertable.address_id = address.address_id
+       WHERE
+               ordertable.order_id = #{order_id}
+    </select>
+
+
 </mapper>
 

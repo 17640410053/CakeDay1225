@@ -7,7 +7,7 @@ import java.util.List;
 import com.tom.cake.model.Attr;
 
 @Mapper
-public interface attrDao {
+public interface AttrDao {
     int insert(@Param("pojo") Attr pojo);
 
     int insertSelective(@Param("pojo") Attr pojo);

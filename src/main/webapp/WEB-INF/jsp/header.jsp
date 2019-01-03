@@ -33,15 +33,15 @@
         <c:if test="${sessionScope.user!=null}">
             <div class="sn-quick-menu">
                 <div class="login"><a href="/user/self_info">${sessionScope.user.username}</a></div>
-                <div class="login"><a href="/user/register">我的订单</a></div>
-                <div class="sp-cart"><a href="/shopcart">购物车</a><span>2</span></div>
+                <div class="login"><a href="<c:url value="/order/order_list"/>">我的订单</a></div>
+                <div class="sp-cart"><a href="<c:url value="/shopcart"/>">购物车</a><span>2</span></div>
             </div>
         </c:if>
         <c:if test="${user==null}">
             <div class="sn-quick-menu">
-                <div class="login"><a href="/user/login">登录</a></div>
+                <div class="login"><a href="<c:url value="/user/login"/>">登录</a></div>
                 <div class="login"><a href="/user/register">注册</a></div>
-                <div class="sp-cart"><a href="/shopcart">购物车</a><span>2</span></div>
+                <div class="sp-cart"><a href="<c:url value="/shopcart"/>">购物车</a><span>2</span></div>
             </div>
         </c:if>
 
@@ -71,3 +71,35 @@
         </div>
     </div>
 </div>
+<script></script>
+<script>
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(1111);
+            return false;
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    layui.config({
+        base: '/res/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['jquery', 'form'], function () {
+        var $ = layui.$, form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.post('/searchGoods', data.field, function (data) {
+                if (data.code === 0) {
+                    location.href = "/commoditySearch";
+                } else {
+                    layer.alert("网络连接错误，请稍后再试");
+                }
+            });
+            return false;
+        });
+
+    })
+</script>

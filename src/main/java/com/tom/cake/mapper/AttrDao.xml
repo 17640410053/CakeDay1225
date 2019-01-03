@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tom.cake.mapper.attrDao">
+<mapper namespace="com.tom.cake.mapper.AttrDao">
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.tom.cake.model.Attr">
         <result column="attr_id" property="attr_id"/>

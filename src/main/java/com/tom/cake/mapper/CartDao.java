@@ -28,4 +28,14 @@ public interface CartDao {
 
     void delete(Cart cart);
 
+    void deleteAllGoodsFromCart(Cart cart);
+
+    Long countMoney(Cart cart);
+
+    Long countNum(Cart cart);
+
+    List<Cart> selectCartByUserId(Cart cart);
+
+    void deleteCartByUserId(Cart cart);
+
 }

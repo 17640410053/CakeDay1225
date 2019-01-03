@@ -45,4 +45,9 @@ public class GoodsServiceImpl implements GoodsService {
     public Goods findByGoods(Goods goods) {
         return goodsDao.selectById(goods);
     }
+
+    @Override
+    public List<Goods> findSearchGoods(Goods goods) {
+        return goodsDao.searchGoods(goods);
+    }
 }

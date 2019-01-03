@@ -3,6 +3,7 @@ package com.tom.cake.constant;
 public enum ResultEnum {
     /**
      * 这儿相当于new 的对象的
+     * 101:第一个1：代表成功，01:代表状态码
      */
     UPDATE_SUCCESS_MESS(0, "修改成功"),
     INSERT_SUCCESS_MESS(0, "添加成功"),
@@ -19,8 +20,10 @@ public enum ResultEnum {
     MAIL_SEND_SUCCESS(0, "邮件发送成功"),
     MAIL_SEND_FAILED(500, "邮件发送失败"),
     VERIFY_CODE_FAILED(500, "验证码不正确"),
-
-
+    REMOVE_SUCCESS(101, "移除成功"),
+    PROCESS_SUCCESS(0, "操作成功"),
+    PROCESS_FAILED(0, "操作失败"),
+    NUM_OVERLARGE(1010, "数量超过限制,同一类型商品最多选购10件"),
 
     ;
 

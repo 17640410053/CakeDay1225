@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-import com.tom.cake.mapper.attrDao;
+import com.tom.cake.mapper.AttrDao;
 
 @Service
 public class attrService{
 
     @Resource
-    private attrDao attrDao;
+    private AttrDao attrDao;
 
     public int insert(Attr pojo){
         return attrDao.insert(pojo);

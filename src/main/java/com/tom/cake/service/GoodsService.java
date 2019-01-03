@@ -10,4 +10,6 @@ public interface GoodsService {
     List<Goods> findByStar(Goods goods);
 
     Goods findByGoods(Goods goods);
+
+    List<Goods> findSearchGoods(Goods goods);
 }

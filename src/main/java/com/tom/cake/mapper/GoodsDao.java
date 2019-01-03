@@ -1,5 +1,7 @@
 package com.tom.cake.mapper;
 
+import com.tom.cake.model.OrderTable;
+import com.tom.cake.vo.OrderTableVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,5 +24,9 @@ public interface GoodsDao {
     List<Goods> selectByStar(Goods goods);
 
     Goods selectById(Goods goods);
+
+    List<Goods> searchGoods(Goods goods);
+
+    List<OrderTableVo> selectManyByOrderId(OrderTable orderTable);
 
 }

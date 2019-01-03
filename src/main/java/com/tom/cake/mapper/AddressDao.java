@@ -18,4 +18,6 @@ public interface AddressDao {
     int update(@Param("pojo") Address pojo);
 
     Address selectByUsersId(Address address);
+
+    List<Address> selectAllAddressByUsersId(Address address);
 }

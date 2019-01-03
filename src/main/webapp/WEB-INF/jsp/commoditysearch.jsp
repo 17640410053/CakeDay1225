@@ -53,23 +53,7 @@
                         <span>200个</span>
                     </div>
                     <div class="cont-list layui-clear" id="list-cont">
-                        <c:if test="${empty searchGoods}">
-                            <c:forEach items="${byStar}" var="star">
-                                <div class="item">
-                                    <div class="img">
-                                        <a href=""><img src="/cakeImg/${star.img}" style="width: 280px;height: 280px;"></a>
-                                    </div>
-                                    <div class="text">
-                                        <p class="title">${star.name}</p>
-                                        <p class="price">
-                                            <span class="pri">￥${star.price}</span>
-                                            <span class="nub">1266付款</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${not empty searchGoods}">
+
                             <c:forEach items="${searchGoods}" var="star">
                                 <div class="item">
                                     <div class="img">
@@ -84,7 +68,7 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                        </c:if>
+
 
                         <%--
                                <div class="item">
@@ -307,11 +291,8 @@
         // }
         // })
 
-        $('.sort a').on('click', function (obj) {
+        $('.sort a').on('click', function () {
             $(this).addClass('active').siblings().removeClass('active');
-            var event=obj.event;
-
-
         })
         $('.list-box dt').on('click', function () {
             if ($(this).attr('off')) {

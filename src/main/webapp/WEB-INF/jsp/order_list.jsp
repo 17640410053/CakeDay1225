@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
 <jsp:include page="header.jsp"/>
-
+<style href=""></style>
 <div class="content content-nav-base shopcart-content">
     <div class="main-nav">
         <div class="inner-cont0">
@@ -27,34 +27,88 @@
         <h3>精选品质</h3>
         <p>蛋糕、糖果、点心9折起</p>
     </div>
+
+    <%--    <div class="w1200" >
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-left: -20px;font-size: larger">收货地址</label>
+                    <div class="layui-input-block" style="width: 700px">
+                        <select name="address_id"   lay-verify="required">
+                           &lt;%&ndash; <option value=""></option>
+                            <option value="0">北京</option>
+                            <option value="1">上海</option>
+                            <option value="2">广州</option>
+                            <option value="3">深圳</option>
+                            <option value="4">杭州</option>&ndash;%&gt;
+                               <c:forEach items="${addressList}" var="a" varStatus="ai">
+                                   <option value="${a.id}">${a.name}&nbsp;&nbsp;${a.phone}&nbsp;&nbsp;${a.detail}</option>
+                               </c:forEach>
+                        </select>
+                        <a href=""><span  style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>
+                    </div>
+
+                </div>
+            &lt;%&ndash;    <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>&ndash;%&gt;
+            </form>
+
+            <script>
+
+                //Demo
+                layui.use('form', function(){
+                    var form = layui.form;
+                    form.render();
+                    //监听提交
+                    form.on('submit(formDemo)', function(data){
+                        layer.msg(JSON.stringify(data.field));
+                        return false;
+                    });
+                });
+            </script>
+         &lt;%&ndash;   <select name="address_id" id="address" style="width:60%;height: 25px" class="form-control">
+                <c:forEach items="${addressList}" var="a" varStatus="ai">
+                    <option value="${a.id}">${a.name}&nbsp;&nbsp;${a.phone}&nbsp;&nbsp;${a.detail}</option>
+                </c:forEach>
+            </select>
+            <c:if test="${empty addressList}">
+                <a href="/address/showAddress">添加收货地址</a>
+            </c:if>
+            <h3>精选品质</h3>
+            <p>蛋糕、糖果、点心9折起</p>&ndash;%&gt;
+        </div>--%>
+
     <div class="cart w1200">
+
+
+
         <div class="cart-table-th">
             <div class="th th-chk">
-                <div class="select-all">
-                    <div class="cart-checkbox">
-                        <input class="check-all check" id="allCheckked" type="checkbox" value="true">
-                    </div>
-                    <label>&nbsp;&nbsp;全选</label>
+                <div class="th-inner">
+                    序号
                 </div>
             </div>
             <div class="th th-item">
                 <div class="th-inner">
-                    商品
+                    订单号
                 </div>
             </div>
             <div class="th th-price">
                 <div class="th-inner">
-                    单价
+                    总金额
                 </div>
             </div>
             <div class="th th-amount">
                 <div class="th-inner">
-                    数量
+                    订单时间
                 </div>
             </div>
             <div class="th th-sum">
                 <div class="th-inner">
-                    小计
+                    订单状态
                 </div>
             </div>
             <div class="th th-op">
@@ -64,127 +118,138 @@
             </div>
         </div>
         <div class="OrderList">
-            <div class="order-content" id="list-cont">
-                <c:forEach items="${usersCart}" var="order">
-                    <c:forEach items="${order.goodsList}" var="orderDetail">
-                        <ul class="item-content layui-clear" id="cart-list-${orderDetail.goods_id}">
-                            <li class="th th-chk">
-                                <div class="select-all">
-                                    <div class="cart-checkbox">
-                                        <input class="CheckBoxShop check" type="checkbox" num="all"
-                                               name="select-all"
-                                               value="true">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="th th-item">
+            <sp class="order-content" id="list-cont">
+                <c:forEach items="${orderList}" var="order" varStatus="i">
 
+                <ul class="item-content layui-clear" id="cart-list-${order.order_id}">
+                    <li class="th th-chk">
+                        <span>${i.count}</span>
+                    </li>
+                    <li class="th th-item">
+                        <span disabled="disabled">${order.order_id}</span>
 
-                                <div class="item-cont">
-                                    <a href="javascript:;"><img src="/cakeImg/${orderDetail.img}" alt=""></a>
-                                    <div class="text">
-                                        <div class="title">${orderDetail.name}</div>
-                                        <p><span>粉色</span> <span>130</span>cm</p>
-                                    </div>
-                                </div>
+                    </li>
+                    <li class="th th-price">
+                        <span class="th-su">￥${order.money}.00</span>
+                    </li>
 
-                            </li>
-                            <li class="th th-price">
-                                <span class="th-su">${orderDetail.price}.00</span>
-                            </li>
+                    <li class="th th-amount">
+                        <span type="" disabled="disabled">${order.time}</span>
+                    </li>
+                    <li class="th th-sum">
+                        <c:if test="${order.status==0}">
+                            <span class="sum">未支付</span>
+                        </c:if>
+                        <c:if test="${order.status==1}">
+                            <span class="sum">已支付</span>
+                        </c:if>
+                        <c:if test="${order.status==2}">
+                            <span class="sum">已发货</span>
+                        </c:if>
+                        <c:if test="${order.status==3}">
+                            <span class="sum">已收货</span>
+                        </c:if>
+                        <c:if test="${order.status==4}">
+                            <span class="sum">已评价</span>
+                        </c:if>
+                    </li>
+                    <li class="th th-op">
+                        <a type="button" class="layui-btn layui-btn-primary" style="margin-top:-30px;margin-bottom: 3px"
+                           href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">订单详情</a>
+                        <c:choose>
+                            <c:when test="${order.status == 0}">
+                                <a type="button" class="layui-btn layui-btn-warm" style="margin-bottom: 3px"
+                                   href="<c:url value="/order/pay_order?order_id=${order.order_id}"/>">去支付</a>
+                                <a type="button" class="layui-btn layui-btn-danger" style="margin-bottom: 3px"
+                                   href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
+                            </c:when>
+                            <c:when test="${order.status == 1}">
+                                <a type="button" class="layui-btn"
+                                   href="<c:url value="/order/sure_order?order_id=${order.order_id}"/>">确认收货</a>
+                            </c:when>
+                        </c:choose>
+                    </li>
+                </ul>
 
-                            <li class="th th-amount">
-                                <div class="box-btn layui-clear">
-                                    <a onclick="addCart(${orderDetail.goods_id},${orderDetail.price},${order.num},2)">
-                                        <div class="less layui-btn">-
-                                        </div>
-                                    </a>
-                                    <input class="Quantity-input" type="" name="" value="${order.num}"
-                                           disabled="disabled">
-                                    <a onclick="addCart(${orderDetail.goods_id},${orderDetail.price},${order.num},1)">
-                                        <div class="add layui-btn">+</div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="th th-sum">
-                                <span class="sum">${order.money}.00</span>
-                            </li>
-                            <li class="th th-op">
-                                <a onclick="addCart(${orderDetail.goods_id},${orderDetail.price},${order.num},3)"><span
-                                        class="dele-btn">删除</span></a>
-                            </li>
-                        </ul>
-                    </c:forEach>
                 </c:forEach>
-            </div>
-        </div>
-
-
-        <!-- 模版导入数据 -->
-        <!-- <script type="text/html" id="demo">
-          {{# layui.each(d.infoList,function(index,item){}}
-            <ul class="item-content layui-clear">
-              <li class="th th-chk">
-                <div class="select-all">
-                  <div class="cart-checkbox">
-                    <input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all" value="true">
-                  </div>
-                </div>
-              </li>
-              <li class="th th-item">
-                <div class="item-cont">
-                  <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
-                  <div class="text">
-                    <div class="title">宝宝T恤棉质小衫</div>
-                    <p><span>粉色</span>  <span>130</span>cm</p>
-                  </div>
-                </div>
-              </li>
-              <li class="th th-price">
-                <span class="th-su">189.00</span>
-              </li>
-              <li class="th th-amount">
-                <div class="box-btn layui-clear">
-                  <div class="less layui-btn">-</div>
-                  <input class="Quantity-input" type="" name="" value="1" disabled="disabled">
-                  <div class="add layui-btn">+</div>
-                </div>
-              </li>
-              <li class="th th-sum">
-                <span class="sum">189.00</span>
-              </li>
-              <li class="th th-op">
-                <span class="dele-btn">删除</span>
-              </li>
-            </ul>
-          {{# });}}
-        </script> -->
-
-
-        <div class="FloatBarHolder layui-clear">
-            <div class="th th-chk">
-                <div class="select-all">
-                    <div class="cart-checkbox">
-                        <input class="check-all check" id="" name="select-all" type="checkbox" value="true">
-                    </div>
-                    <label>&nbsp;&nbsp;已选<span class="Selected-pieces">0</span>件</label>
-                </div>
-            </div>
-            <div class="th batch-deletion">
-                <a><span class="batch-dele-btn">批量删除</span></a>
-            </div>
-            <div class="th Settlement">
-                <a href="<c:url value="/ordertable"/>">
-                    <button class="layui-btn settle-accounts">结算</button>
-                </a>
-
-            </div>
-            <div class="th total">
-                <p>应付：<span class="pieces-total">0</span></p>
-            </div>
-
         </div>
     </div>
+
+
+    <!-- 模版导入数据 -->
+    <!-- <script type="text/html" id="demo">
+      {{# layui.each(d.infoList,function(index,item){}}
+        <ul class="item-content layui-clear">
+          <li class="th th-chk">
+            <div class="select-all">
+              <div class="cart-checkbox">
+                <input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all" value="true">
+              </div>
+            </div>
+          </li>
+          <li class="th th-item">
+            <div class="item-cont">
+              <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
+              <div class="text">
+                <div class="title">宝宝T恤棉质小衫</div>
+                <p><span>粉色</span>  <span>130</span>cm</p>
+              </div>
+            </div>
+          </li>
+          <li class="th th-price">
+            <span class="th-su">189.00</span>
+          </li>
+          <li class="th th-amount">
+            <div class="box-btn layui-clear">
+              <div class="less layui-btn">-</div>
+              <input class="Quantity-input" type="" name="" value="1" disabled="disabled">
+              <div class="add layui-btn">+</div>
+            </div>
+          </li>
+          <li class="th th-sum">
+            <span class="sum">189.00</span>
+          </li>
+          <li class="th th-op">
+            <span class="dele-btn">删除</span>
+          </li>
+        </ul>
+      {{# });}}
+    </script> -->
+
+
+    <div class="FloatBarHolder layui-clear">
+
+
+    </div>
+
+
+    <script>
+
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                $.post('/addOrder', data.field, function (msg) {
+                    if (msg.code === 0) {
+                        layer.msg(msg.msg);
+                        /**
+                         * 在这儿写成功登陆的话去主页
+                         * */
+                        location.href = "/order/pay_order?order_id=" + msg.data;
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                });
+
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+</div>
+
 </div>
 <script type="text/javascript">
     layui.config({
@@ -209,13 +274,13 @@
         //
         // car.init();
 
-        var uls = document.getElementById('list-cont').getElementsByTagName('ul');//每一行
+        /*var uls = document.getElementById('list-cont').getElementsByTagName('ul');//每一行
         var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
         var checkAll = document.getElementsByClassName('check-all'); //全选框
         var SelectedPieces = document.getElementsByClassName('Selected-pieces')[0];//总件数
         var piecesTotal = document.getElementsByClassName('pieces-total')[0];//总价
         var batchdeletion = document.getElementsByClassName('batch-deletion')[0]//批量删除按钮
-        /*计算*/
+        /!*计算*!/
         function getTotal() {
             var seleted = 0, price = 0;
             for (var i = 0; i < uls.length; i++) {
@@ -240,7 +305,7 @@
             ul.getElementsByClassName('sum')[0].innerHTML = SubTotal.toFixed(2);
         }
 
-        /*全选框功能*/
+        /!*全选框功能*!/
 
         for (var i = 0; i < checkInputs.length; i++) {
             checkInputs[i].onclick = function () {
@@ -316,24 +381,25 @@
         checkAll[0].checked = true;
         checkAll[0].onclick();
 
-        /*
+        /!*
                 $('.settle-accounts').on('click', function () {
                     // layer.alert("啦啦啦");
                     $.post("/order/addOrder", {}, function (data) {
 
                     })
-                })*/
+                })*!/
 
         function test(num) {
             layer.alert("123" + num);
-        }
+        }*/
+
 
     })
     ;
 
 </script>
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
-<script>
+<%--<script>
     /**
      *
      * @param id
@@ -421,8 +487,6 @@
 
     }
 
-</script>
-<%--
-todo:1.减到0时怎么去除这一行，2.还有加到一定的数值限制，防止数值越界变负数,3.删除时怎么及时的刷新
---%>
+</script>--%>
+
 <jsp:include page="footer.jsp"/>

@@ -66,14 +66,14 @@
                     <div class="layui-carousel" id="test1">
                         <div carousel-item>
                             <div class="item-box">
-                                <c:forEach items="${goodsList2}" var="goods">
-                                    <div class="item"><a href="<c:url value="/details?goods_id=${goods.goods_id}"/>">
+                                <c:forEach items="${goodsList2}" var="orderDetail">
+                                    <div class="item"><a href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
                                         <%--<a href="javascript:;">--%>
-                                            <img src="/cakeImg/${goods.img}">
+                                            <img src="/cakeImg/${orderDetail.img}">
                                         <%--</a>--%>
-                                        <div class="title">${goods.name}</div>
+                                        <div class="title">${orderDetail.name}</div>
                                         <div class="price">
-                                            <span>￥${goods.price}</span>
+                                            <span>￥${orderDetail.price}</span>
                                             <del>￥299.00</del>
                                         </div>
                                     </a></div>
@@ -81,14 +81,14 @@
 
                             </div>
                             <div class="item-box">
-                                <c:forEach items="${goodsList}" var="goods" begin="0" end="5">
-                                    <div class="item"><a href="<c:url value="/details?goods_id=${goods.goods_id}"/>">
+                                <c:forEach items="${goodsList}" var="orderDetail" begin="0" end="5">
+                                    <div class="item"><a href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
                                         <%--<a href="javascript:;">--%>
-                                            <img src="/cakeImg/${goods.img}">
+                                            <img src="/cakeImg/${orderDetail.img}">
                                         <%--</a>--%>
-                                        <div class="title">${goods.name}</div>
+                                        <div class="title">${orderDetail.name}</div>
                                         <div class="price">
-                                            <span>￥${goods.price}</span>
+                                            <span>￥${orderDetail.price}</span>
                                             <del>￥299.00</del>
                                         </div>
                                     </a></div>
@@ -133,17 +133,17 @@
 
 
     <div class="product-cont w1200" id="product-cont">
-        <c:forEach items="${goodsListAll}" var="goods" varStatus="i">
+        <c:forEach items="${goodsListAll}" var="orderDetail" varStatus="i">
             <div class="product-item product-item${i.count} layui-clear">
                 <div class="left-title">
                     <h4><i>${i.count}F</i></h4>
                     <img src="<c:url value="/res/static/img/icon_gou.png"/>">
-                    <h5>${goods.name}</h5>
+                    <h5>${orderDetail.name}</h5>
                 </div>
                 <div class="right-cont">
                     <a href="javascript:;" class="top-img"><img src="<c:url value="/res/static/img/img12.jpg"/>" alt=""></a>
                     <div class="img-box">
-                        <c:forEach items="${goods.goodsList}" var="goods1" begin="0" end="4">
+                        <c:forEach items="${orderDetail.goodsList}" var="goods1" begin="0" end="4">
                             <a href="javascript:;">
                                 <img src="/cakeImg/${goods1.img}" style="width: 199px;height: 197px; float: left"
                                      alt="">

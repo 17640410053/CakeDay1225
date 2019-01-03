@@ -96,7 +96,13 @@
     <select id="selectByUsersId" resultType="Address">
         select *
         from cake_day1225.address
-        where user_id = #{user_id} and defaultAddress=1
+        where user_id = #{user_id}
+          and defaultAddress = 1
+    </select>
+    <select id="selectAllAddressByUsersId" resultType="Address">
+        select *
+        from cake_day1225.address
+        where user_id = #{user_id}
     </select>
 </mapper>
 

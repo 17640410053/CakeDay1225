@@ -9,9 +9,7 @@ layui.define(['layer'], function (exports) {
 
     var car = {
         init: function () {
-            /**/
-            // var goods_id = document.getElementsByClassName('hidden-goods-id');
-            /**/
+
             var uls = document.getElementById('list-cont').getElementsByTagName('ul');//每一行
             var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
             var checkAll = document.getElementsByClassName('check-all'); //全选框
@@ -70,15 +68,9 @@ layui.define(['layer'], function (exports) {
                     var that = this;
                     switch (cls) {
                         case 'add layui-btn':
-                            input.value = val + 1;
-                        /*    /!**!/
-                            $(".add").click(function () {
-                                $.post("/addCart", {goods_id: goods_id}, function (data) {
-                                    layer.msg(data.msg);
-                                })
-                            });
-                            /!**!/*/
-
+                            if (val < 10) {
+                                input.value = val + 1;
+                            }
                             getSubTotal(this)
                             break;
                         case 'less layui-btn':
@@ -88,12 +80,8 @@ layui.define(['layer'], function (exports) {
                             getSubTotal(this)
                             break;
                         case 'dele-btn':
-                            layer.confirm('你确定要删除吗', {
-                                yes: function (index, layero) {
-                                    layer.close(index)
-                                    that.parentNode.removeChild(that);
-                                }
-                            })
+                            getSubTotal(this)
+
                             break;
                     }
                     getTotal()

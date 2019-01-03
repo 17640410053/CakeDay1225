@@ -132,5 +132,19 @@
         from cake_day1225.goods
         where goods_id = #{goods_id}
     </select>
+
+    <select id="searchGoods" resultType="Goods" parameterType="Goods">
+        SELECT * FROM cake_day1225.goods
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT("%",#{name},"%")
+            </if>
+            <if test="detail != null and detail != ''">
+                or detail LIKE CONCAT("%",#{detail},"%")
+            </if>
+        </where>
+
+    </select>
+    <!--     ORDER BY price-->
 </mapper>
 

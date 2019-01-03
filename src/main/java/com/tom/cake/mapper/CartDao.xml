@@ -130,6 +130,7 @@
         FROM cake_day1225.goods
                  INNER JOIN cake_day1225.cart ON cake_day1225.cart.goods_id = cake_day1225.goods.goods_id
         WHERE cake_day1225.cart.user_id = #{user_id}
+          and cake_day1225.cart.num > 0
     </select>
 
     <delete id="delete">
@@ -137,6 +138,31 @@
         from cake_day1225.cart
         where user_id = #{user_id}
           and goods_id = #{goods_id}
+    </delete>
+
+    <delete id="deleteAllGoodsFromCart">
+        delete
+        from cake_day1225.cart
+        where user_id = #{user_id}
+    </delete>
+
+    <select id="countMoney" resultType="java.lang.Long">
+        select sum(money)
+        from cake_day1225.cart
+        where user_id = #{user_id}
+    </select>
+
+    <select id="countNum" resultType="java.lang.Long">
+        select sum(num)
+        from cake_day1225.cart
+        where user_id = #{user_id}
+    </select>
+    <select id="selectCartByUserId" resultType="Cart">
+        select * from cake_day1225.cart where user_id=#{user_id}
+    </select>
+
+    <delete id="deleteCartByUserId">
+        delete from cake_day1225.cart where user_id=#{user_id}
     </delete>
 </mapper>
 
