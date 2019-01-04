@@ -1,8 +1,11 @@
 package com.tom.cake.controller;
 
 import com.tom.cake.constant.ResultEntity;
+import com.tom.cake.model.Comment;
+import com.tom.cake.model.Goods;
 import com.tom.cake.model.OrderTable;
 import com.tom.cake.model.Users;
+import com.tom.cake.service.GoodsService;
 import com.tom.cake.service.OrderTableService;
 import com.tom.cake.vo.OrderTableVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class OrderController extends BaseController {
     @Autowired
     private OrderTableService orderTableService;
 
+    @Autowired
+    private GoodsService goodsService;
+
     @RequestMapping("/pay_order")
     public ModelAndView pay_order(OrderTable orderTable) {
         ModelAndView mv = new ModelAndView("pay_order");
@@ -33,19 +39,19 @@ public class OrderController extends BaseController {
     public ResultEntity<String> pay_response(OrderTable orderTable, Integer num) {
         switch (num) {
             case 1:
-                orderTable.setStatus(1);
+                orderTable.setStatus(1);//已付款
                 break;
             case 2:
-                orderTable.setStatus(2);
+                orderTable.setStatus(2);//已收货
                 break;
             case 3:
-                orderTable.setStatus(3);
+                orderTable.setStatus(3);//已评价
                 break;
             case 4:
                 orderTable.setStatus(4);
         }
-        ResultEntity<String> result = orderTableService.modifyOrderStatus(orderTable);
-        return result;
+
+        return orderTableService.modifyOrderStatus(orderTable);
     }
 
 
@@ -61,24 +67,43 @@ public class OrderController extends BaseController {
     }
 
     @RequestMapping("/order_info")
-    public ModelAndView info(OrderTable orderTable) {
+    public ModelAndView info(OrderTable orderTable, Integer num) {
         ModelAndView mv = new ModelAndView("order_info");
         List<OrderTableVo> orderVos = orderTableService.findManyByOrderId(orderTable);
         mv.addObject("orderVos", orderVos);
-
+        if (num != null) {
+            mv = new ModelAndView("comment_order");
+            orderTable.setStatus(3);
+            ResultEntity<String> result = orderTableService.modifyOrderStatus(orderTable);
+            if (result.getCode() == 0) {
+                orderVos = orderTableService.findManyByOrderId(orderTable);
+            }
+            mv.addObject("orderVos", orderVos);
+            return mv;
+        }
 
         return mv;
     }
 
     @RequestMapping("/delete_order")
-    public ModelAndView delete_order() {
+    public ResultEntity<String> delete_order(OrderTable orderTable) {
         ModelAndView mv = new ModelAndView("order_info");
+
+        return null;
+    }
+
+    @RequestMapping("/comment_goods")
+    public ModelAndView comment_goods(Goods goods) {
+        ModelAndView mv = new ModelAndView("comment_goods");
+        goods = goodsService.findByGoods(goods);
+        mv.addObject("goods", goods);
         return mv;
     }
 
-    @RequestMapping("/sure_order")
-    public ModelAndView sure_order() {
-        ModelAndView mv = new ModelAndView("order_info");
+    @RequestMapping("/submit_comment")
+    public ModelAndView submit_comment(Comment comment, HttpSession session) {
+        ModelAndView mv = new ModelAndView("comment_goods");
+        Integer user_id = getUser(session).getUser_id();
         return mv;
     }
 }

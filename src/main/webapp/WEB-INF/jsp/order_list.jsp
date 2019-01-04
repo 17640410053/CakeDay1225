@@ -84,7 +84,6 @@
     <div class="cart w1200">
 
 
-
         <div class="cart-table-th">
             <div class="th th-chk">
                 <div class="th-inner">
@@ -143,13 +142,13 @@
                         <c:if test="${order.status==1}">
                             <span class="sum">已支付</span>
                         </c:if>
-                        <c:if test="${order.status==2}">
+                    <%--    <c:if test="${order.status==2}">
                             <span class="sum">已发货</span>
-                        </c:if>
-                        <c:if test="${order.status==3}">
+                        </c:if>--%>
+                        <c:if test="${order.status==2}">
                             <span class="sum">已收货</span>
                         </c:if>
-                        <c:if test="${order.status==4}">
+                        <c:if test="${order.status==3}">
                             <span class="sum">已评价</span>
                         </c:if>
                     </li>
@@ -165,89 +164,96 @@
                             </c:when>
                             <c:when test="${order.status == 1}">
                                 <a type="button" class="layui-btn"
-                                   href="<c:url value="/order/sure_order?order_id=${order.order_id}"/>">确认收货</a>
+                                   href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=2"/>">确认收货</a>
                             </c:when>
+                            <%--<c:when test="${order.status == 2 }">--%>
+                                <%--<a type="button" class="layui-btn"--%>
+                                   <%--href="<c:url value="/order/order_info?order_id=${order.order_id}&num=3"/>">去评价</a>--%>
+                            <%--</c:when>--%>
                         </c:choose>
                     </li>
                 </ul>
 
                 </c:forEach>
         </div>
-    </div>
 
-
-    <!-- 模版导入数据 -->
-    <!-- <script type="text/html" id="demo">
-      {{# layui.each(d.infoList,function(index,item){}}
-        <ul class="item-content layui-clear">
-          <li class="th th-chk">
-            <div class="select-all">
-              <div class="cart-checkbox">
-                <input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all" value="true">
-              </div>
-            </div>
-          </li>
-          <li class="th th-item">
-            <div class="item-cont">
-              <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
-              <div class="text">
-                <div class="title">宝宝T恤棉质小衫</div>
-                <p><span>粉色</span>  <span>130</span>cm</p>
-              </div>
-            </div>
-          </li>
-          <li class="th th-price">
-            <span class="th-su">189.00</span>
-          </li>
-          <li class="th th-amount">
-            <div class="box-btn layui-clear">
-              <div class="less layui-btn">-</div>
-              <input class="Quantity-input" type="" name="" value="1" disabled="disabled">
-              <div class="add layui-btn">+</div>
-            </div>
-          </li>
-          <li class="th th-sum">
-            <span class="sum">189.00</span>
-          </li>
-          <li class="th th-op">
-            <span class="dele-btn">删除</span>
-          </li>
-        </ul>
-      {{# });}}
-    </script> -->
-
-
-    <div class="FloatBarHolder layui-clear">
+        <div class="FloatBarHolder layui-clear">
+            <a href="<c:url value="/index"/>">
+                <button type="button" class="layui-btn layui-btn-primary" style="float: right">返回</button>
+            </a>
+        </div>
 
 
     </div>
+</div>
 
 
-    <script>
+<!-- 模版导入数据 -->
+<!-- <script type="text/html" id="demo">
+{{# layui.each(d.infoList,function(index,item){}}
+<ul class="item-content layui-clear">
+<li class="th th-chk">
+<div class="select-all">
+<div class="cart-checkbox">
+<input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all" value="true">
+</div>
+</div>
+</li>
+<li class="th th-item">
+<div class="item-cont">
+<a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
+<div class="text">
+<div class="title">宝宝T恤棉质小衫</div>
+<p><span>粉色</span> <span>130</span>cm</p>
+</div>
+</div>
+</li>
+<li class="th th-price">
+<span class="th-su">189.00</span>
+</li>
+<li class="th th-amount">
+<div class="box-btn layui-clear">
+<div class="less layui-btn">-</div>
+<input class="Quantity-input" type="" name="" value="1" disabled="disabled">
+<div class="add layui-btn">+</div>
+</div>
+</li>
+<li class="th th-sum">
+<span class="sum">189.00</span>
+</li>
+<li class="th th-op">
+<span class="dele-btn">删除</span>
+</li>
+</ul>
+{{# });}}
+</script> -->
 
-        //Demo
-        layui.use('form', function () {
-            var form = layui.form;
-            form.render();
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                $.post('/addOrder', data.field, function (msg) {
-                    if (msg.code === 0) {
-                        layer.msg(msg.msg);
-                        /**
-                         * 在这儿写成功登陆的话去主页
-                         * */
-                        location.href = "/order/pay_order?order_id=" + msg.data;
-                    } else {
-                        layer.msg(msg.msg);
-                    }
-                });
 
-                layer.msg(JSON.stringify(data.field));
-                return false;
+<script>
+
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.post('/addOrder', data.field, function (msg) {
+                if (msg.code === 0) {
+                    layer.msg(msg.msg);
+                    /**
+                     * 在这儿写成功登陆的话去主页
+                     * */
+                    location.href = "/order/pay_order?order_id=" + msg.data;
+                } else {
+                    layer.msg(msg.msg);
+                }
             });
+
+            layer.msg(JSON.stringify(data.field));
+            return false;
         });
-    </script>
+    });
+</script>
 </div>
 
 </div>

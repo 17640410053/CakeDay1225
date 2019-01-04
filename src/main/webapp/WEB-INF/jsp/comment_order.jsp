@@ -30,8 +30,92 @@
 
 
     <div class="cart w1200">
-        <form class="layui-form" action="">
+        <div class="cart-table-th">
+            <div class="th th-chk">
 
+                <div class="th-inner">
+                    序号
+                </div>
+            </div>
+            <div class="th th-item">
+                <div class="th-inner">
+                    商品
+                </div>
+            </div>
+            <div class="th th-price">
+                <div class="th-inner">
+                    单价
+                </div>
+            </div>
+            <div class="th th-amount">
+                <div class="th-inner">
+                    数量
+                </div>
+            </div>
+            <div class="th th-sum">
+                <div class="th-inner">
+                    总价
+                </div>
+            </div>
+            <%--<div class="th th-op">--%>
+            <%--<div class="th-inner">--%>
+            <%--操作--%>
+            <%--</div>--%>
+            <%--</div>--%>
+        </div>
+        <div class="OrderList">
+            <div class="order-content" id="list-cont">
+                <c:forEach items="${orderVos}" var="order" >
+                    <c:forEach items="${order.orderDetailList}" var="orderDetail" varStatus="i">
+                        <ul class="item-content layui-clear" id="cart-list-${orderDetail.goods_id}">
+                            <li class="th th-chk">
+                                <div class="select-all">
+                                    <div class="cart-checkbox">
+                                        <span>${i.count}</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="th th-item">
+                                <div class="item-cont">
+                                    <a href="javascript:;"><img src="/cakeImg/${orderDetail.goods.img}" alt=""></a>
+                                    <div class="text">
+                                        <div class="title">${orderDetail.goods.name}</div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="th th-price">
+                                <span class="th-su">${orderDetail.goods.price}.00</span>
+                            </li>
+                            <li class="th th-amount">
+                                <span type="" disabled="disabled">${orderDetail.num}</span>
+                            </li>
+                            <li class="th th-sum">
+                                <span class="sum">${orderDetail.money}.00</span>
+                            </li>
+                                <%--<li class="th th-op">--%>
+
+                                <%--<span class="dele-btn">查看</span>--%>
+                                <%--</li>--%>
+                        </ul>
+                    </c:forEach>
+                </c:forEach>
+            </div>
+        </div>
+
+
+        <div class="FloatBarHolder layui-clear">
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <%--<button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>--%>
+                    <a href="<c:url value="/order/order_list"/>"><button type="button" class="layui-btn layui-btn-primary">返回</button></a>
+                </div>
+            </div>
+
+        </div>
+        <form class="layui-form" action="">
             <div class="layui-form-item">
                 <label class="layui-form-label" style="margin-left: -20px;font-size: larger">收货地址</label>
                 <div class="layui-input-block" style="width: 800px">
@@ -63,100 +147,7 @@
         </form>
 
 
-        <div class="cart-table-th">
-            <div class="th th-chk">
 
-                <div class="th-inner">
-                    序号
-                </div>
-            </div>
-            <div class="th th-item">
-                <div class="th-inner">
-                    商品
-                </div>
-            </div>
-            <div class="th th-price">
-                <div class="th-inner">
-                    单价
-                </div>
-            </div>
-            <div class="th th-amount">
-                <div class="th-inner">
-                    数量
-                </div>
-            </div>
-            <div class="th th-sum">
-                <div class="th-inner">
-                    总价
-                </div>
-            </div>
-            <div class="th th-op">
-                <div class="th-inner">
-                    操作
-                </div>
-            </div>
-        </div>
-        <div class="OrderList">
-            <div class="order-content" id="list-cont">
-                <c:forEach items="${orderVos}" var="order">
-                    <c:forEach items="${order.orderDetailList}" var="orderDetail" varStatus="i">
-                        <ul class="item-content layui-clear" id="cart-list-${orderDetail.goods_id}">
-                            <li class="th th-chk">
-                                <div class="select-all">
-                                    <div class="cart-checkbox">
-
-                                        <span>${i.count}</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="th th-item">
-
-
-                                <div class="item-cont">
-                                    <a href="javascript:;"><img src="/cakeImg/${orderDetail.goods.img}" alt=""></a>
-                                    <div class="text">
-                                        <div class="title">${orderDetail.goods.name}</div>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li class="th th-price">
-                                <span class="th-su">${orderDetail.goods.price}.00</span>
-                            </li>
-                            <li class="th th-amount">
-                                <span type="" disabled="disabled">${orderDetail.num}</span>
-                            </li>
-                            <li class="th th-sum">
-                                <span class="sum">${orderDetail.money}.00</span>
-                            </li>
-                            <li class="th th-op">
-                                <c:if test="${order.status!=0}">
-                                    <a href="<c:url value="/order/comment_goods?goods_id=${orderDetail.goods.goods_id}"/>">
-                                        <span>去评价</span></a>
-                                </c:if>
-
-                            </li>
-                        </ul>
-                    </c:forEach>
-                </c:forEach>
-            </div>
-        </div>
-
-
-        <div class="FloatBarHolder layui-clear">
-
-
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <%--<button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>--%>
-                    <a href="<c:url value="/order/order_list"/>">
-                        <button type="button" class="layui-btn layui-btn-primary">返回</button>
-                    </a>
-                </div>
-            </div>
-
-
-        </div>
 
 
         <script>

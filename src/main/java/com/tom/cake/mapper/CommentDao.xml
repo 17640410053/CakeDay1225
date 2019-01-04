@@ -25,36 +25,27 @@
 
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.comm_id">
-        INSERT INTO comment (
-            `comm_id`,
-            `content`,
-            `user_id`,
-            `goods_id`,
-            `star`,
-            `img`,
-            `create_time`
-        ) VALUES (
-            #{pojo.comm_id},
-            #{pojo.content},
-            #{pojo.user_id},
-            #{pojo.goods_id},
-            #{pojo.star},
-            #{pojo.img},
-            #{pojo.createTime}
-        )
+        INSERT INTO comment (`comm_id`, `content`, `user_id`, `goods_id`, `star`, `img`, `create_time`)
+        VALUES (#{pojo.comm_id},
+                #{pojo.content},
+                #{pojo.user_id},
+                #{pojo.goods_id},
+                #{pojo.star},
+                #{pojo.img},
+                #{pojo.createTime})
     </insert>
 
     <!--auto generated Code-->
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.comm_id">
         INSERT INTO comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.comm_id!=null"> `comm_id`,</if>
-            <if test="pojo.content!=null"> `content`,</if>
-            <if test="pojo.user_id!=null"> `user_id`,</if>
-            <if test="pojo.goods_id!=null"> `goods_id`,</if>
-            <if test="pojo.star!=null"> `star`,</if>
-            <if test="pojo.img!=null"> `img`,</if>
-            <if test="pojo.createTime!=null"> `create_time`,</if>
+            <if test="pojo.comm_id!=null">`comm_id`,</if>
+            <if test="pojo.content!=null">`content`,</if>
+            <if test="pojo.user_id!=null">`user_id`,</if>
+            <if test="pojo.goods_id!=null">`goods_id`,</if>
+            <if test="pojo.star!=null">`star`,</if>
+            <if test="pojo.img!=null">`img`,</if>
+            <if test="pojo.createTime!=null">`create_time`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -90,15 +81,25 @@
     <update id="update">
         UPDATE comment
         <set>
-            <if test="pojo.comm_id != null"> `comm_id` = #{pojo.comm_id}, </if>
-            <if test="pojo.content != null"> `content` = #{pojo.content}, </if>
-            <if test="pojo.user_id != null"> `user_id` = #{pojo.user_id}, </if>
-            <if test="pojo.goods_id != null"> `goods_id` = #{pojo.goods_id}, </if>
-            <if test="pojo.star != null"> `star` = #{pojo.star}, </if>
-            <if test="pojo.img != null"> `img` = #{pojo.img}, </if>
-            <if test="pojo.createTime != null"> `create_time` = #{pojo.createTime} </if>
+            <if test="pojo.comm_id != null">`comm_id` = #{pojo.comm_id},</if>
+            <if test="pojo.content != null">`content` = #{pojo.content},</if>
+            <if test="pojo.user_id != null">`user_id` = #{pojo.user_id},</if>
+            <if test="pojo.goods_id != null">`goods_id` = #{pojo.goods_id},</if>
+            <if test="pojo.star != null">`star` = #{pojo.star},</if>
+            <if test="pojo.img != null">`img` = #{pojo.img},</if>
+            <if test="pojo.createTime != null">`create_time` = #{pojo.createTime}</if>
         </set>
         WHERE comm_id = #{pojo.comm_id}
     </update>
+
+
+    <insert id="insertComment">
+        insert into cake_day1225.comment (content, user_id, goods_id,
+        <if test="star!=null">`star`,</if>
+        <if test="img!=null">`img`</if>)
+        VALUES ( #{content}, #{user_id}, #{goods_id},
+        <if test="star!=null and star !=''">#{star},</if>
+        <if test="img!=null and img !=''">#{img}</if> )
+    </insert>
 </mapper>
 
