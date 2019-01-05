@@ -1,6 +1,7 @@
 package com.tom.cake.controller;
 
 import com.tom.cake.constant.ResultEntity;
+import com.tom.cake.constant.ResultEnum;
 import com.tom.cake.model.Comment;
 import com.tom.cake.model.Goods;
 import com.tom.cake.model.OrderTable;
@@ -54,6 +55,19 @@ public class OrderController extends BaseController {
         return orderTableService.modifyOrderStatus(orderTable);
     }
 
+    /**
+     * <li>待付款</li>
+     * <%--0--%>
+     * <li>待发货</li>
+     * <%--1--%>
+     * <li>待收货</li>
+     * <%--2--%>
+     * <li>待评价</li>
+     * <%--3--%>
+     *
+     * @param session
+     * @return
+     */
 
     @RequestMapping("/order_list")
     public ModelAndView order_list(HttpSession session) {
@@ -62,7 +76,25 @@ public class OrderController extends BaseController {
         OrderTable orderTable = new OrderTable();
         orderTable.setUser_id(user.getUser_id());
         List<OrderTable> orderList = orderTableService.findAllOrdersByUId(orderTable);
+        //waitPayOrderList
+        orderTable.setStatus(-1);
+        List<OrderTable> waitPayOrderList = orderTableService.findAllOrdersByUId(orderTable);
+        //waitSendOrderList
+        orderTable.setStatus(1);
+        List<OrderTable> waitSendOrderList = orderTableService.findAllOrdersByUId(orderTable);
+        //waitReceiveOrderList
+        orderTable.setStatus(2);
+        List<OrderTable> waitReceiveOrderList = orderTableService.findAllOrdersByUId(orderTable);
+        //waitEstimateOrderList
+        orderTable.setStatus(3);
+        List<OrderTable> waitEstimateOrderList = orderTableService.findAllOrdersByUId(orderTable);
+
         mv.addObject("orderList", orderList);
+        mv.addObject("waitPayOrderList", waitPayOrderList);
+        mv.addObject("waitSendOrderList", waitSendOrderList);
+        mv.addObject("waitReceiveOrderList", waitReceiveOrderList);
+        mv.addObject("waitEstimateOrderList", waitEstimateOrderList);
+
         return mv;
     }
 
@@ -87,9 +119,15 @@ public class OrderController extends BaseController {
 
     @RequestMapping("/delete_order")
     public ResultEntity<String> delete_order(OrderTable orderTable) {
-        ModelAndView mv = new ModelAndView("order_info");
-
-        return null;
+        ResultEntity<String> result = new ResultEntity<>();
+        try {
+            orderTableService.removeOrderByOrderId(orderTable);
+            result.setCodeAndMsg(ResultEnum.DELETE_SUCCESS_MESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setCodeAndMsg(ResultEnum.DELETE_FAILED_MESS);
+        }
+        return result;
     }
 
     @RequestMapping("/comment_goods")

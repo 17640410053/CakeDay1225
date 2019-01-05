@@ -156,7 +156,7 @@ public class CartController extends BaseController {
         orderTable.setOrder_id(order_id);
         orderTable.setUser_id(user.getUser_id());
         orderTable.setMoney(countMoney.intValue());
-        orderTable.setStatus(0);
+        orderTable.setStatus(-1);
         orderTable.setAddress_id(address.getAddress_id());
         try {
             orderTableService.saveOrder(orderTable);

@@ -129,95 +129,106 @@
 
     <select id="selectAllOrdersByUId" resultType="OrderTable">
         SELECT ordertable.order_id,
-               ordertable.user_id,
-               ordertable.money,
-               ordertable.`status`,
-               ordertable.time,
-               ordertable.address_id
+        ordertable.user_id,
+        ordertable.money,
+        ordertable.`status`,
+        ordertable.time,
+        ordertable.address_id
         FROM ordertable
         WHERE ordertable.user_id = #{user_id}
+        <if test="status !=null">
+            and ordertable.`status`=
+        </if>
+        <if test="status !=null">
+            #{status}
+        </if>
+        order by ordertable.time desc
     </select>
 
- <!--   <resultMap type="Student" id="studentMapper">
-        <id column="sid" property="sid"/>
-        <result column="sname" property="sname"/>
-        <collection property="courses" ofType="Course">
-            <id column="cid" property="cid"/>
-            <result column="cname" property="cname"/>
-        </collection>
-    </resultMap>
-    <select id="selectById" resultMap="studentMapper">
-        select sid, sname, cid, cname
+    <!--   <resultMap type="Student" id="studentMapper">
+           <id column="sid" property="sid"/>
+           <result column="sname" property="sname"/>
+           <collection property="courses" ofType="Course">
+               <id column="cid" property="cid"/>
+               <result column="cname" property="cname"/>
+           </collection>
+       </resultMap>
+       <select id="selectById" resultMap="studentMapper">
+           select sid, sname, cid, cname
 
-        from student,
-             middle,
-             course
-        where sid = studentId
-          and courseId = cid
-          and sid = #{xxxx}
-    </select>
--->
+           from student,
+                middle,
+                course
+           where sid = studentId
+             and courseId = cid
+             and sid = #{xxxx}
+       </select>
+   -->
 
 
- <!--   <select id="selectManyByOrderId" resultMap="orderTableMapper">
-        SELECT
-               orderdetail.num as num,
-               goods.goods_id AS goodsId,
-               goods.`name`,
+    <!--   <select id="selectManyByOrderId" resultMap="orderTableMapper">
+           SELECT
+                  orderdetail.num as num,
+                  goods.goods_id AS goodsId,
+                  goods.`name`,
+                  goods.detail,
+                  goods.price,
+                  goods.`status` AS goods_status,
+                  goods.createtime,
+                  goods.type_id,
+                  goods.img,
+                  goods.star,
+                  ordertable.address_id,
+                  ordertable.time,
+                  ordertable.order_id,
+                  ordertable.user_id,
+                  ordertable.money,
+                  ordertable.`status`,
+                  address.`name` addressName,
+                  address.phone
+           FROM
+                ordertable
+                    INNER JOIN orderdetail ON orderdetail.order_id = ordertable.order_id
+                    INNER JOIN goods ON orderdetail.goods_id = goods.goods_id
+                    INNER JOIN address ON ordertable.address_id = address.address_id
+           WHERE
+                   ordertable.order_id = #{order_id}
+       </select>-->
+    <select id="selectManyByOrderId" resultMap="orderTableMapper">
+        SELECT address.`name`      addressName,
+               address.phone,
+               goods.goods_id      goodsId,
+               goods.`name`        goodsName,
                goods.detail,
                goods.price,
-               goods.`status` AS goods_status,
+               goods.`status`      goodsStatus,
                goods.createtime,
                goods.type_id,
                goods.img,
                goods.star,
-               ordertable.address_id,
-               ordertable.time,
-               ordertable.order_id,
+               ordertable.order_id orderId,
                ordertable.user_id,
                ordertable.money,
                ordertable.`status`,
-               address.`name` addressName,
-               address.phone
-        FROM
-             ordertable
-                 INNER JOIN orderdetail ON orderdetail.order_id = ordertable.order_id
+               ordertable.time,
+               orderdetail.orderDetail_id,
+               orderdetail.order_id,
+               orderdetail.goods_id,
+               orderdetail.num,
+               orderdetail.money   orderMoney
+        FROM orderdetail
+                 INNER JOIN ordertable ON orderdetail.order_id = ordertable.order_id
                  INNER JOIN goods ON orderdetail.goods_id = goods.goods_id
                  INNER JOIN address ON ordertable.address_id = address.address_id
-        WHERE
-                ordertable.order_id = #{order_id}
-    </select>-->
-   <select id="selectManyByOrderId" resultMap="orderTableMapper">
-       SELECT
-              address.`name` addressName,
-              address.phone,
-              goods.goods_id goodsId,
-              goods.`name` goodsName,
-              goods.detail,
-              goods.price,
-              goods.`status` goodsStatus,
-              goods.createtime,
-              goods.type_id,
-              goods.img,
-              goods.star,
-              ordertable.order_id orderId,
-              ordertable.user_id,
-              ordertable.money,
-              ordertable.`status`,
-              ordertable.time,
-              orderdetail.orderDetail_id,
-              orderdetail.order_id,
-              orderdetail.goods_id,
-              orderdetail.num,
-              orderdetail.money orderMoney
-       FROM
-            orderdetail
-                INNER JOIN ordertable ON orderdetail.order_id = ordertable.order_id
-                INNER JOIN goods ON orderdetail.goods_id = goods.goods_id
-                INNER JOIN address ON ordertable.address_id = address.address_id
-       WHERE
-               ordertable.order_id = #{order_id}
+        WHERE ordertable.order_id = #{order_id}
+
     </select>
+
+    <delete id="deleteOrderByOrderId">
+        delete
+        from cake_day1225.ordertable
+        where order_id = #{order_id}
+    </delete>
 
 
 </mapper>

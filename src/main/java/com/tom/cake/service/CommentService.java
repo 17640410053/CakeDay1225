@@ -2,8 +2,15 @@ package com.tom.cake.service;
 
 import com.tom.cake.constant.ResultEntity;
 import com.tom.cake.model.Comment;
+import com.tom.cake.vo.CommentVo;
+
+import java.util.List;
 
 public interface CommentService {
 
-    ResultEntity<String> saveComment(Comment comment);
+    ResultEntity<Integer> saveComment(Comment comment);
+
+    CommentVo findCommentById(Comment comment);
+
+    List<CommentVo> findByGoodsId(Comment comment);
 }

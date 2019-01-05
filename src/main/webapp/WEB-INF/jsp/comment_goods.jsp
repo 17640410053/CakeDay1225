@@ -84,7 +84,7 @@
                            value="${goods.goods_id}" autocomplete="off"
                            class="layui-input" readonly>
                     <input id="imgName" type="hidden" name="img"
-                           value=""  readonly>
+                           value="" readonly>
 
                     <input type="text" required lay-verify="required"
                            value="${goods.name}" autocomplete="off"
@@ -140,14 +140,14 @@
                 </div>
             </div>
 
-          <%--  <div class="layui-form-item">
-                <label class="layui-form-label">几颗星</label>
-                <div class="layui-input-block">
-                    <input type="text" required lay-verify="required"
-                           name="star" placeholder="请输入几颗星" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>--%>
+            <%--  <div class="layui-form-item">
+                  <label class="layui-form-label">几颗星</label>
+                  <div class="layui-input-block">
+                      <input type="text" required lay-verify="required"
+                             name="star" placeholder="请输入几颗星" autocomplete="off"
+                             class="layui-input">
+                  </div>
+              </div>--%>
             <div class="layui-form-item">
                 <label class="layui-form-label">几颗星</label>
                 <div class="layui-input-block">
@@ -342,7 +342,7 @@
                             /**
                              * 在这儿写成功登陆的话去主页
                              * */
-                            location.href = "/test_success";
+                            location.href = "/test_success?comm_id=" + msg.data;
                         } else {
                             layer.msg(msg.msg);
                         }

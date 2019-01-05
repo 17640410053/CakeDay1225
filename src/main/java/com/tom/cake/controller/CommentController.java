@@ -6,6 +6,7 @@ import com.tom.cake.model.Comment;
 import com.tom.cake.model.Goods;
 import com.tom.cake.model.Users;
 import com.tom.cake.service.CommentService;
+import com.tom.cake.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -164,27 +166,31 @@ public class CommentController extends BaseController {
 
     @RequestMapping("/submit_comment")
     @ResponseBody
-    public ResultEntity<String> submit_comment(Comment comment, HttpSession session) throws StringIndexOutOfBoundsException {
+    public ResultEntity<Integer> submit_comment(Comment comment, HttpSession session) throws StringIndexOutOfBoundsException {
         Users user = getUser(session);
         comment.setUser_id(user.getUser_id());
         System.out.println("comment.getImg()---------" + comment.getImg());
         if (comment.getImg() != null && !comment.getImg().equals("")) {
             comment.setImg(comment.getImg().substring(0, comment.getImg().length() - 1));
         }
-
-
+        System.out.println("comm_id----------------------test" + comment.getComm_id());
         return commentService.saveComment(comment);
     }
 
 
     @RequestMapping("/test_success")
-    public String test_success() {
-        return "comment_success";
+    public ModelAndView test_success(Comment comment) {
+        ModelAndView mv = new ModelAndView("comment_success");
+        mv.addObject("comment", comment);
+        return mv;
     }
 
     @RequestMapping("/comment/comment_show")
-    public String comment_show() {
-        return "comment_show";
+    public ModelAndView comment_show(Comment comment) {
+        ModelAndView mv = new ModelAndView("comment_show");
+        CommentVo commentVo = commentService.findCommentById(comment);
+        mv.addObject("commentVo", commentVo);
+        return mv;
     }
 
 }

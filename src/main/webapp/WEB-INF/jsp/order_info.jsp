@@ -130,10 +130,17 @@
                                 <span class="sum">${orderDetail.money}.00</span>
                             </li>
                             <li class="th th-op">
-                                <c:if test="${order.status!=0}">
-                                    <a href="<c:url value="/order/comment_goods?goods_id=${orderDetail.goods.goods_id}"/>">
-                                        <span>去评价</span></a>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${order.status >=2}">
+                                        <a href="<c:url value="/order/comment_goods?goods_id=${orderDetail.goods.goods_id}"/>">
+                                            <span>去评价</span></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="<c:url value="/details?goods_id=${orderDetail.goods.goods_id}"/>">
+                                            <span>查看</span></a>
+                                    </c:otherwise>
+                                </c:choose>
+
 
                             </li>
                         </ul>

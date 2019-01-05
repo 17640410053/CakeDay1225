@@ -79,5 +79,10 @@
         insert into cake_day1225.orderdetail (order_id, goods_id, num, money)
         VALUES (#{order_id}, #{goods_id}, #{num}, #{money})
     </insert>
+
+
+    <delete id="deleteByOrderId">
+        delete from cake_day1225.orderdetail where order_id=#{order_id}
+    </delete>
 </mapper>
 

@@ -18,4 +18,6 @@ public interface OrderTableService {
 
 
     List<OrderTableVo> findManyByOrderId(OrderTable orderTable);
+
+    void removeOrderByOrderId(OrderTable orderTable);
 }

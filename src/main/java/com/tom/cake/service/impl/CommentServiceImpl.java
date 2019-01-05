@@ -4,6 +4,7 @@ import com.tom.cake.constant.ResultEntity;
 import com.tom.cake.constant.ResultEnum;
 import com.tom.cake.model.Comment;
 import com.tom.cake.service.CommentService;
+import com.tom.cake.vo.CommentVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,12 +36,15 @@ public class CommentServiceImpl implements CommentService {
         return commentDao.update(pojo);
     }
 
+
     @Override
-    public ResultEntity<String> saveComment(Comment comment) {
-        ResultEntity<String> result = new ResultEntity<>();
+    public ResultEntity<Integer> saveComment(Comment comment) {
+        ResultEntity<Integer> result = new ResultEntity<>();
         try {
             commentDao.insertComment(comment);
+            System.out.println("comm_id----------------------" + comment.getComm_id());
             result.setCodeAndMsg(ResultEnum.INSERT_SUCCESS_MESS);
+            result.setData(comment.getComm_id());
         } catch (Exception e) {
             e.printStackTrace();
             result.setCodeAndMsg(ResultEnum.INSERT_FAILED_MESS);
@@ -49,5 +53,15 @@ public class CommentServiceImpl implements CommentService {
         return result;
 
 
+    }
+
+    @Override
+    public CommentVo findCommentById(Comment comment) {
+        return commentDao.selectCommentById(comment);
+    }
+
+    @Override
+    public List<CommentVo> findByGoodsId(Comment comment) {
+        return commentDao.selectByGoodsId(comment);
     }
 }

@@ -12,6 +12,49 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <resultMap id="commentGoodsMapper" type="com.tom.cake.vo.CommentVo">
+        <id column="comm_id" property="comm_id"/>
+        <result column="content" property="content"/>
+        <result column="user_id" property="user_id"/>
+        <result column="goods_id" property="goods_id"/>
+        <result column="star" property="star"/>
+        <result column="img" property="img"/>
+        <result column="createTime" property="createTime"/>
+        <association property="goods" javaType="Goods">
+            <id column="goodsId" property="goods_id"/>
+            <result column="name" property="name"/>
+            <result column="detail" property="detail"/>
+            <result column="price" property="price"/>
+            <result column="status" property="status"/>
+            <result column="createtime" property="createtime"/>
+            <result column="type_id" property="type_id"/>
+            <result column="goodsImg" property="img"/>
+            <result column="star" property="star"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="commentGoodsByGoodsIdMapper" type="com.tom.cake.vo.CommentVo">
+        <id column="comm_id" property="comm_id"/>
+        <result column="content" property="content"/>
+        <result column="user_id" property="user_id"/>
+        <result column="goods_id" property="goods_id"/>
+        <result column="star" property="star"/>
+        <result column="img" property="img"/>
+        <result column="createTime" property="createTime"/>
+        <association property="users" javaType="Users">
+            <result column="userId" property="user_id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="phone" property="phone"/>
+            <result column="mail" property="mail"/>
+            <result column="birth" property="birth"/>
+            <result column="gender" property="gender"/>
+            <result column="image" property="image"/>
+            <result column="token" property="token"/>
+            <result column="createtime" property="createTime"/>
+        </association>
+    </resultMap>
+
     <!--auto generated Code-->
     <sql id="all_column">
         `comm_id`,
@@ -93,13 +136,110 @@
     </update>
 
 
-    <insert id="insertComment">
-        insert into cake_day1225.comment (content, user_id, goods_id,
-        <if test="star!=null">`star`,</if>
-        <if test="img!=null">`img`</if>)
-        VALUES ( #{content}, #{user_id}, #{goods_id},
-        <if test="star!=null and star !=''">#{star},</if>
-        <if test="img!=null and img !=''">#{img}</if> )
+    <!--<insert id="insertComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="comm_id">--><!--第一种方法-->
+    <insert id="insertComment" parameterType="Comment">
+        <selectKey keyColumn="comm_id" keyProperty="comm_id" order="AFTER" resultType="Comment">
+            /*第二种方法，注意这个后面as的内容与keyColumn="comm_id" 对应*/
+            SELECT LAST_INSERT_ID() as comm_id FROM DUAL
+        </selectKey>
+
+        insert into cake_day1225.comment(
+        <trim suffixOverrides=",">
+            <if test="content!=null and content!=''">
+                content,
+            </if>
+            <if test="user_id !=null and user_id !=''">
+                user_id,
+            </if>
+            <if test="goods_id !=null and goods_id !=''">
+                goods_id,
+            </if>
+            <if test="star !=null and star!=''">
+                star,
+            </if>
+            <if test="img !=null and img !=''">
+                img,
+            </if>
+        </trim>
+        ) values(
+        <trim suffixOverrides=",">
+            <if test="content!=null and content!=''">
+                #{content},
+            </if>
+            <if test="user_id !=null and user_id !=''">
+                #{user_id},
+            </if>
+            <if test="goods_id !=null and goods_id !=''">
+                #{goods_id},
+            </if>
+            <if test="star !=null and star!=''">
+                #{star},
+            </if>
+            <if test="img !=null and img !=''">
+                #{img},
+            </if>
+
+        </trim>
+        )
     </insert>
+
+
+    <select id="selectCommentById" resultMap="commentGoodsMapper">
+        SELECT `comment`.comm_id,
+               `comment`.content,
+               `comment`.user_id,
+               `comment`.goods_id,
+               `comment`.star,
+               `comment`.img,
+               `comment`.createTime,
+               goods.goods_id AS goodsId,
+               goods.`name`,
+               goods.detail,
+               goods.price,
+               goods.`status`,
+               goods.createtime,
+               goods.type_id,
+               goods.img      AS goodsImg,
+               goods.star
+        FROM `comment`
+                 INNER JOIN goods ON `comment`.goods_id = goods.goods_id
+        WHERE `comment`.comm_id = #{comm_id}
+    </select>
+
+
+    <select id="selectByGoodsId" resultMap="commentGoodsByGoodsIdMapper">
+        SELECT `comment`.comm_id,
+        `comment`.content,
+        `comment`.user_id,
+        `comment`.goods_id,
+        `comment`.star,
+        `comment`.img,
+        `comment`.createTime,
+        users.username,
+        users.user_id AS userId,
+        users.`password`,
+        users.phone,
+        users.mail,
+        users.birth,
+        users.gender,
+        users.image,
+        users.token,
+        users.createtime
+        FROM `comment`
+        INNER JOIN users ON `comment`.user_id = users.user_id
+        WHERE `comment`.goods_id = #{goods_id}
+        <if test="star !=null and star !=''">
+            and star between
+        </if>
+        <if test="star !=null and star !=''">
+            #{star}-1 and #{star}+1
+        </if>
+
+        <if test="img !=null and img !=''">
+            and `comment`.img is not null and `comment`.img != ''
+        </if>
+        ORDER BY `comment`.star ASC,
+        `comment`.createTime DESC
+    </select>
 </mapper>
 

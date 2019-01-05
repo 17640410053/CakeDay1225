@@ -1,14 +1,11 @@
 package com.tom.cake.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.tom.cake.model.Address;
-import com.tom.cake.model.Goods;
-import com.tom.cake.model.Type;
-import com.tom.cake.model.Users;
+import com.tom.cake.model.*;
 import com.tom.cake.service.AddressService;
+import com.tom.cake.service.CommentService;
 import com.tom.cake.service.GoodsService;
 import com.tom.cake.service.TypeService;
-import com.tom.cake.service.UsersService;
+import com.tom.cake.vo.CommentVo;
 import com.tom.cake.vo.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +27,9 @@ public class IndexController {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private CommentService commentService;
 
     /**
      * 主页
@@ -125,6 +125,28 @@ public class IndexController {
             address = addressService.findByUsersId(address);
             mv.addObject("address", address);
         }
+        //添加评论
+        Comment comment = new Comment();
+        comment.setGoods_id(goods.getGoods_id());
+        List<CommentVo> commentVoList = commentService.findByGoodsId(comment);
+        System.out.println("commentVoList.size：————————" + commentVoList.size());
+
+        comment.setStar(5);
+        List<CommentVo> goodCommentVoList = commentService.findByGoodsId(comment);
+        comment.setStar(3);
+        List<CommentVo> midCommentVoList = commentService.findByGoodsId(comment);
+        comment.setStar(1);
+        List<CommentVo> badCommentVoList = commentService.findByGoodsId(comment);
+        //非空时，晒图功能查看
+        comment.setStar(null);
+        comment.setImg("test");
+        List<CommentVo> imgCommentVoList = commentService.findByGoodsId(comment);
+
+        mv.addObject("commentVoList", commentVoList);
+        mv.addObject("goodCommentVoList", goodCommentVoList);
+        mv.addObject("midCommentVoList", midCommentVoList);
+        mv.addObject("badCommentVoList", badCommentVoList);
+        mv.addObject("imgCommentVoList", imgCommentVoList);
         mv.addObject("byStar", byStar);
         mv.addObject("goods", goods);
         return mv;
@@ -133,5 +155,10 @@ public class IndexController {
     @RequestMapping("/test")
     public ModelAndView test() {
         return new ModelAndView("test1");
+    }
+
+    @RequestMapping("/img_show")
+    public String img_show() {
+        return "img_show";
     }
 }

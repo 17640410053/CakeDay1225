@@ -69,4 +69,9 @@ public class OrderTableServiceImpl implements OrderTableService {
     public List<OrderTableVo> findManyByOrderId(OrderTable orderTable) {
         return orderTableDao.selectManyByOrderId(orderTable);
     }
+
+    @Override
+    public void removeOrderByOrderId(OrderTable orderTable) {
+        orderTableDao.deleteOrderByOrderId(orderTable);
+    }
 }

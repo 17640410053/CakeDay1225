@@ -8,6 +8,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <jsp:include page="header.jsp"/>
+<style>
+    .test {
+        line-height: 42px;
+        width: 100px;
+        text-align: center;
+        font-size: 18px;
+        cursor: pointer;
+        color: #888888;
+    }
+
+    .test3 {
+        margin-top: -9px;
+    }
+
+    .test2 {
+        height: 2402px;
+        width: 800px;
+    }
+</style>
 
 <div class="content content-nav-base datails-content">
     <div class="main-nav">
@@ -32,7 +51,8 @@
         </div>
         <div class="product-intro layui-clear">
             <div class="preview-wrap">
-                <a href="javascript:;"><img src="/cakeImg/${goods.img}" style="height: 402px;width: 402px"></a>
+                <a href="<c:url value="/details?goods_id=${goods.goods_id}"/>"><img src="/cakeImg/${goods.img}"
+                                                                                    style="height: 402px;width: 402px"></a>
             </div>
             <div class="itemInfo-wrap">
                 <div class="itemInfo">
@@ -51,7 +71,6 @@
                                 江西&nbsp;&nbsp;南昌&nbsp;&nbsp;东湖区
                             </c:if>
                             <c:if test="${address!=null}">
-
                                 ${address.name.split(",")[0]}&nbsp;&nbsp;${address.name.split(",")[1]}&nbsp;&nbsp;${address.name.split(",")[2]}
                             </c:if>
                         </strong>
@@ -69,7 +88,9 @@
                         </div>
                     </div>
                     <div class="choose-btns">
-                        <button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button>
+                        <a href="<c:url value="/ordertable?goods_id=${goods.goods_id}"/>">
+                            <button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button>
+                        </a>
                         <button class="layui-btn  layui-btn-danger car-btn"><i
                                 class="layui-icon layui-icon-cart-simple"></i>加入购物车
                         </button>
@@ -83,7 +104,7 @@
                 <div class="item-list">
                     <c:forEach items="${byStar}" var="star" begin="0" end="5">
                         <div class="item">
-                            <a href="<c:url value="/details?goods_id=${goods.goods_id}"/>">
+                            <a href="<c:url value="/details?goods_id=${star.goods_id}"/>">
                                 <img src="/cakeImg/${star.img}"
                                      style="width: 280px;height: 280px;">
                                 <p><span>${star.name}</span><span class="pric">￥${star.price}</span></p></a>
@@ -91,16 +112,253 @@
                     </c:forEach>
                 </div>
             </div>
-            <div class="detail">
-                <h4>详情</h4>
-                <div class="item">
-                    <img src="<c:url value="/res/static/img/details_imgbig.jpg"/>">
+            <div class="detail test3">
+                <%--<h4>详情</h4>--%>
+                <%--<div class="item">--%>
+                <%--<img src="<c:url value="/res/static/img/details_imgbig.jpg"/>">--%>
+                <%--</div>--%>
+
+
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this test"><h4 style="border-bottom: none">详情</h4></li>
+                        <li class="test"><h4 style="border-bottom: none">用户评价</h4></li>
+                        <li class="test"><h4 style="border-bottom: none">占位中</h4></li>
+                    </ul>
+                    <div class="layui-tab-content item" style="border-top:none;">
+                        <div class="layui-tab-item layui-show">
+                            <div class="item test2">
+                                <img src="<c:url value="/cakeImg/pc1.jpg"/>" style="height: 1878px;width: 800px;"
+                                     alt="">
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="item test2">
+                                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                                    <ul class="layui-tab-title">
+                                        <li class="layui-this">全部评论</li>
+                                        <li>好评</li>
+                                        <li>中评</li>
+                                        <li>差评</li>
+                                        <li>晒图</li>
+                                    </ul>
+                                    <div class="layui-tab-content">
+
+                                        <div class="layui-tab-item layui-show">
+                                            <c:forEach items="${commentVoList}" var="commentVo">
+                                                <div class="layui-row layui-col-space10"
+                                                     style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
+                                                    <div class="layui-col-md2">
+                                                        <p style="text-align: center"><img
+                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                                alt=""
+                                                                style="border-radius: 50%"></p>
+                                                        <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
+                                                    </div>
+                                                    <div class="layui-col-md7">
+                                                        <p class="comment-img">
+                                                            <c:forEach items="${commentVo.img}" var="commImg">
+                                                                <img src="/upload/${commImg}" height="60"
+                                                                     alt="" style="margin-left: 10px">
+                                                            </c:forEach>
+                                                        </p>
+                                                        <div style="height: 100%;margin-top: 15px">人生就像是一场修行
+                                                            <p>${commentVo.content}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-col-md3">
+                                                        <span style="font-size:12px;color: #999 ">${commentVo.createTime}</span>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                            <%--layui.code--%>
+                                            <%--          <table class="layui-table" lay-skin="line">
+                                                          <colgroup>
+                                                              <col width="150">
+                                                              <col width="200">
+                                                              <col>
+                                                          </colgroup>
+                                                          &lt;%&ndash;    <thead>
+                                                              <tr>
+                                                                  <th>昵称</th>
+                                                                  <th>加入时间</th>
+                                                                  <th>签名</th>
+                                                              </tr>
+                                                              </thead>&ndash;%&gt;
+                                                          <tbody>
+                                                          <c:forEach items="${commentVoList}" var="commentVo">
+
+
+                                                              <tr>
+                                                                  <td>
+                                                                      <div><img src="/img/userImg/${commentVo.users.image}"
+                                                                                alt=""
+                                                                                style="height: 35px;width: 35px;border-radius: 50%">
+                                                                          <span>${commentVo.users.username}</span>
+                                                                      </div>
+                                                                  </td>
+                                                                  <td>${commentVo.content}
+                                                                      <c:forEach items="${commentVo.img}" var="commImg">
+                                                                          <img src="/upload/${commImg}" alt=""
+                                                                               style="height: 60px;width: 60px;">
+                                                                      </c:forEach>
+                                                                      <span> ${commentVo.createTime}</span>
+                                                                  </td>
+                                                                  <td>人生就像是一场修行</td>
+                                                              </tr>
+                                                          </c:forEach>
+                                                          &lt;%&ndash;             <tr>
+                                                                           <td>许闲心</td>
+                                                                           <td>2016-11-28</td>
+                                                                           <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                                                                       </tr>&ndash;%&gt;
+                                                          </tbody>
+                                                      </table>--%>
+                                        </div>
+                                        <div class="layui-tab-item">
+
+                                            <c:forEach items="${goodCommentVoList}" var="commentVo">
+                                                <div class="layui-row layui-col-space10"
+                                                     style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
+                                                    <div class="layui-col-md2">
+                                                        <p style="text-align: center"><img
+                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                                alt=""
+                                                                style="border-radius: 50%"></p>
+                                                        <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
+                                                    </div>
+                                                    <div class="layui-col-md7">
+                                                        <p class="comment-img">
+                                                            <c:forEach items="${commentVo.img}" var="commImg">
+                                                                <img src="/upload/${commImg}" height="60"
+                                                                     alt="" style="margin-left: 10px">
+                                                            </c:forEach>
+                                                        </p>
+                                                        <div style="height: 100%;margin-top: 15px">人生就像是一场修行
+                                                            <p>${commentVo.content}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-col-md3">
+                                                        <span style="font-size:12px;color: #999 ">${commentVo.createTime}</span>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+
+                                        </div>
+                                        <div class="layui-tab-item">
+                                            <c:forEach items="${midCommentVoList}" var="commentVo">
+                                                <div class="layui-row layui-col-space10"
+                                                     style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
+                                                    <div class="layui-col-md2">
+                                                        <p style="text-align: center"><img
+                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                                alt=""
+                                                                style="border-radius: 50%"></p>
+                                                        <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
+                                                    </div>
+                                                    <div class="layui-col-md7">
+                                                        <p class="comment-img">
+                                                            <c:forEach items="${commentVo.img}" var="commImg">
+                                                                <img src="/upload/${commImg}" height="60"
+                                                                     alt="" style="margin-left: 10px">
+                                                            </c:forEach>
+                                                        </p>
+                                                        <div style="height: 100%;margin-top: 15px">人生就像是一场修行
+                                                            <p>${commentVo.content}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-col-md3">
+                                                        <span style="font-size:12px;color: #999 ">${commentVo.createTime}</span>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="layui-tab-item">
+                                            <c:forEach items="${badCommentVoList}" var="commentVo">
+                                                <div class="layui-row layui-col-space10"
+                                                     style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
+                                                    <div class="layui-col-md2">
+                                                        <p style="text-align: center"><img
+                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                                alt=""
+                                                                style="border-radius: 50%"></p>
+                                                        <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
+                                                    </div>
+                                                    <div class="layui-col-md7">
+                                                        <p class="comment-img">
+                                                            <c:forEach items="${commentVo.img}" var="commImg">
+                                                                <img src="/upload/${commImg}" height="60"
+                                                                     alt="" style="margin-left: 10px">
+                                                            </c:forEach>
+                                                        </p>
+                                                        <div style="height: 100%;margin-top: 15px">人生就像是一场修行
+                                                            <p>${commentVo.content}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-col-md3">
+                                                        <span style="font-size:12px;color: #999 ">${commentVo.createTime}</span>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="layui-tab-item">
+                                            <c:forEach items="${imgCommentVoList}"
+                                                       var="commentVo">
+                                                <div class="layui-row layui-col-space10"
+                                                     style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
+                                                    <div class="layui-col-md2">
+                                                        <p style="text-align: center"><img
+                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                                alt=""
+                                                                style="border-radius: 50%"></p>
+                                                        <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
+                                                    </div>
+                                                    <div class="layui-col-md7">
+                                                        <p class="comment-img">
+                                                            <c:forEach items="${commentVo.img}" var="commImg">
+                                                                <img src="/upload/${commImg}" height="60"
+                                                                     alt="" style="margin-left: 10px">
+                                                            </c:forEach>
+                                                        </p>
+                                                        <div style="height: 100%;margin-top: 15px">人生就像是一场修行
+                                                            <p>${commentVo.content}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-col-md3">
+                                                        <span style="font-size:12px;color: #999 ">${commentVo.createTime}</span>
+                                                    </div>
+                                                </div>
+                                            </c:forEach></div>
+                                    </div>
+                                </div>
+                                <script>
+                                    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+                                    layui.use('element', function () {
+                                        var element = layui.element;
+
+                                        //…
+                                    });
+                                </script>
+
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="item test2">
+                                3
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
+
+
         </div>
     </div>
 </div>
 <script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>
+<script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
     layui.config({
         base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录 这是一个入口，下面有一个入口，可能layer冲突
@@ -125,7 +383,45 @@
                 layer.alert("啦啦啦");
                 layer.alert(data.msg);
             })
-        })
+        });
+        /**
+         * 点击图片加载大图功能
+         */
+        $('.comment-img > img').each(function () {
+            $(this).click(function () {
+                var url = $(this).attr('src'), height, width;
+                // 这个的意思是，在内存地址里面创建一个<img>元素,就是在内存地址里面创建的，只不过不在页面显示而已
+                $("<img/>").attr("src", url).load(function () {
+                    height = this.height;
+                    width = this.width;
+                    layer.open({
+                        type: 2,
+                        content: url,
+                        area: [width + "px", height + 42.99 + "px"]
+                    });
+                });
+                // layer.open({
+                //     type: 2,
+                //     content: '/img_show?url=' + url,
+                //     area: ["600px", "600px"]
+                // });
+            });
+        });
+
+        function getImgArea(url) {
+            var img = new Image();
+            img.src = url;
+            ;//每次都重新加载，不要缓存呢，这不是我要缓存，缓存是浏览器的机制，除非把浏览器缓存关了，但是你不能保证用户的浏览器缓存都是关闭的，嘿嘿
+            // 如果图片被缓存，则直接返回缓存数据
+            if (img.complete) {
+                return {width: img.width, height: img.height}
+            } else {
+                // 完全加载完毕的事件
+                img.onload = function () {
+                    return {width: img.width, height: img.height}
+                }
+            }
+        }
     });
 </script>
 <script>

@@ -27,4 +27,6 @@ public interface OrderTableDao {
     List<OrderTable> selectAllOrdersByUId(OrderTable orderTable);
 
     List<OrderTableVo> selectManyByOrderId(OrderTable orderTable);
+
+    void deleteOrderByOrderId(OrderTable orderTable);
 }
