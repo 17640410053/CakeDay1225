@@ -180,7 +180,7 @@
 
                     <div class="layui-input-block">
                         <c:forEach items="${commentVo.img}" var="commImg">
-                            <img src="/upload/${commImg}" alt="" style="height: 100px;width: 100px;">
+                            <img src="<c:url value="//upload/${commImg}"/>" alt="" style="height: 100px;width: 100px;">
                         </c:forEach>
                     </div>
                 </div>

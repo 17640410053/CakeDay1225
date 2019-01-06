@@ -81,10 +81,11 @@
 
 
                                 <div class="item-cont">
-                                    <a href="javascript:;"><img src="/cakeImg/${orderDetail.img}" alt=""></a>
+                                    <a href="javascript:;">
+                                        <img src="<c:url value="/cakeImg/${orderDetail.img}"/>" alt=""></a>
                                     <div class="text">
                                         <div class="title">${orderDetail.name}</div>
-                                        <p><span>粉色</span> <span>130</span>cm</p>
+                                        <p><span>雪过天晴后的第一口呼吸，甜蜜清新得不落俗套。</span></p>
                                     </div>
                                 </div>
 
