@@ -16,7 +16,8 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/res/static/css/main.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/res/layui/css/layui.css"/>">
-    <script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>
+    <%--<script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>--%>
+    <script type="text/javascript" src="<c:url value="/res/layui/layui.js"/>"></script>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -28,12 +29,12 @@
     <div class="site-nav w1200">
         <p class="sn-back-home">
             <i class="layui-icon layui-icon-home"></i>
-            <a href="/index">首页</a>
+            <a href="<c:url value="/index"/>">首页</a>
         </p>
 
         <c:if test="${sessionScope.user!=null}">
             <div class="sn-quick-menu">
-                <div class="login"><a href="/user/self_info">${sessionScope.user.username}</a></div>
+                <div class="login"><a href="<c:url value="/user/self_info"/>">${sessionScope.user.username}</a></div>
                 <div class="login"><a href="<c:url value="/order/order_list"/>">我的订单</a></div>
                 <div class="sp-cart"><a href="<c:url value="/shopcart"/>">购物车</a><span>2</span></div>
             </div>

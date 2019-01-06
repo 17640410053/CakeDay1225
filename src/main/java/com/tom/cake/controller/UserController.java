@@ -5,7 +5,9 @@ import com.bilibili.yl.util.MailUtils;
 import com.bilibili.yl.util.VerifyUtils;
 import com.tom.cake.constant.ResultEntity;
 import com.tom.cake.constant.ResultEnum;
+import com.tom.cake.model.Address;
 import com.tom.cake.model.Users;
+import com.tom.cake.service.AddressService;
 import com.tom.cake.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +22,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 @Controller
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private AddressService addressService;
 
 
     @RequestMapping("/user/login")
@@ -124,9 +129,16 @@ public class UserController {
     }
 
     @RequestMapping("/user/self_info")
-    public ModelAndView self_info() {
+    public ModelAndView self_info(HttpSession session) {
         ModelAndView mv = new ModelAndView("self_info");
-        mv.addObject("title","个人中心");
+        Users user = getUser(session);
+        user = usersService.findOne(user);
+        Address address = new Address();
+        address.setUser_id(user.getUser_id());
+        address = addressService.findByUsersId(address);
+        mv.addObject("title", "个人中心");
+        mv.addObject("user", user);
+        mv.addObject("address", address);
         return mv;
     }
 }
