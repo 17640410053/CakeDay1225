@@ -57,7 +57,9 @@
                             <c:forEach items="${searchGoods}" var="star">
                                 <div class="item">
                                     <div class="img">
-                                        <a href=""><img src="/cakeImg/${star.img}" style="width: 280px;height: 280px;"></a>
+                                        <a href="">
+
+                                            <img src="<c:url value="/cakeImg/${star.img}"/>" style="width: 280px;height: 280px;"></a>
                                     </div>
                                     <div class="text">
                                         <p class="title">${star.name}</p>
