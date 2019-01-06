@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,6 @@ public class UserController {
 
     @Autowired
     private UsersService usersService;
-
 
 
     @RequestMapping("/user/login")
@@ -123,5 +123,9 @@ public class UserController {
         }
     }
 
-
+    @RequestMapping("/user/self_info")
+    public ModelAndView self_info() {
+        ModelAndView mv = new ModelAndView("self_info");
+        return mv;
+    }
 }
