@@ -380,8 +380,8 @@
             layer.alert("啦啦啦");
         }, function () {
             $.post("/addCart", {goods_id:${goods.goods_id}, money:${goods.price}}, function (data) {
-                layer.alert("啦啦啦");
-                layer.alert(data.msg);
+                // layer.alert("啦啦啦");
+                layer.msg(data.msg);
             })
         });
         /**

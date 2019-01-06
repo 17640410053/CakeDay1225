@@ -2,11 +2,9 @@ package com.tom.cake.controller;
 
 import com.tom.cake.constant.ResultEntity;
 import com.tom.cake.constant.ResultEnum;
-import com.tom.cake.model.Comment;
-import com.tom.cake.model.Goods;
-import com.tom.cake.model.OrderTable;
-import com.tom.cake.model.Users;
+import com.tom.cake.model.*;
 import com.tom.cake.service.GoodsService;
+import com.tom.cake.service.OrderDetailService;
 import com.tom.cake.service.OrderTableService;
 import com.tom.cake.vo.OrderTableVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,8 @@ public class OrderController extends BaseController {
 
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @RequestMapping("/pay_order")
     public ModelAndView pay_order(OrderTable orderTable) {
@@ -118,15 +118,26 @@ public class OrderController extends BaseController {
     }
 
     @RequestMapping("/delete_order")
+    @ResponseBody/*ResponseBody要加上，不然一直404，但是数据还是删除了*/
     public ResultEntity<String> delete_order(OrderTable orderTable) {
         ResultEntity<String> result = new ResultEntity<>();
-        try {
-            orderTableService.removeOrderByOrderId(orderTable);
-            result.setCodeAndMsg(ResultEnum.DELETE_SUCCESS_MESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.setCodeAndMsg(ResultEnum.DELETE_FAILED_MESS);
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setOrder_id(orderTable.getOrder_id());
+        //在删除前查询是否有这个对象，不然一直提示删除成功
+        OrderTable byOrderId = orderTableService.findByOrderId(orderTable);
+        if (byOrderId != null) {
+            try {
+                orderDetailService.deleteByOrderId(orderDetail);
+                orderTableService.removeOrderByOrderId(orderTable);
+                result.setCodeAndMsg(ResultEnum.DELETE_SUCCESS_MESS);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.setCodeAndMsg(ResultEnum.DELETE_FAILED_MESS);
+            }
+        } else {
+            result.setCodeAndMsg(ResultEnum.DATA_NOT_EXISTS);
         }
+
         return result;
     }
 

@@ -94,6 +94,13 @@
                 <%--2--%>
                 <li>待评价</li>
                 <%--3--%>
+                <%--
+                 todo
+                 1.删除订单
+                 2.申请退款
+                 3.确认收货
+                 4.添加追评
+                 --%>
 
             </ul>
             <div class="layui-tab-content" style="border: 1px solid #e6e6e6;border-top: none">
@@ -120,7 +127,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${orderList}" var="order" varStatus="i">
-                            <tr>
+                            <tr class="order-list-${order.order_id}">
                                 <td><span>${i.count}</span></td>
                                 <td><a href="<c:url value="/order/order_info?order_id=${order.order_id}"/>"><span
                                         disabled="disabled">${order.order_id}</span></a></td>
@@ -155,16 +162,15 @@
 
                                             <%--href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>--%>
 
-
                                             <%--<a type="button" class="layui-btn layui-btn-danger"
-                                               onclick="deleteOrder(${order.order_id}) ">删除订单</a>
---%>
-                                            <a onclick="deleteOrder('${order.order_id}')" class="dele-btn">删除订单</a>
+                                               onclick="deleteOrder(${order.order_id}) ">删除订单</a>--%>
+
+                                            <a onclick="deleteOrder('${order.order_id}')"
+                                               class="dele-btn layui-btn layui-btn-danger">删除订单</a>
                                             <%--你的id是int可以不加""，但是是string类型的必须要--%>
 
-                                            <a onclick="deleteOrder('${order.order_id}')"><span
-                                                    class="dele-btn">删除订单</span></a>
-
+                                            <%--<a onclick="deleteOrder('${order.order_id}')"><span--%>
+                                            <%--class="dele-btn">删除订单</span></a>--%>
                                         </c:when>
                                         <c:when test="${order.status == 1}">
 
@@ -206,101 +212,110 @@
 
                 </div>
                 <div class="layui-tab-item">
-
-
-                    <table class="layui-table" lay-skin="line">
-                        <colgroup>
-                            <col width="80">
-                            <col width="270">
-                            <col width="130">
-                            <col width="140">
-                            <col width="160">
-                            <col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>订单号</th>
-                            <th>总金额</th>
-                            <th>订单时间</th>
-                            <th>状态</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${waitPayOrderList}" var="order" varStatus="i">
-                            <tr>
-                                <td><span>${i.count}</span></td>
-                                <td><a href="<c:url value="/order/order_info?order_id=${order.order_id}"/>"><span
-                                        disabled="disabled">${order.order_id}</span></a></td>
-                                <td><span class="th-su">￥${order.money}.00</span></td>
-                                <td><span type="" disabled="disabled">${order.time}</span></td>
-                                <td><c:if test="${order.status==-1}">
-                                    <span class="sum">待付款</span>
-                                </c:if>
-                                    <c:if test="${order.status==1}">
-                                        <span class="sum">已支付，待发货</span>
-                                    </c:if>
-                                    <c:if test="${order.status==2}">
-                                        <span class="sum">已发货,待收货</span>
-                                    </c:if>
-                                    <c:if test="${order.status==3}">
-                                        <span class="sum">已收货，待评价</span>
-                                    </c:if>
-                                    <c:if test="${order.status==4}">
-                                        <span class="sum">已评价</span>
-                                    </c:if>
-                                </td>
-                                <td>
-                                    <a type="button" class="layui-btn layui-btn-primary"
-
-                                       href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">订单详情</a>
-                                    <c:choose>
-                                        <c:when test="${order.status ==-1}">
-
-                                            <a type="button" class="layui-btn layui-btn-warm"
-                                               href="<c:url value="/order/pay_order?order_id=${order.order_id}"/>">前去支付</a>
-                                            <a type="button" class="layui-btn layui-btn-danger"
-
-                                               href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
-
-                                        </c:when>
-                                        <c:when test="${order.status == 1}">
-
-                                            <a type="button" class="layui-btn layui-btn-normal"
-                                               href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">申请退款</a><%--确认收货，状态改为已收货--%>
-                                        </c:when>
-                                        <c:when test="${order.status == 2}">
-
-                                            <a type="button" class="layui-btn"
-                                               href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">确认收货</a><%--确认收货，状态改为已收货--%>
-                                        </c:when>
-                                        <c:when test="${order.status == 3}">
-
-                                            <a type="button" class="layui-btn layui-btn-primary"
-                                               href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">前去评价</a>
-                                            <a type="button" class="layui-btn layui-btn-danger"
-
-                                               href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
-                                        </c:when>
-                                        <c:when test="${order.status == 4}">
-
-                                            <a type="button" class="layui-btn"
-                                               href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=2"/>">添加追评</a>
-                                            <a type="button" class="layui-btn layui-btn-danger"
-
-                                               href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
-                                        </c:when>
-
-                                    </c:choose>
-
-                                </td>
+                    <c:if test="${empty waitPayOrderList}">
+                        <div style="text-align: center"><i class="layui-icon layui-icon-list"
+                                                           style="font-size: 120px; color: #FF5722;"></i>
+                            <h2>您还没有相关的订单</h2>
+                            <p style="font-size: smaller"><a href="<c:url value="/index"/>">可以去看看有哪些想买的</a></p>
+                        </div>
+                    </c:if>
+                    <c:if test="${!empty waitPayOrderList}">
+                        <table class="layui-table" lay-skin="line">
+                            <colgroup>
+                                <col width="80">
+                                <col width="270">
+                                <col width="130">
+                                <col width="140">
+                                <col width="160">
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr style="text-align: center">
+                                <th>序号</th>
+                                <th>订单号</th>
+                                <th>总金额</th>
+                                <th>订单时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
                             </tr>
+                            </thead>
+                            <tbody>
 
-                        </c:forEach>
 
-                        </tbody>
-                    </table>
+                            <c:forEach items="${waitPayOrderList}" var="order" varStatus="i">
+                                <tr>
+                                    <td><span>${i.count}</span></td>
+                                    <td><a href="<c:url value="/order/order_info?order_id=${order.order_id}"/>"><span
+                                            disabled="disabled">${order.order_id}</span></a></td>
+                                    <td><span class="th-su">￥${order.money}.00</span></td>
+                                    <td><span type="" disabled="disabled">${order.time}</span></td>
+                                    <td><c:if test="${order.status==-1}">
+                                        <span class="sum">待付款</span>
+                                    </c:if>
+                                        <c:if test="${order.status==1}">
+                                            <span class="sum">已支付，待发货</span>
+                                        </c:if>
+                                        <c:if test="${order.status==2}">
+                                            <span class="sum">已发货,待收货</span>
+                                        </c:if>
+                                        <c:if test="${order.status==3}">
+                                            <span class="sum">已收货，待评价</span>
+                                        </c:if>
+                                        <c:if test="${order.status==4}">
+                                            <span class="sum">已评价</span>
+                                        </c:if>
+                                    </td>
+                                    <td>
+                                        <a type="button" class="layui-btn layui-btn-primary"
+
+                                           href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">订单详情</a>
+                                        <c:choose>
+                                            <c:when test="${order.status ==-1}">
+
+                                                <a type="button" class="layui-btn layui-btn-warm"
+                                                   href="<c:url value="/order/pay_order?order_id=${order.order_id}"/>">前去支付</a>
+                                                <a type="button" class="layui-btn layui-btn-danger"
+
+                                                   href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
+
+                                            </c:when>
+                                            <c:when test="${order.status == 1}">
+
+                                                <a type="button" class="layui-btn layui-btn-normal"
+                                                   href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">申请退款</a><%--确认收货，状态改为已收货--%>
+                                            </c:when>
+                                            <c:when test="${order.status == 2}">
+
+                                                <a type="button" class="layui-btn"
+                                                   href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">确认收货</a><%--确认收货，状态改为已收货--%>
+                                            </c:when>
+                                            <c:when test="${order.status == 3}">
+
+                                                <a type="button" class="layui-btn layui-btn-primary"
+                                                   href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">前去评价</a>
+                                                <a type="button" class="layui-btn layui-btn-danger"
+
+                                                   href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
+                                            </c:when>
+                                            <c:when test="${order.status == 4}">
+
+                                                <a type="button" class="layui-btn"
+                                                   href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=2"/>">添加追评</a>
+                                                <a type="button" class="layui-btn layui-btn-danger"
+
+                                                   href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
+                                            </c:when>
+
+                                        </c:choose>
+
+                                    </td>
+                                </tr>
+
+                            </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
                 <div class="layui-tab-item">
 
@@ -556,13 +571,7 @@
 
                                             <a type="button" class="layui-btn layui-btn-danger"
                                                onclick="deleteOrder('${order.order_id}') ">删除订单</a>
-                                            <%--
-                                            todo
-                                            1.删除订单
-                                            2.申请退款
-                                            3.确认收货
-                                            4.添加追评
-                                            --%>
+
                                         </c:when>
                                         <c:when test="${order.status == 1}">
 
@@ -692,7 +701,6 @@
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 
 
-
     })
     ;
 
@@ -792,9 +800,13 @@
     function deleteOrder(id) {
         $.post("/order/delete_order", {order_id: id}, function (data) {
             // layer.msg(data.msg);
-            alert(data.msg);
+            // alert(data.msg);
+            layer.msg(data.msg);
+            if (data.code === 0) {
+                $(".order-list-" + id).remove();
+            }
         })
-        alert("123")
+        // alert("123")
     }
 
 </script>

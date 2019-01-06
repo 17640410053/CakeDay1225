@@ -35,6 +35,11 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public void saveOrderDetails(OrderDetail orderDetail) {
-            orderDetailDao.addOrderDetails(orderDetail);
+        orderDetailDao.addOrderDetails(orderDetail);
+    }
+
+    @Override
+    public void deleteByOrderId(OrderDetail orderDetail) {
+        orderDetailDao.deleteByOrderId(orderDetail);
     }
 }

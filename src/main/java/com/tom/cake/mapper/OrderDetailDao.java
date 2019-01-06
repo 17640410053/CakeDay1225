@@ -18,4 +18,6 @@ public interface OrderDetailDao {
     int update(@Param("pojo") OrderDetail pojo);
 
     void addOrderDetails(OrderDetail orderDetail);
+
+    void deleteByOrderId(OrderDetail orderDetail);
 }
