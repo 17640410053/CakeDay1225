@@ -59,7 +59,7 @@
             <div class="sk_inner w1200">
                 <div class="sk_hd">
                     <a href="javascript:;">
-                        <img src="/res/static/img/s_img1.jpg">
+                        <img src="<c:url value="/res/static/img/s_img1.jpg"/>">
                     </a>
                 </div>
                 <div class="sk_bd">
@@ -69,7 +69,8 @@
                                 <c:forEach items="${goodsList2}" var="orderDetail">
                                     <div class="item"><a href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
                                         <%--<a href="javascript:;">--%>
-                                            <img src="/cakeImg/${orderDetail.img}">
+                                            <%--<img src="/cakeImg/${orderDetail.img}">--%>
+                                            <img src="<c:url value="/cakeImg/${orderDetail.img}"/> " alt="">
                                         <%--</a>--%>
                                         <div class="title">${orderDetail.name}</div>
                                         <div class="price">
@@ -109,24 +110,24 @@
             <div class="item">
                 <h4>热销推荐</h4>
                 <div class="big-img">
-                    <a href="javascript:;"><img src="/cakeImg/${byStar0.img}" style="width: 242px; height: 192px;"></a>
+                    <a href="javascript:;"> <img src="<c:url value="/cakeImg/${byStar0.img}"/>" style="width: 242px; height: 192px;"></a>
                 </div>
                 <div class="small-img">
-                    <a href="javascript:;"><img src="/cakeImg/${byStar4.img}" style="width: 112px; height: 80px;"></a>
+                    <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar4.img}"/>" style="width: 112px; height: 80px;"></a>
                 </div>
             </div>
             <div class="item">
                 <div class="top-img">
-                    <a href="javascript:;"><img src="/cakeImg/${byStar2.img}" style="width: 350px; height: 246px;"></a>
+                    <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar2.img}"/>" style="width: 350px; height: 246px;"></a>
                 </div>
                 <div class="bottom-img">
-                    <a href="javascript:;"><img src="/cakeImg/${byStar3.img}" style="width: 168px; height: 200px;"></a>
-                    <a class="baby-cream" href="javascript:;"><img src="/cakeImg/${byStar1.img}" style="width: 168px; height: 200px;"></a>
+                    <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar3.img}"/>" style="width: 168px; height: 200px;"></a>
+                    <a class="baby-cream" href="javascript:;"><img src="<c:url value="/cakeImg/${byStar1.img}"/>" style="width: 168px; height: 200px;"></a>
                 </div>
             </div>
             <div class="item item1 margin0 padding0">
-                <a href="javascript:;"><img src="/cakeImg/${byStar6.img}" style="width: 390px; height: 242px;"></a>
-                <a href="javascript:;"><img src="/cakeImg/${byStar7.img}" style="width: 390px; height: 242px;margin-top: 15px"></a>
+                <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar6.img}"/>" style="width: 390px; height: 242px;"></a>
+                <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar7.img}"/>" style="width: 390px; height: 242px;margin-top: 15px"></a>
             </div>
         </div>
     </div>

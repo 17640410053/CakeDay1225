@@ -51,8 +51,9 @@
         </div>
         <div class="product-intro layui-clear">
             <div class="preview-wrap">
-                <a href="<c:url value="/details?goods_id=${goods.goods_id}"/>"><img src="/cakeImg/${goods.img}"
-                                                                                    style="height: 402px;width: 402px"></a>
+                <a href="<c:url value="/details?goods_id=${goods.goods_id}"/>"><img
+                        src="<c:url value="/cakeImg/${goods.img}"/>"
+                        style="height: 402px;width: 402px"></a>
             </div>
             <div class="itemInfo-wrap">
                 <div class="itemInfo">
@@ -105,7 +106,7 @@
                     <c:forEach items="${byStar}" var="star" begin="0" end="5">
                         <div class="item">
                             <a href="<c:url value="/details?goods_id=${star.goods_id}"/>">
-                                <img src="/cakeImg/${star.img}"
+                                <img src="<c:url value="/cakeImg/${star.img}"/>"
                                      style="width: 280px;height: 280px;">
                                 <p><span>${star.name}</span><span class="pric">￥${star.price}</span></p></a>
                         </div>
@@ -149,16 +150,18 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center"><img
-                                                                src="/img/userImg/${commentVo.users.image}" width="50"
-                                                                alt=""
-                                                                style="border-radius: 50%"></p>
+                                                        <p style="text-align: center">
+                                                            <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>"
+                                                                 width="50"
+                                                                 alt=""
+                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
                                                     </div>
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="/upload/${commImg}" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>"
+                                                                     height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -221,8 +224,9 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center"><img
-                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                        <p style="text-align: center">
+
+                                                            <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -230,7 +234,7 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="/upload/${commImg}" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -250,8 +254,7 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center"><img
-                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                        <p style="text-align: center">  <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -259,7 +262,7 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="/upload/${commImg}" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -278,8 +281,7 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center"><img
-                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                        <p style="text-align: center">  <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -287,7 +289,7 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="/upload/${commImg}" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -307,8 +309,7 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center"><img
-                                                                src="/img/userImg/${commentVo.users.image}" width="50"
+                                                        <p style="text-align: center">  <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -316,7 +317,7 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="/upload/${commImg}" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>

@@ -113,7 +113,8 @@
 
 
                                 <div class="item-cont">
-                                    <a href="javascript:;"><img src="/cakeImg/${orderDetail.goods.img}" alt=""></a>
+                                    <a href="javascript:;">
+                                        <img src="<c:url value="/cakeImg/${orderDetail.goods.img}"/>" alt=""></a>
                                     <div class="text">
                                         <div class="title">${orderDetail.goods.name}</div>
                                     </div>
