@@ -126,6 +126,7 @@ public class UserController {
     @RequestMapping("/user/self_info")
     public ModelAndView self_info() {
         ModelAndView mv = new ModelAndView("self_info");
+        mv.addObject("title","个人中心");
         return mv;
     }
 }

@@ -11,6 +11,7 @@
 <%--少了个这个--%>
 <html lang="en">
 <head>
+    <title>cake商城-${title}</title>
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/res/static/css/main.css"/>">
