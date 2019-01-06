@@ -69,7 +69,8 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.40</version>
+            <version>8.0.13</version>
+            <!--版本低了，数据是8的，包至少也要是8以上版本，那换了，我的mysql能不能也换了可以换，这就搞定了，厉害呢，那我下次就用你的数据库了，再教你一次安装数据库把，顺便教你卸载，我来自己搞，你看着，可以吗，不然下次还是不会，人呢-->
         </dependency>
 
         <dependency>
