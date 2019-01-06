@@ -27,6 +27,7 @@ public enum ResultEnum {
     PROCESS_FAILED(0, "操作失败"),
     NUM_OVERLARGE(1010, "数量超过限制,同一类型商品最多选购10件"),
     DATA_NOT_EXISTS(1000, "数据不存在"),
+    DATA_IS_REPETITION(5000, "表单已过期，请刷新后尝试"),
     ;
 
     private Integer code;
