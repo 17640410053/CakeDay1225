@@ -8,4 +8,6 @@ public interface UsersService {
     Users findByMail(Users users);
 
     Users findByMailAndPassword(Users users);
+
+    void modifyUsersInfo(Users users);
 }

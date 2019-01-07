@@ -45,4 +45,9 @@ public class UsersServiceImpl implements UsersService {
     public Users findByMailAndPassword(Users users) {
         return usersDao.selectByMailAndPassword(users);
     }
+
+    @Override
+    public void modifyUsersInfo(Users users) {
+        usersDao.updateUsersInfo(users);
+    }
 }

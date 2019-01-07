@@ -31,29 +31,26 @@
 
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.user_id">
-        INSERT INTO users (
-            `user_id`,
-            `username`,
-            `password`,
-            `phone`,
-            `mail`,
-            `birth`,
-            `gender`,
-            `image`,
-            `token`,
-            `create_time`
-        ) VALUES (
-            #{pojo.user_id},
-            #{pojo.username},
-            #{pojo.password},
-            #{pojo.phone},
-            #{pojo.mail},
-            #{pojo.birth},
-            #{pojo.gender},
-            #{pojo.image},
-            #{pojo.token},
-            #{pojo.createTime}
-        )
+        INSERT INTO users (`user_id`,
+                           `username`,
+                           `password`,
+                           `phone`,
+                           `mail`,
+                           `birth`,
+                           `gender`,
+                           `image`,
+                           `token`,
+                           `create_time`)
+        VALUES (#{pojo.user_id},
+                #{pojo.username},
+                #{pojo.password},
+                #{pojo.phone},
+                #{pojo.mail},
+                #{pojo.birth},
+                #{pojo.gender},
+                #{pojo.image},
+                #{pojo.token},
+                #{pojo.createTime})
     </insert>
 
     <!--auto generated Code-->
@@ -125,19 +122,45 @@
         WHERE user_id = #{pojo.user_id}
     </update>
 
+    <update id="updateUsersInfo">
+        UPDATE users
+        <set>
+            <if test="user_id != null">`user_id` = #{user_id},</if>
+            <if test="username != null">`username` = #{username},</if>
+            <if test="password != null">`password` = #{password},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="mail != null">`mail` = #{mail},</if>
+            <if test="birth != null">`birth` = #{birth},</if>
+            <if test="gender != null">`gender` = #{gender},</if>
+            <if test="image != null">`image` = #{image},</if>
+            <if test="token != null">`token` = #{token},</if>
+            <if test="createTime != null">`createtime` = #{createTime}</if>
+        </set>
+        WHERE user_id = #{user_id}
+    </update>
+
 
     <select id="selectOne" resultType="Users">
-        select * from cake_day1225.users where username=#{username} and password=#{password}
+        select *
+        from cake_day1225.users
+        where username = #{username}
+          and password = #{password}
     </select>
 
     <select id="selectByMailAndPassword" resultType="Users">
-        select * from cake_day1225.users where mail=#{mail}  and password=#{password}
+        select *
+        from cake_day1225.users
+        where mail = #{mail}
+          and password = #{password}
 
     </select>
 
     <select id="selectByMail" resultType="Users">
-        select * from cake_day1225.users where mail=#{mail}
-   </select>
+        select *
+        from cake_day1225.users
+        where mail = #{mail}
+    </select>
+
 
 </mapper>
 

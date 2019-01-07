@@ -162,7 +162,7 @@
         </script> -->
 
 
-        <div class="FloatBarHolder layui-clear">
+        <div class="FloatBarHolder layui-clear testDiv">
             <div class="th th-chk">
                 <div class="select-all">
                     <div class="cart-checkbox">
@@ -183,6 +183,9 @@
             <div class="th total">
                 <p>应付：<span class="pieces-total">0</span></p>
             </div>
+            <%--<div>--%>
+                <%--<a href="<c:url value="/index"/>" class="layui-btn">购物车还没有商品，快去选购吧</a>--%>
+            <%--</div>--%>
 
         </div>
     </div>
@@ -190,9 +193,14 @@
 <script type="text/javascript">
     layui.config({
         base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['mm', 'jquery', 'element', 'car'], function () {
+    }).use(['mm', 'jquery', 'element', 'car','jquery'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
-
+      /*  var $ = layui.$;
+       var test=$(".Selected-pieces").html();
+       if (test===0){
+           $(".testDiv").remove();
+           $(".testDiv").html(" <a href=\"/index\" class=\"layui-btn\">购物车还没有商品，快去选购吧</a>")
+       }*/
         // 模版导入数据
         // var html = demo.innerHTML,
         // listCont = document.getElementById('list-cont');

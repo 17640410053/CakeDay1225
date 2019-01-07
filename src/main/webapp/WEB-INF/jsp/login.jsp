@@ -10,7 +10,6 @@
 
 
 <jsp:include page="header.jsp"/>
-
 <div class="content content-nav-base  login-content">
     <div class="main-nav">
         <div class="inner-cont0">
@@ -138,7 +137,7 @@
 <script type="text/javascript">
     layui.config({
         base: '/res/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['jquery', 'form'], function () {
+    }).use(['jquery', 'form','element'], function () {
         var $ = layui.$, form = layui.form;
         var find = $("#find");
 

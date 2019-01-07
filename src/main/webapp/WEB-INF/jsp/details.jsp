@@ -226,15 +226,17 @@
                                                     <div class="layui-col-md2">
                                                         <p style="text-align: center">
 
-                                                            <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
-                                                                alt=""
-                                                                style="border-radius: 50%"></p>
+                                                            <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>"
+                                                                 width="50"
+                                                                 alt=""
+                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
                                                     </div>
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>"
+                                                                     height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -254,7 +256,9 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center">  <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
+                                                        <p style="text-align: center"><img
+                                                                src="<c:url value="/img/userImg/${commentVo.users.image}"/>"
+                                                                width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -262,7 +266,8 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>"
+                                                                     height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -281,7 +286,9 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center">  <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
+                                                        <p style="text-align: center"><img
+                                                                src="<c:url value="/img/userImg/${commentVo.users.image}"/>"
+                                                                width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -289,7 +296,8 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>"
+                                                                     height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -309,7 +317,9 @@
                                                 <div class="layui-row layui-col-space10"
                                                      style="margin-top: 10px;border-bottom: 1px solid #ddd;;">
                                                     <div class="layui-col-md2">
-                                                        <p style="text-align: center">  <img src="<c:url value="/img/userImg/${commentVo.users.image}"/>" width="50"
+                                                        <p style="text-align: center"><img
+                                                                src="<c:url value="/img/userImg/${commentVo.users.image}"/>"
+                                                                width="50"
                                                                 alt=""
                                                                 style="border-radius: 50%"></p>
                                                         <p style="text-align: center;margin-top: 10px">${commentVo.users.username}</p>
@@ -317,7 +327,8 @@
                                                     <div class="layui-col-md7">
                                                         <p class="comment-img">
                                                             <c:forEach items="${commentVo.img}" var="commImg">
-                                                                <img src="<c:url value="/upload/${commImg}"/>" height="60"
+                                                                <img src="<c:url value="/upload/${commImg}"/>"
+                                                                     height="60"
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
@@ -358,12 +369,13 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>
+<%--<script type="text/javascript" src="<c:url value="/res/layui/layui.all.js"/>"></script>--%>
+<%--注意用element元素就可以把上面的all.js省略--%>
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
     layui.config({
         base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录 这是一个入口，下面有一个入口，可能layer冲突
-    }).use(['mm', 'jquery', 'layer'], function () {
+    }).use(['mm', 'jquery', 'layer', 'element'], function () {
         var mm = layui.mm,
             $ = layui.$;
         var cur = $('.number-cont input').val();

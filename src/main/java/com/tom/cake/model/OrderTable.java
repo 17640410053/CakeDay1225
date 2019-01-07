@@ -1,13 +1,14 @@
 package com.tom.cake.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class OrderTable {
     private String order_id;
     private Integer user_id;
     private Integer money;
     private Integer status;
-    private Date time;
+    private Timestamp time;
     private Integer address_id;
 
     public String getOrder_id() {
@@ -42,11 +43,11 @@ public class OrderTable {
         this.status = status;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 

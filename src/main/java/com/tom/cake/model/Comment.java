@@ -1,6 +1,7 @@
 package com.tom.cake.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Comment {
     private Integer comm_id;
@@ -9,7 +10,7 @@ public class Comment {
     private Integer goods_id;
     private Integer star;
     private String img;
-    private Date createTime;
+    private Timestamp createTime;
 
     public Integer getComm_id() {
         return comm_id;
@@ -59,11 +60,11 @@ public class Comment {
         this.img = img;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 }

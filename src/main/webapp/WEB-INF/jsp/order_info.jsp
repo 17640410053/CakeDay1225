@@ -147,7 +147,7 @@
         </form>
 
 
-        <%--    <div class="cart-table-th">
+            <div class="cart-table-th">
                 <div class="th th-chk">
 
                     <div class="th-inner">
@@ -240,7 +240,7 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        &lt;%&ndash;<button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>&ndash;%&gt;
+                        <%--<button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>--%>
                         <a href="<c:url value="/order/order_list"/>">
                             <button type="button" class="layui-btn layui-btn-primary">返回</button>
                         </a>
@@ -248,7 +248,7 @@
                 </div>
 
 
-            </div>--%>
+            </div>
 
 
         <script>
@@ -284,7 +284,6 @@
         base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
-
 
     })
     ;

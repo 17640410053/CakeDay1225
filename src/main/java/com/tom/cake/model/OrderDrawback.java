@@ -1,6 +1,7 @@
 package com.tom.cake.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class OrderDrawback {
     private Integer draw_id;
@@ -9,7 +10,7 @@ public class OrderDrawback {
     private String phone;
     private String reason;
     private Integer state;
-    private Date createtime;
+    private Timestamp createtime;
 
     public Integer getDraw_id() {
         return draw_id;
@@ -59,11 +60,11 @@ public class OrderDrawback {
         this.state = state;
     }
 
-    public Date getCreatetime() {
+    public Timestamp getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime;
     }
 }

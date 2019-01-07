@@ -74,10 +74,10 @@ public class CommentController extends BaseController {
             for (int i = 0; i < file.length; i++) {
                 if (!file[i].isEmpty()) {
 //                    String path = request.getSession().getServletContext().getRealPath("/upload");
-//                    String path = session.getServletContext().getRealPath("/upload/");  //获取本地存储路径
+                    String path = session.getServletContext().getRealPath("/upload");  //获取本地存储路径
 
 //                    String path = "D:/MultipartFile";
-                    String path = "D:\\ProjectCollection\\Demo\\CakeDay1225\\src\\main\\webapp\\upload/";
+//                    String path = "D:\\ProjectCollection\\Demo\\CakeDay1225\\src\\main\\webapp\\upload/";
 
                     String fileName = file[i].getOriginalFilename();
                     String fileType = fileName.substring(fileName.lastIndexOf(".")); //获取后缀名

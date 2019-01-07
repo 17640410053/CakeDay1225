@@ -16,16 +16,16 @@
                 <li class="layui-nav-item"><a>修改密码</a></li>
                 <li class="layui-nav-item"><a>修改头像</a></li>
                 <li class="layui-nav-item"><a>绑定邮箱</a></li>
-                <li class="layui-nav-item"><a href="">我的订单</a></li>
+                <li class="layui-nav-item"><a href="<c:url value="/order/order_list"/>">我的订单</a></li>
                 <%--这个直接跳转你的订单页--%>
-                <li class="layui-nav-item"><a href="">我的购物车</a></li>
+                <li class="layui-nav-item"><a href="<c:url value="/shopcart"/>">我的购物车</a></li>
                 <%--这个直接跳转你的购物车--%>
             </ul>
         </div>
         <div class="layui-col-md4 item-detail">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    <img src="<c:url value="/img/userImg/${user.image}"/> " height="45" style="border-radius: 50%"
+                    <img id="user_Img_1" src="<c:url value="/img/userImg/${user.image}"/> " height="45" style="border-radius: 50%"
                          alt="">
                     个人信息
                 </div>
@@ -43,10 +43,10 @@
                             <div class="layui-input-block">
                                 <c:if test="${user.gender==0}">
                                     <input type="radio" name="sex" value="男" title="男" checked>
-                                    <input type="radio" name="sex" value="女" title="女">
+                                    <input type="radio" name="sex" value="女" title="女" disabled>
                                 </c:if>
                                 <c:if test="${user.gender!=0}">
-                                    <input type="radio" name="sex" value="男" title="男">
+                                    <input type="radio" name="sex" value="男" title="男" disabled>
                                     <input type="radio" name="sex" value="女" title="女" checked>
                                 </c:if>
                             </div>
@@ -75,7 +75,8 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">地址</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" required lay-verify="required" value="${address.name}"
+                                <input type="text" name="title" required lay-verify="required"
+                                       value="${address.name.replace(","," - ")}"
                                        autocomplete="off" readonly class="layui-input">
                             </div>
                         </div>
@@ -84,8 +85,8 @@
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">个性签名</label>
                             <div class="layui-input-block">
-                                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"
-                                          style="resize: none"></textarea>
+                                <textarea name="desc" class="layui-textarea" readonly
+                                          style="resize: none">对方还没看到这儿，所以没有签名~~</textarea>
                             </div>
                         </div>
 
@@ -97,10 +98,10 @@
                             var form = layui.form;
 
                             //监听提交
-                            form.on('submit(formDemo)', function (data) {
-                                layer.msg(JSON.stringify(data.field));
-                                return false;
-                            });
+                            // form.on('submit(formDemo)', function (data) {
+                            //     layer.msg(JSON.stringify(data.field));
+                            //     return false;
+                            // });
                         });
                     </script>
 
@@ -121,72 +122,206 @@
                     <%--这里写你的修改密码代码--%>
                     <form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
                         <div class="layui-form-item">
-                            <label class="layui-form-label">输入框</label>
+                            <label class="layui-form-label">密码</label>
                             <div class="layui-input-block">
-                                <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <input type="password" name="oldPassword" placeholder="请输入旧密码" lay-verify="required"
+                                       autocomplete="off"
+                                       id="oldPassword" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">下拉选择框</label>
+                            <label class="layui-form-label">新密码</label>
                             <div class="layui-input-block">
-                                <select name="interest" lay-filter="aihao">
-                                    <option value="0">写作</option>
-                                    <option value="1">阅读</option>
-                                </select>
+                                <input type="password" name="newPassword" placeholder="请输入新密码" lay-verify="required"
+                                       autocomplete="off"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">复选框</label>
+                            <label class="layui-form-label">密码确认</label>
                             <div class="layui-input-block">
-                                <input type="checkbox" name="like[write]" title="写作">
-                                <input type="checkbox" name="like[read]" title="阅读">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">开关关</label>
-                            <div class="layui-input-block">
-                                <input type="checkbox" lay-skin="switch">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">开关开</label>
-                            <div class="layui-input-block">
-                                <input type="checkbox" checked lay-skin="switch">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">单选框</label>
-                            <div class="layui-input-block">
-                                <input type="radio" name="sex" value="0" title="男">
-                                <input type="radio" name="sex" value="1" title="女" checked>
-                            </div>
-                        </div>
-                        <div class="layui-form-item layui-form-text">
-                            <label class="layui-form-label">请填写描述</label>
-                            <div class="layui-input-block">
-                                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                                <input type="password" name="newPasswordConfirm" lay-verify="required"
+                                       placeholder="请再次输入新密码"
+                                       autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                                <button class="layui-btn" lay-submit lay-filter="formDemo_changePassword">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                             </div>
                         </div>
 
                     </form>
+                    <script>
+
+                    </script>
+                    <script>
+                        //Demo
+                        layui.use(['form', 'jquery'], function () {
+                            var form = layui.form;
+                            var $ = layui.$;
+                            //监听提交
+                            form.on('submit(formDemo_changePassword)', function (data) {
+                                layer.msg(JSON.stringify(data.field));
+                                $.post("/user/change_password", data.field, function (res) {
+                                    if (res.code === 0) {
+                                        alert(res.msg + "请重新登录~~");
+                                        location.href = "/user/login";
+                                    } else {
+                                        layer.msg(res.msg)
+                                    }
+                                })
+                                return false;
+                            });
+                        });
+                    </script>
                 </div>
             </div>
             <div class="layui-card">
                 <div class="layui-card-header">修改头像</div>
                 <div class="layui-card-body">
-                    这里写你的修改头像代码
+                    <%--这里写你的修改头像代码--%>
+                    <div class="layui-form-item">
+                        <img id="userImg" src="<c:url value="/img/userImg/${user.image}"/>" height="100" alt="">
+                    </div>
+
+                    <div class="layui-form-item">
+                        <button type="button" class="layui-btn" id="test1">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
+                        <script>
+                            layui.use(['upload', 'jquery'], function () {
+                                var upload = layui.upload;
+                                var $ = layui.$;
+                                /**
+                                 *这个要写上jQuery的引用，不然会报没有定义$
+                                 */
+                                    //执行实例
+                                var uploadInst = upload.render({
+                                        elem: '#test1' //绑定元素
+                                        , url: '/user/change_userImg/' //上传接口
+                                        , done: function (res) {
+                                            //上传完毕回调
+                                            layer.msg(res.msg);
+                                            $("#userImg").attr("src", "/img/userImg/" + res.data);
+                                            $("#user_Img_1").attr("src","/img/userImg/"+res.data);
+                                        }
+                                        , error: function () {
+                                            //请求异常回调
+                                        }
+                                    });
+                            });
+                        </script>
+                    </div>
+
                 </div>
             </div>
             <div class="layui-card">
                 <div class="layui-card-header">绑定邮箱</div>
                 <div class="layui-card-body">
-                    这里写你的绑定邮箱代码
+                    <%--这里写你的绑定邮箱代码--%>
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <%--<input type="text" name="mail" id="mail" required placeholder="请输入邮箱" lay-verify="email"--%>
+                                <%--autocomplete="off" class="layui-input" > --%>
+
+                                <input type="text" name="mail" id="mail" required value="${user.mail}"
+                                       lay-verify="email"
+                                       autocomplete="off" class="layui-input" readonly>
+
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="button" class="layui-btn" id="find" value="发送验证码"/>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">验证码</label>
+                            <div class="layui-input-block veri-code">
+                                <div class="layui-input-inline">
+                                    <input id="pnum" type="text" name="code" lay-verify="required"
+                                           placeholder="请输入验证码"
+                                           autocomplete="off" class="layui-input">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="formDemoMail">立即绑定</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <script>
+                        //Demo
+                        layui.use(['form', 'jquery', 'element'], function () {
+                            var form = layui.form;
+                            var $ = layui.$;
+                            var find = $("#find");
+
+                            find.on("click", function () {
+                                var mail = $("[name = 'mail']:eq(0)");
+                                if (!/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(mail.val())) {
+                                    layer.msg("请输入正确的邮箱");
+                                    return false;
+                                }
+                                var obj = this;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/send",
+                                    data: {mail: mail.val()},
+                                    dataType: "json",//返回的
+                                    success: function (data) {
+                                        if (data.code === 0) {
+                                            find.addClass("layui-btn-disabled");
+                                            find.attr('disabled', "true");
+                                            settime(obj);
+                                        }
+                                        layer.msg(data.msg);
+                                    },
+                                    error: function (msg) {
+                                        console.log(msg);
+                                    }
+                                });
+
+                            });
+                            var countdown = 60;
+
+                            function settime(obj) {
+                                if (countdown === 0) {
+                                    obj.removeAttribute("disabled");
+                                    obj.classList.remove("layui-btn-disabled");
+                                    obj.value = "获取验证码";
+                                    countdown = 60;
+                                    return;
+                                } else {
+
+                                    obj.value = "重新发送(" + countdown + ")";
+                                    countdown--;
+                                }
+                                setTimeout(function () {
+                                        settime(obj)
+                                    }
+                                    , 1000)
+                            }
+
+
+                            //监听提交
+                            form.on('submit(formDemoMail)', function (data) {
+                                // layer.msg(JSON.stringify(data.field));
+                                $.post("/bindMail", data.field, function (data) {
+                                    layer.msg(data.msg)
+                                })
+                                return false;
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>
