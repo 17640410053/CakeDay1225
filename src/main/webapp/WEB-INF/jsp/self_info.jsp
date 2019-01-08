@@ -10,12 +10,13 @@
 <jsp:include page="header.jsp"/>
 <div class="context">
     <div class="layui-row">
-        <div class="layui-col-md2 layui-col-md-offset3">
+        <div class="layui-col-md2 layui-col-md-offset3"><%--style="margin-right: -100px"--%>
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-this"><a>个人信息</a></li>
                 <li class="layui-nav-item"><a>修改密码</a></li>
                 <li class="layui-nav-item"><a>修改头像</a></li>
                 <li class="layui-nav-item"><a>绑定邮箱</a></li>
+                <li class="layui-nav-item"><a>地址管理</a></li>
                 <li class="layui-nav-item"><a href="<c:url value="/order/order_list"/>">我的订单</a></li>
                 <%--这个直接跳转你的订单页--%>
                 <li class="layui-nav-item"><a href="<c:url value="/shopcart"/>">我的购物车</a></li>
@@ -25,7 +26,8 @@
         <div class="layui-col-md4 item-detail">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    <img id="user_Img_1" src="<c:url value="/img/userImg/${user.image}"/> " height="45" style="border-radius: 50%"
+                    <img id="user_Img_1" src="<c:url value="/img/userImg/${user.image}"/> " height="45"
+                         style="border-radius: 50%"
                          alt="">
                     个人信息
                 </div>
@@ -205,7 +207,7 @@
                                             //上传完毕回调
                                             layer.msg(res.msg);
                                             $("#userImg").attr("src", "/img/userImg/" + res.data);
-                                            $("#user_Img_1").attr("src","/img/userImg/"+res.data);
+                                            $("#user_Img_1").attr("src", "/img/userImg/" + res.data);
                                         }
                                         , error: function () {
                                             //请求异常回调
@@ -322,6 +324,45 @@
                             });
                         });
                     </script>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">修改头像</div>
+                <div class="layui-card-body">
+                    <%--这里写你的地址管理代码--%>
+                    <div class="layui-form-item">
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <button type="button" class="layui-btn" id="test2">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
+                        <script>
+                            layui.use(['upload', 'jquery'], function () {
+                                var upload = layui.upload;
+                                var $ = layui.$;
+                                /**
+                                 *这个要写上jQuery的引用，不然会报没有定义$
+                                 */
+                                    //执行实例
+                                var uploadInst = upload.render({
+                                        elem: '#test1' //绑定元素
+                                        , url: '/user/change_userImg/' //上传接口
+                                        , done: function (res) {
+                                            //上传完毕回调
+                                            layer.msg(res.msg);
+                                            $("#userImg").attr("src", "/img/userImg/" + res.data);
+                                            $("#user_Img_1").attr("src", "/img/userImg/" + res.data);
+                                        }
+                                        , error: function () {
+                                            //请求异常回调
+                                        }
+                                    });
+                            });
+                        </script>
+                    </div>
+
                 </div>
             </div>
         </div>

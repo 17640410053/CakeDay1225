@@ -162,6 +162,9 @@
                                             <c:if test="${order.status==4}">
                                                 <span class="sum">已评价</span>
                                             </c:if>
+                                            <c:if test="${order.status==5}">
+                                                <span class="sum">已评价</span>
+                                            </c:if>
                                         </td>
                                         <td>
                                             <a type="button" class="layui-btn layui-btn-primary"
@@ -211,9 +214,8 @@
                                                 <c:when test="${order.status == 4}">
 
                                                     <a type="button" class="layui-btn"
-                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=2"/>">添加追评</a>
+                                                       href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">添加追评</a>
                                                     <a type="button" class="layui-btn layui-btn-danger"
-
                                                        href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>
                                                 </c:when>
 
@@ -426,7 +428,7 @@
                                                 <c:when test="${order.status == 4}">
 
                                                     <a type="button" class="layui-btn"
-                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=2"/>">添加追评</a>
+                                                       href="<c:url value="/order/order_info?order_id=${order.order_id}&num=2"/>">添加追评</a>
                                                     <a onclick="deleteOrder('${order.order_id}')"
                                                        class="dele-btn layui-btn layui-btn-danger">删除订单</a>
                                                     <%--你的id是int可以不加""，但是是string类型的必须要--%>
@@ -517,13 +519,13 @@
                                                 <c:when test="${order.status == 1}">
 
                                                     <a type="button" class="layui-btn layui-btn-normal"
-                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">申请退款</a><%--确认收货，状态改为已收货--%>
+                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">申请退款</a>
                                                 </c:when>
                                                 <c:when test="${order.status == 2}">
                                                     <a type="button" class="layui-btn"
                                                        onclick="receiveConfirm('${order.order_id}')">确认收货</a>
                                                     <a type="button" class="layui-btn"
-                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">确认收货</a><%--确认收货，状态改为已收货--%>
+                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=3"/>">确认收货</a>
                                                 </c:when>
                                                 <c:when test="${order.status == 3}">
 
@@ -536,7 +538,7 @@
                                                 <c:when test="${order.status == 4}">
 
                                                     <a type="button" class="layui-btn"
-                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}&num=2"/>">添加追评</a>
+                                                       href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">添加追评</a>
                                                     <a onclick="deleteOrder('${order.order_id}')"
                                                        class="dele-btn layui-btn layui-btn-danger">删除订单</a>
                                                     <%--你的id是int可以不加""，但是是string类型的必须要--%>
@@ -566,7 +568,7 @@
                         </c:when>
                         <c:otherwise>
 
-                            <table class="layui-table" lay-skin="line">
+                            <table class="layui-table" lay-skin="line" >
                                 <colgroup>
                                     <col width="80">
                                     <col width="270">
@@ -651,7 +653,7 @@
                                                 <c:when test="${order.status == 4}">
 
                                                     <a type="button" class="layui-btn"
-                                                       href="<c:url value="/order/pay_response?order_id=${order.order_id}"/>">添加追评</a>
+                                                       href="<c:url value="/order/order_info?order_id=${order.order_id}"/>">添加追评</a>
                                                     <a type="button" class="layui-btn layui-btn-danger"
 
                                                        href="<c:url value="/order/delete_order?order_id=${order.order_id}"/>">删除订单</a>

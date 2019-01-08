@@ -12,4 +12,6 @@ public interface GoodsService {
     Goods findByGoods(Goods goods);
 
     List<Goods> findSearchGoods(Goods goods);
+
+    List<Goods> findAllGoodsStarLQ3();
 }

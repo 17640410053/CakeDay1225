@@ -102,33 +102,80 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">描述相符</label>
                 <div class="layui-input-block">
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <%--<a href=""><span style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>--%>
+                    <div id="test3"></div>
+                    <input type="text" id="number3" name="star3" value="" style="display: none">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">物流服务</label>
                 <div class="layui-input-block">
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <%--<a href=""><span style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>--%>
+                    <div id="test4"></div>
+                    <input type="text" id="number4" name="star4" value="" style="display: none">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">服务态度</label>
                 <div class="layui-input-block">
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
-                    <i class="layui-icon layui-icon-rate" style="font-size: 30px; color: #FF5722;"></i>
+
+                    <div id="test5"></div>
+                    <input type="text" id="number5" name="star5" value="" style="display: none">
+                    <script>
+                        layui.use(['rate'], function () {
+                            var rate = layui.rate;
+
+                            //自定义文本
+                            rate.render({
+                                elem: '#test5'
+                                , value: 5
+                                , text: true
+                                , setText: function (value) { //自定义文本的回调
+                                    var arrs = {
+                                        '1': '极差'
+                                        , '2': '差'
+                                        , '3': '中等'
+                                        , '4': '好'
+                                        , '5': '极好'
+                                    };
+                                    this.span.text(arrs[value] || (value + "星"));
+                                    $("#number5").val(value);
+                                }
+                            })
+                            rate.render({
+                                elem: '#test3'
+                                , value: 5
+                                , text: true
+                                , setText: function (value) { //自定义文本的回调
+                                    var arrs = {
+                                        '1': '极差'
+                                        , '2': '差'
+                                        , '3': '中等'
+                                        , '4': '好'
+                                        , '5': '极好'
+                                    };
+                                    this.span.text(arrs[value] || (value + "星"));
+                                    $("#number3").val(value);
+                                }
+                            })
+                            rate.render({
+                                elem: '#test4'
+                                , value: 5
+                                , text: true
+                                , setText: function (value) { //自定义文本的回调
+                                    var arrs = {
+                                        '1': '极差'
+                                        , '2': '差'
+                                        , '3': '中等'
+                                        , '4': '好'
+                                        , '5': '极好'
+                                    };
+                                    this.span.text(arrs[value] || (value + "星"));
+                                    $("#number4").val(value);
+                                }
+                            })
+
+                        });
+                    </script>
+
                     <%--<a href=""><span style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>--%>
                 </div>
             </div>
@@ -136,93 +183,95 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发表评论</label>
                 <div class="layui-input-block">
-                    <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea name="content" placeholder="请输入内容" class="layui-textarea" style="resize: none"></textarea>
                 </div>
             </div>
-
-            <%--  <div class="layui-form-item">
-                  <label class="layui-form-label">几颗星</label>
-                  <div class="layui-input-block">
-                      <input type="text" required lay-verify="required"
-                             name="star" placeholder="请输入几颗星" autocomplete="off"
-                             class="layui-input">
-                  </div>
-              </div>--%>
             <div class="layui-form-item">
-                <label class="layui-form-label">几颗星</label>
+                <label class="layui-form-label">上传图片</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="star" value="1" title="一颗星">
-                    <input type="radio" name="star" value="2" title="两颗星">
-                    <input type="radio" name="star" value="3" title="三颗星">
-                    <input type="radio" name="star" value="4" title="四颗星">
-                    <input type="radio" name="star" value="5" title="五颗星" checked>
+                    <div class="layui-upload ">
+
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            预览图：
+                            <div class="layui-upload-list" id="imgs">
+                            </div>
+                        </blockquote>
+
+
+                    </div>
+                    <button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>
+                    <button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>
+
+                    <button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" id="tijiao" lay-submit lay-filter="formDemo_comment">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button onclick="location.replace(document.referrer)" type="button"
+                            class="layui-btn layui-btn-primary">返回
+                    </button>
                 </div>
             </div>
 
-            <%--</form>--%>
 
-            <button class="layui-btn test" lay-data="{url: '/upload/'}">上传图片</button>
-            <button class="layui-btn test" lay-data="{url: '/upload/', accept: 'file'}">上传文件</button>
+            <%--      <button class="layui-btn test" lay-data="{url: '/upload/'}">上传图片</button>
+                  <button class="layui-btn test" lay-data="{url: '/upload/', accept: 'file'}">上传文件</button>
 
-            <button type="button" class="layui-btn" id="test1">
-                <i class="layui-icon">&#xe67c;</i>上传图片
-            </button>
+                  <button type="button" class="layui-btn" id="test1">
+                      <i class="layui-icon">&#xe67c;</i>上传图片
+                  </button>
 
-            <button onclick="location.replace(document.referrer)" type="button" class="layui-btn layui-btn-primary">
-                &nbsp;返回 &nbsp;
-            </button>
-            <%--<button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>--%>
-            <%--<button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>--%>
+                  <button onclick="location.replace(document.referrer)" type="button" class="layui-btn layui-btn-primary">
+                      &nbsp;返回 &nbsp;
+                  </button>--%>
 
-            <%--<button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>--%>
-            <script>
-                layui.use('upload', function () {
-                    var upload = layui.upload;
+            <%--     <script>
+                     layui.use('upload', function () {
+                         var upload = layui.upload;
 
-                    //执行实例
-                    var uploadInst = upload.render({
-                        elem: '#test1' //绑定元素
-                        , url: '/upload/' //上传接口
-                        , done: function (res) {
-                            //上传完毕回调
-                            alert(res.msg)
-                        }
-                        , error: function () {
-                            // alert(res.msg)
-                            //请求异常回调
-                        }
-                    });
+                         //执行实例
+                         var uploadInst = upload.render({
+                             elem: '#test1' //绑定元素
+                             , url: '/upload/' //上传接口
+                             , done: function (res) {
+                                 //上传完毕回调
+                                 alert(res.msg)
+                             }
+                             , error: function () {
+                                 // alert(res.msg)
+                                 //请求异常回调
+                             }
+                         });
 
-                    upload.render({
-                        elem: '.test'
-                        , done: function (res, index, upload) {
-                            //获取当前触发上传的元素，一般用于 elem 绑定 class 的情况，注意：此乃 layui 2.1.0 新增
-                            var item = this.item;
-                        }
-                    })
-                });
-            </script>
+                         upload.render({
+                             elem: '.test'
+                             , done: function (res, index, upload) {
+                                 //获取当前触发上传的元素，一般用于 elem 绑定 class 的情况，注意：此乃 layui 2.1.0 新增
+                                 var item = this.item;
+                             }
+                         })
+                     });
+                 </script>--%>
+
+            <%--把下面的内容提到上面，效果一样--%>
+            <%--    <div class="layui-upload ">
+
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                        预览图：
+                        <div class="layui-upload-list" id="imgs">
+                        </div>
+                    </blockquote>
 
 
-            <div class="layui-upload ">
+                </div>
+                <button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>
+                <button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>
 
-                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                    预览图：
-                    <div class="layui-upload-list" id="imgs">
-                    </div>
-                </blockquote>
-                <%--   <div class="mark_button">
-                       <button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>
-                       <button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>
-
-                       <button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>
-                   </div>--%>
-
-            </div>
-            <button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>
-            <button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>
-
-            <button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>
+                <button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>--%>
             <script id="img_template" type="text/html">
                 <div class="upload-img" filename="{{ d.index }}">
                     <input type="checkbox" name="" lay-skin="primary">
@@ -232,8 +281,8 @@
             <br>
             <br>
             <br>
-            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <%--  <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>--%>
 
         </form>
         <script>
@@ -329,142 +378,169 @@
             });
         </script>
         <script>
-
             //Demo
             layui.use('form', function () {
                 var form = layui.form;
                 form.render();
                 //监听提交
-                form.on('submit(formDemo)', function (data) {
+                form.on('submit(formDemo_comment)', function (data) {
+                    data.field['order_id']='${orderTable.order_id}';
+                    data.field['comment_token'] = '${c_token}';
+
                     $.post('/submit_comment', data.field, function (msg) {
                         if (msg.code === 0) {
                             layer.msg(msg.msg);
-                            /**
-                             * 在这儿写成功登陆的话去主页
-                             * */
-                            location.href = "/test_success?comm_id=" + msg.data;
+                            location.href = "/test_success?comm_id=" + msg.count+"&order_id="+msg.data;
                         } else {
                             layer.msg(msg.msg);
                         }
                     });
-
-                    layer.msg(JSON.stringify(data.field));
                     return false;
+                    /*  layer.msg(JSON.stringify(data.field));
+                                       return false;
+                                       $.ajax({
+                                           url: '/submit_comment',
+                                           type: 'post',
+                                           dataType: 'json',
+                                           data: data.field,
+                                           beforeSend: function () { //触发ajax请求开始时执行
+                                               $("#tijiao").attr("disabled", "true"); //改变提交按钮上的文字并将按钮设置为不可点击
+                                           },
+                                           success: function (result) {
+                                               console.log(result);
+                                               if (result.code === 0) {
+                                                   layer.msg("更新组织信息成功!", {time: 2000, icon: 1});
+                                                   location.href = "/test_success?comm_id=" + result.data;
+                                               } else {
+                                                   layer.msg(result.msg, {time: 2000, icon: 2}, function () {
+                                                       $("#tijiao").removeAttr("disabled"); //改变提交按钮上的文字并将按钮设置为可点击
+                                                   });
+                                               }
+                                           },
+                                           error: function () {
+                                               layer.msg(result.msg, {time: 2000, icon: 2}, function () {
+                                                   $("#tijiao").removeAttr("disabled"); //改变提交按钮上的文字并将按钮设置为可点击
+                                               });
+                                           }
+                                       });
+                                       return false;*/
+
+
                 });
 
 
             });
         </script>
 
+        <%--这个也是好的--%>
+        <%--  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                
+              <legend>图片信息</legend>
 
-              
-            <legend>图片信息</legend>
+          </fieldset>
+           
+           
+          <div class="layui-upload">
+               
+              <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+               
+               
+              <div class="layui-upload-list">
+                     
+                  <table class="layui-table">
+                           
+                      <thead>
+                             
+                      <tr>
+                          <th>文件名</th>
+                                 
+                          <th>大小</th>
+                                 
+                          <th>状态</th>
+                                 
+                          <th>操作</th>
+                               
+                      </tr>
+                      </thead>
+                           
+                      <tbody id="demoList"></tbody>
+                         
+                  </table>
+                   
+              </div>
+               
+              <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+               
+              <button type="button" class="layui-btn" id="back">返回</button>
+          </div>
 
-        </fieldset>
-         
-         
-        <div class="layui-upload">
-             
-            <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
-             
-             
-            <div class="layui-upload-list">
-                   
-                <table class="layui-table">
-                         
-                    <thead>
-                           
-                    <tr>
-                        <th>文件名</th>
-                               
-                        <th>大小</th>
-                               
-                        <th>状态</th>
-                               
-                        <th>操作</th>
-                             
-                    </tr>
-                    </thead>
-                         
-                    <tbody id="demoList"></tbody>
-                       
-                </table>
-                 
-            </div>
-             
-            <button type="button" class="layui-btn" id="testListAction">开始上传</button>
-             
-            <button type="button" class="layui-btn" id="back">返回</button>
-        </div>
+          <script>
 
-        <script>
+              layui.use('upload', function () {
+                  var $ = layui.jquery
+                      , upload = layui.upload;
+                  // var id = $("#agendaId").val();
+                  //多文件列表示例
+                  var demoListView = $('#demoList')
+                      , uploadListIns = upload.render({
+                      elem: '#testList'
+                      , url: '/fileUploadFiles/'
+                      , accept: 'file'
+                      , data: {}   //可放扩展数据  key-value
+                      , multiple: true
+                      , auto: false
+                      , bindAction: '#testListAction'
+                      , choose: function (obj) {
+                          var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                          //读取本地文件
+                          obj.preview(function (index, file, result) {
+                              var tr = $(['<tr id="upload-' + index + '">'
+                                  , '<td>' + file.name + '</td>'
+                                  , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                  , '<td>等待上传</td>'
+                                  , '<td>'
+                                  , '<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
+                                  , '<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
+                                  , '</td>'
+                                  , '</tr>'].join(''));
 
-            layui.use('upload', function () {
-                var $ = layui.jquery
-                    , upload = layui.upload;
-                // var id = $("#agendaId").val();
-                //多文件列表示例
-                var demoListView = $('#demoList')
-                    , uploadListIns = upload.render({
-                    elem: '#testList'
-                    , url: '/fileUploadFiles/'
-                    , accept: 'file'
-                    , data: {}   //可放扩展数据  key-value
-                    , multiple: true
-                    , auto: false
-                    , bindAction: '#testListAction'
-                    , choose: function (obj) {
-                        var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
-                        //读取本地文件
-                        obj.preview(function (index, file, result) {
-                            var tr = $(['<tr id="upload-' + index + '">'
-                                , '<td>' + file.name + '</td>'
-                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
-                                , '<td>等待上传</td>'
-                                , '<td>'
-                                , '<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
-                                , '<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
-                                , '</td>'
-                                , '</tr>'].join(''));
+                              //单个重传
+                              tr.find('.demo-reload').on('click', function () {
+                                  obj.upload(index, file);
+                              });
 
-                            //单个重传
-                            tr.find('.demo-reload').on('click', function () {
-                                obj.upload(index, file);
-                            });
+                              //删除
+                              tr.find('.demo-delete').on('click', function () {
+                                  delete files[index]; //删除对应的文件
+                                  tr.remove();
+                                  uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                              });
 
-                            //删除
-                            tr.find('.demo-delete').on('click', function () {
-                                delete files[index]; //删除对应的文件
-                                tr.remove();
-                                uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
-                            });
+                              demoListView.append(tr);
+                          });
+                      }
+                      , done: function (res, index, upload) {
+                          if (res.code === 0) {
+                              alert(res.data);
+                          } //上传成功
+                          var tr = demoListView.find('tr#upload-' + index)
+                              , tds = tr.children();
+                          tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                          tds.eq(3).html(''); //清空操作
+                          return delete this.files[index]; //删除文件队列已经上传成功的文件
 
-                            demoListView.append(tr);
-                        });
-                    }
-                    , done: function (res, index, upload) {
-                        if (res.code === 0) {
-                            alert(res.data);
-                        } //上传成功
-                        var tr = demoListView.find('tr#upload-' + index)
-                            , tds = tr.children();
-                        tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-                        tds.eq(3).html(''); //清空操作
-                        return delete this.files[index]; //删除文件队列已经上传成功的文件
+                      } //code为后台传回来的数据，具体多少自己定，
 
-                    } //code为后台传回来的数据，具体多少自己定，
+                      //后台只能传回json格式数据，不然会走error函数；
 
-                    //后台只能传回json格式数据，不然会走error函数；
+                      , error: function (index, upload) {
 
-                    , error: function (index, upload) {
-
-                    }
-                });
-            })
-        </script>
-
+                      }
+                  });
+              })
+          </script>
+  --%>
 
     </div>
 
@@ -481,94 +557,6 @@
 
 </script>
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
-<%--<script>
-    /**
-     *
-     * @param id
-     * @param price 价格
-     * @param goodsNum 商品数量：用于来判断是否还剩一个之后
-     * @param num   用于复用的符号：1+, 2-, 3移除
-     * */
-    function addCart(id, price, goodsNum, num) {
-        //那你在这里提醒就好了，这就好了，还有，那就分开写，你在哪判断的，等于2是啥，减，后面还有一个参数是用于最后一个移除返回的操作提示
-        //返回json的时候500了，没有返回数据，肯定不执行啊
-        //这个总价还要处理下
-        switch (num) {
-            case 1:
-                $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
-                    if (num === 1 && data.code === 1010) {
-                        $('.Quantity-input').val(10)
-                        layer.alert(data.msg);
-                    }
-                });
-                break;
-            case 2:
-                $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
-                    if (num === 2 && data.code === 101) {
-                        if (data.count === 0) {
-                            $('.pieces-total').html("￥0.00");
-                        } else {
-                            $('.pieces-total').html(data.count)
-                        }
-                        if (data.data === 0) {
-                            $('.Selected-pieces').html("0");
-                        } else {
-                            $('.Selected-pieces').html(data.data);
-                        }
-                        $('#cart-list-' + id).remove();
-                    } else {
-                        layer.alert(data.msg);
-                    }
-                });
-                break;
-            case 3:
-                if (confirm("确认要删除吗?")) {
-                    $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
-                        if (data.code === 0) {
-                            if (data.count === 0) {
-                                $('.pieces-total').html("￥0.00");
 
-                            } else {
-                                $('.pieces-total').html(data.count)
-                            }
-                            if (data.data === 0) {
-                                $('.Selected-pieces').html("0");
-                            } else {
-                                $('.Selected-pieces').html(data.data);
-                            }
-                            $('#cart-list-' + id).remove();
-                        } else {
-                            layer.alert(data.msg);
-                        }
-                    });
-                }
-
-
-                /*  layer.confirm('你确定要删除吗', {
-                      yes: function (index, layero) {
-                          layer.close(index);
-                          $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
-                              layer.alert(data.msg);
-                              $('#cart-list-' + id).remove();
-                          })
-                      }
-                  });*/
-                break;
-        }
-    }
-
-    /*提示信息还没出现就删了
-    **/
-    /* function deleteAllGoods() {
-         $.post("/deleteAllGoods", {}, function (data) {
-             layer.alert(data.msg)
-         })
-     }*/
-
-    function goOrder() {
-
-    }
-
-</script>--%>
 
 <jsp:include page="footer.jsp"/>

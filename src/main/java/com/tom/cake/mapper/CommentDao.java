@@ -24,4 +24,7 @@ public interface CommentDao {
     CommentVo selectCommentById(Comment comment);
 
     List<CommentVo> selectByGoodsId(Comment comment);
+    CommentVo selectByGoodsIdAndOrderId(Comment comment);
+
+    Comment selectByCommentId(Comment comment);
 }

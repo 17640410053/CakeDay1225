@@ -15,6 +15,7 @@
     <resultMap id="commentGoodsMapper" type="com.tom.cake.vo.CommentVo">
         <id column="comm_id" property="comm_id"/>
         <result column="content" property="content"/>
+        <result column="add_content" property="add_content"/>
         <result column="user_id" property="user_id"/>
         <result column="goods_id" property="goods_id"/>
         <result column="star" property="star"/>
@@ -52,6 +53,27 @@
             <result column="image" property="image"/>
             <result column="token" property="token"/>
             <result column="createtime" property="createTime"/>
+        </association>
+    </resultMap>
+    <resultMap id="commentByGoodsIdAndOrderIdMapper" type="com.tom.cake.vo.CommentVo">
+        <id column="comm_id" property="comm_id"/>
+        <result column="content" property="content"/>
+        <result column="user_id" property="user_id"/>
+        <!--<result column="gid" property="goods_id"/>-->
+        <result column="star" property="star"/>
+        <result column="img" property="img"/>
+        <result column="createTime" property="createTime"/>
+        <result column="order_id" property="order_id"/>
+        <association property="goods" javaType="Goods">
+            <id column="goodsId" property="goods_id"/>
+            <result column="name" property="name"/>
+            <result column="detail" property="detail"/>
+            <result column="price" property="price"/>
+            <result column="status" property="status"/>
+            <result column="createtime" property="createtime"/>
+            <result column="type_id" property="type_id"/>
+            <result column="goodsImg" property="img"/>
+            <result column="star" property="star"/>
         </association>
     </resultMap>
 
@@ -137,9 +159,10 @@
 
 
     <!--<insert id="insertComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="comm_id">--><!--第一种方法-->
+    <!-- 第二种方法，注意这个后面as的内容与keyColumn="comm_id" 对应-->
     <insert id="insertComment" parameterType="Comment">
         <selectKey keyColumn="comm_id" keyProperty="comm_id" order="AFTER" resultType="Comment">
-            /*第二种方法，注意这个后面as的内容与keyColumn="comm_id" 对应*/
+
             SELECT LAST_INSERT_ID() as comm_id FROM DUAL
         </selectKey>
 
@@ -160,6 +183,12 @@
             <if test="img !=null and img !=''">
                 img,
             </if>
+            <if test="order_id !=null and order_id !=''">
+                order_id
+            </if>
+            <if test="add_content!=null and add_content=''">
+                add_content
+            </if>
         </trim>
         ) values(
         <trim suffixOverrides=",">
@@ -178,7 +207,12 @@
             <if test="img !=null and img !=''">
                 #{img},
             </if>
-
+            <if test="order_id !=null and order_id !=''">
+                #{order_id}
+            </if>
+            <if test="add_content!=null and add_content=''">
+                #{add_content}
+            </if>
         </trim>
         )
     </insert>
@@ -187,6 +221,7 @@
     <select id="selectCommentById" resultMap="commentGoodsMapper">
         SELECT `comment`.comm_id,
                `comment`.content,
+               `comment`.add_content,
                `comment`.user_id,
                `comment`.goods_id,
                `comment`.star,
@@ -207,7 +242,7 @@
     </select>
 
 
-    <select id="selectByGoodsId" resultMap="commentGoodsByGoodsIdMapper">
+    <select id="selectByGoodsId" resultMap="commentGoodsMapper">
         SELECT `comment`.comm_id,
         `comment`.content,
         `comment`.user_id,
@@ -234,12 +269,45 @@
         <if test="star !=null and star !=''">
             #{star}-1 and #{star}+1
         </if>
-
         <if test="img !=null and img !=''">
             and `comment`.img is not null and `comment`.img != ''
         </if>
+        <if test="order_id !=null and order_id !=''">
+            and `comment`.order_id=#{order_id}
+        </if>
         ORDER BY `comment`.star ASC,
         `comment`.createTime DESC
+    </select>
+
+
+    <select id="selectByGoodsIdAndOrderId" resultMap="commentByGoodsIdAndOrderIdMapper">
+        SELECT `comment`.comm_id,
+               `comment`.content,
+               `comment`.user_id,
+               `comment`.goods_id as gid,
+               `comment`.star,
+               `comment`.img,
+               `comment`.createTime,
+               `comment`.order_id,
+               goods.`name`,
+               goods.goods_id     AS goodsId,
+               goods.detail,
+               goods.price,
+               goods.`status`,
+               goods.createtime,
+               goods.type_id,
+               goods.img          AS goodsImg,
+               goods.star
+        FROM `comment`
+                 INNER JOIN goods ON `comment`.goods_id = goods.goods_id
+        where `comment`.order_id = #{order_id}
+          and goods.goods_id = #{goods_id}
+    </select>
+
+    <select id="selectByCommentId" resultType="Comment">
+        select *
+        from cake_day1225.comment
+        where comm_id = #{comm_id}
     </select>
 </mapper>
 

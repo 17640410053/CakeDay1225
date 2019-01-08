@@ -30,10 +30,14 @@
         <div style="height: 500px;border: 1px solid #C9C9C9;text-align: center">
 
             <i class="layui-icon layui-icon-ok-circle" style="font-size: 45px; color: #FF5722;"></i>
-
+            <h2>评价成功</h2>
+            <br>
             <a href="<c:url value="/index"/>">返回首页</a>
             <a href="<c:url value="/comment/comment_show?comm_id=${comment.comm_id}"/>">查看评价</a>
+            <a href="<c:url value="/order/order_info?order_id=${orderTable.order_id}"/>">继续评价</a>
+
         </div>
+
     </div>
 
 </div>

@@ -51,4 +51,9 @@ public class TypeServiceImpl implements TypeService {
     public List<TypeVo> findForGoods() {
         return typeDao.selectTypesForGoods();
     }
+
+    @Override
+    public List<TypeVo> findByTypeId(Type type) {
+        return typeDao.selectByTypeId(type);
+    }
 }

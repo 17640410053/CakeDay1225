@@ -29,4 +29,6 @@ public interface GoodsDao {
 
     List<OrderTableVo> selectManyByOrderId(OrderTable orderTable);
 
+    List<Goods> selectAllGoodsStarLQ3();
+
 }

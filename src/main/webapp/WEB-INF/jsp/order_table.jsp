@@ -158,9 +158,6 @@
                     $.post('/addOrder', data.field, function (msg) {
                         if (msg.code === 0) {
                             layer.msg(msg.msg);
-                            /**
-                             * 在这儿写成功登陆的话去主页
-                             * */
                             location.href = "/order/pay_order?order_id=" + msg.data;
                         } else {
                             layer.msg(msg.msg);

@@ -67,11 +67,12 @@
                         <div carousel-item>
                             <div class="item-box">
                                 <c:forEach items="${goodsList2}" var="orderDetail">
-                                    <div class="item"><a href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
-                                        <%--<a href="javascript:;">--%>
+                                    <div class="item"><a
+                                            href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
+                                            <%--<a href="javascript:;">--%>
                                             <%--<img src="/cakeImg/${orderDetail.img}">--%>
-                                            <img src="<c:url value="/cakeImg/${orderDetail.img}"/> " alt="">
-                                        <%--</a>--%>
+                                        <img src="<c:url value="/cakeImg/${orderDetail.img}"/> " alt="">
+                                            <%--</a>--%>
                                         <div class="title">${orderDetail.name}</div>
                                         <div class="price">
                                             <span>￥${orderDetail.price}</span>
@@ -83,10 +84,11 @@
                             </div>
                             <div class="item-box">
                                 <c:forEach items="${goodsList}" var="orderDetail" begin="0" end="5">
-                                    <div class="item"><a href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
-                                        <%--<a href="javascript:;">--%>
-                                            <img src="/cakeImg/${orderDetail.img}">
-                                        <%--</a>--%>
+                                    <div class="item"><a
+                                            href="<c:url value="/details?goods_id=${orderDetail.goods_id}"/>">
+                                            <%--<a href="javascript:;">--%>
+                                        <img src="<c:url value="/cakeImg/${orderDetail.img}"/>">
+                                            <%--</a>--%>
                                         <div class="title">${orderDetail.name}</div>
                                         <div class="price">
                                             <span>￥${orderDetail.price}</span>
@@ -110,24 +112,32 @@
             <div class="item">
                 <h4>热销推荐</h4>
                 <div class="big-img">
-                    <a href="javascript:;"> <img src="<c:url value="/cakeImg/${byStar0.img}"/>" style="width: 242px; height: 192px;"></a>
+                    <a href="<c:url value="/details?goods_id=${byStar0.goods_id}"/>"> <img
+                            src="<c:url value="/cakeImg/${byStar0.img}"/>" style="width: 242px; height: 192px;"></a>
                 </div>
                 <div class="small-img">
-                    <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar4.img}"/>" style="width: 112px; height: 80px;"></a>
+                    <a href="<c:url value="/details?goods_id=${byStar4.goods_id}"/>"><img
+                            src="<c:url value="/cakeImg/${byStar4.img}"/>" style="width: 112px; height: 80px;"></a>
                 </div>
             </div>
             <div class="item">
                 <div class="top-img">
-                    <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar2.img}"/>" style="width: 350px; height: 246px;"></a>
+                    <a href="<c:url value="/details?goods_id=${byStar2.goods_id}"/>"><img
+                            src="<c:url value="/cakeImg/${byStar2.img}"/>" style="width: 350px; height: 246px;"></a>
                 </div>
                 <div class="bottom-img">
-                    <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar3.img}"/>" style="width: 168px; height: 200px;"></a>
-                    <a class="baby-cream" href="javascript:;"><img src="<c:url value="/cakeImg/${byStar1.img}"/>" style="width: 168px; height: 200px;"></a>
+                    <a href="<c:url value="/details?goods_id=${byStar3.goods_id}"/>"><img
+                            src="<c:url value="/cakeImg/${byStar3.img}"/>" style="width: 168px; height: 200px;"></a>
+                    <a href="<c:url value="/details?goods_id=${byStar1.goods_id}"/>"><img
+                            src="<c:url value="/cakeImg/${byStar1.img}"/>" style="width: 168px; height: 200px;"></a>
                 </div>
             </div>
             <div class="item item1 margin0 padding0">
-                <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar6.img}"/>" style="width: 390px; height: 242px;"></a>
-                <a href="javascript:;"><img src="<c:url value="/cakeImg/${byStar7.img}"/>" style="width: 390px; height: 242px;margin-top: 15px"></a>
+                <a href="<c:url value="/details?goods_id=${byStar6.goods_id}"/>"><img
+                        src="<c:url value="/cakeImg/${byStar6.img}"/>" style="width: 390px; height: 242px;"></a>
+                <a href="<c:url value="/details?goods_id=${byStar7.goods_id}"/>"><img
+                        src="<c:url value="/cakeImg/${byStar7.img}"/>"
+                        style="width: 390px; height: 242px;margin-top: 15px"></a>
             </div>
         </div>
     </div>
@@ -145,8 +155,9 @@
                     <a href="javascript:;" class="top-img"><img src="<c:url value="/res/static/img/img12.jpg"/>" alt=""></a>
                     <div class="img-box">
                         <c:forEach items="${orderDetail.goodsList}" var="goods1" begin="0" end="4">
-                            <a href="javascript:;">
-                                <img src="/cakeImg/${goods1.img}" style="width: 199px;height: 197px; float: left"
+                            <a href="<c:url value="/details?goods_id=${goods1.goods_id}"/>">
+                                <img src="<c:url value="/cakeImg/${goods1.img}"/>"
+                                     style="width: 199px;height: 197px; float: left"
                                      alt="">
                             </a>
                         </c:forEach>
@@ -160,141 +171,146 @@
         <div class="product-list-cont w1200">
             <h4>更多推荐</h4>
             <div class="product-item-box layui-clear">
-                <div class="list-item">
-                    <a href="javascript:;"><img src="<c:url value="/res/static/img/more1.jpg"/>"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="<c:url value="/res/static/img/more2.jpg"/>"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
-                <div class="list-item">
-                    <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                    <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                    <span>￥100.00</span>
-                </div>
+                <c:forEach items="${goodsStarLQ3}" var="goods">
+                    <div class="list-item">
+                        <a href="<c:url value="/details?goods_id=${goods.goods_id}"/>"><img
+                                src="<c:url value="/cakeImg/${goods.img}"/>"
+                                height="180"></a>
+                        <p style="text-align: center">${goods.name}</p>
+                        <span>￥${goods.price}</span>
+                    </div>
+                </c:forEach>
+
+                <%--   <div class="list-item">
+                       <a href="javascript:;"><img src="<c:url value="/res/static/img/more2.jpg"/>"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="/res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="/res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>
+                   <div class="list-item">
+                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
+                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
+                       <span>￥100.00</span>
+                   </div>--%>
             </div>
         </div>
     </div>

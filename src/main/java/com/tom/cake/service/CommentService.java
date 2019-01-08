@@ -13,4 +13,8 @@ public interface CommentService {
     CommentVo findCommentById(Comment comment);
 
     List<CommentVo> findByGoodsId(Comment comment);
+
+    CommentVo findByGoodsIdAndOrderId(Comment comment);
+
+    Comment findByCommentId(Comment comment);
 }

@@ -152,5 +152,24 @@
          WHERE type_id = #{pojo.type_id}
      </update>
  -->
+
+    <select id="selectByTypeId" resultMap="ResultMapForGoods">
+        select t.type_id,
+               t.`name`,
+               t.`level`,
+               t.parent_id,
+               g.goods_id   goods_id,
+               g.`name`     goodsname,
+               g.createtime createtime,
+               g.detail     detail,
+               g.img        img,
+               g.price      price,
+               g.star       satr,
+               g.`status`   status,
+               g.type_id    typeid
+        FROM goods g
+                 INNER JOIN type t ON g.type_id = t.type_id
+        WHERE t.type_id = #{type_id}
+    </select>
 </mapper>
 

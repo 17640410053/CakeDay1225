@@ -77,7 +77,6 @@
         <p>蛋糕、糖果、点心9折起</p>
     </div>
 
-
     <div class="cart w1200">
         <form class="layui-form" action="">
             <div class="layui-form-item">
@@ -99,7 +98,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">商品</label>
                 <div class="layui-input-block">
-                    <img src="/cakeImg/${commentVo.goods.img}" alt="" style="height: 100px;width: 100px;">
+                    <img src="<c:url value="/cakeImg/${commentVo.goods.img}"/>" alt=""
+                         style="height: 100px;width: 100px;">
                 </div>
             </div>
             <%-- int g = s%10;
@@ -229,13 +229,6 @@
                               style="resize: none">${commentVo.content}</textarea>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">追加评论</label>
-                <div class="layui-input-block">
-                    <textarea name="content" class="layui-textarea" readonly
-                              style="resize: none">${commentVo.add_content}</textarea>
-                </div>
-            </div>
             <c:if test="${!empty commentVo.img}">
                 <div class="layui-form-item">
                     <label class="layui-form-label">评论照片</label>
@@ -248,13 +241,47 @@
                 </div>
 
             </c:if>
-            <button onclick="location.replace(document.referrer)" type="button" class="layui-btn layui-btn-primary">
-                &nbsp;返回 &nbsp;
-            </button>
+            <div class="layui-form-item">
+                <label class="layui-form-label">追加评论</label>
+                <div class="layui-input-block">
+                    <textarea name="add_content" placeholder="请输入追加的评论内容" class="layui-textarea"
+                              style="resize: none"></textarea>
+                    <input type="hidden" name="comm_id" value="${commentVo.comm_id}">
 
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo_addContent">提交追评</button>
+                    <button onclick="location.replace(document.referrer)" type="button"
+                            class="layui-btn layui-btn-primary">
+                        &nbsp;返回 &nbsp;
+                    </button>
+                </div>
+            </div>
         </form>
 
-
+        <script>
+            //Demo
+            layui.use(['form', 'jquery'], function () {
+                var form = layui.form;
+                var $ = layui.$;
+                //监听提交
+                form.on('submit(formDemo_addContent)', function (data) {
+                    layer.msg(JSON.stringify(data.field));
+                    // return false;
+                    $.post("/comment/addContent", data.field, function (res) {
+                        if (res.code === 0) {
+                            alert(res.msg + "请重新登录~~");
+                            location.href = "/user/login";
+                        } else {
+                            layer.msg(res.msg)
+                        }
+                    })
+                    return false;
+                });
+            });
+        </script>
     </div>
 
 </div>

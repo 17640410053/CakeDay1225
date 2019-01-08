@@ -64,4 +64,14 @@ public class CommentServiceImpl implements CommentService {
     public List<CommentVo> findByGoodsId(Comment comment) {
         return commentDao.selectByGoodsId(comment);
     }
+
+    @Override
+    public CommentVo findByGoodsIdAndOrderId(Comment comment) {
+        return commentDao.selectByGoodsIdAndOrderId(comment);
+    }
+
+    @Override
+    public Comment findByCommentId(Comment comment) {
+        return commentDao.selectByCommentId(comment);
+    }
 }

@@ -101,6 +101,9 @@ public class IndexController {
 
         goods.setStar(8);
         List<Goods> byStar = goodsService.findByStar(goods);
+
+        List<Goods> goodsStarLQ3 = goodsService.findAllGoodsStarLQ3();
+        mv.addObject("goodsStarLQ3",goodsStarLQ3);
         mv.addObject("byStar0", byStar.get(0));
         mv.addObject("byStar1", byStar.get(1));
         mv.addObject("byStar2", byStar.get(2));

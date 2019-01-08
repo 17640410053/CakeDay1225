@@ -4,8 +4,10 @@ import com.tom.cake.constant.ResultEntity;
 import com.tom.cake.constant.ResultEnum;
 import com.tom.cake.model.Comment;
 import com.tom.cake.model.Goods;
+import com.tom.cake.model.OrderTable;
 import com.tom.cake.model.Users;
 import com.tom.cake.service.CommentService;
+import com.tom.cake.service.OrderTableService;
 import com.tom.cake.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class CommentController extends BaseController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private OrderTableService orderTableService;
 
 
     @RequestMapping("/upload")
@@ -74,10 +79,10 @@ public class CommentController extends BaseController {
             for (int i = 0; i < file.length; i++) {
                 if (!file[i].isEmpty()) {
 //                    String path = request.getSession().getServletContext().getRealPath("/upload");
-                    String path = session.getServletContext().getRealPath("/upload");  //获取本地存储路径
+//                    String path = session.getServletContext().getRealPath("/upload");  //获取本地存储路径
 
 //                    String path = "D:/MultipartFile";
-//                    String path = "D:\\ProjectCollection\\Demo\\CakeDay1225\\src\\main\\webapp\\upload/";
+                    String path = "D:\\ProjectCollection\\Demo\\CakeDay1225\\src\\main\\webapp\\upload/";
 
                     String fileName = file[i].getOriginalFilename();
                     String fileType = fileName.substring(fileName.lastIndexOf(".")); //获取后缀名
@@ -166,31 +171,113 @@ public class CommentController extends BaseController {
 
     @RequestMapping("/submit_comment")
     @ResponseBody
-    public ResultEntity<Integer> submit_comment(Comment comment, HttpSession session) throws StringIndexOutOfBoundsException {
+    public ResultEntity<String> submit_comment(Comment comment, HttpSession session, String star3, String star4, String star5, OrderTable orderTable, String comment_token) throws StringIndexOutOfBoundsException {
+        ResultEntity<String> result = new ResultEntity<>();
         Users user = getUser(session);
         comment.setUser_id(user.getUser_id());
+        String sessionToken = (String) session.getAttribute("comment_token");
+        if (comment_token.equals("") || !comment_token.equals(sessionToken)) {
+            result.setCodeAndMsg(ResultEnum.DATA_IS_REPETITION);
+            return result;
+        }
         System.out.println("comment.getImg()---------" + comment.getImg());
+        String star = star3 + star4 + star5;
+        comment.setStar(Integer.parseInt(star));
+        System.out.println("star--------------------" + star);
         if (comment.getImg() != null && !comment.getImg().equals("")) {
             comment.setImg(comment.getImg().substring(0, comment.getImg().length() - 1));
         }
-        System.out.println("comm_id----------------------test" + comment.getComm_id());
-        return commentService.saveComment(comment);
+        System.out.println("comm_id----------------------" + comment.getComm_id());
+        try {
+            ResultEntity<Integer> saveComment = commentService.saveComment(comment);
+            Integer comment_id = saveComment.getData();
+            result.setCount(comment_id.longValue());
+            result.setData(orderTable.getOrder_id());
+            orderTable.setStatus(4);
+            orderTableService.modifyOrderStatus(orderTable);
+            session.removeAttribute("comment_token");
+            result.setCodeAndMsg(ResultEnum.INSERT_SUCCESS_MESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setCodeAndMsg(ResultEnum.INSERT_FAILED_MESS);
+        }
+
+        return result;
     }
 
+ /*   @RequestMapping("/submit_comment")
+    @ResponseBody
+    public ResultEntity<String> submit_comment(Comment comment, HttpSession session, OrderTable orderTable, String comment_token) {
+        System.out.println("comment_token--------------------" + comment_token);
+        ResultEntity<String> result = new ResultEntity<>();
+        String sessionToken = (String) session.getAttribute("comment_token");
+        if (comment_token.equals("") || !comment_token.equals(sessionToken)) {
+            result.setCodeAndMsg(ResultEnum.DATA_IS_REPETITION);
+            return result;
+        }
+        if (sessionToken.equals(comment_token)) {
+            try {
+                //成功后移除session
+                orderTable.setStatus(4);
+                orderTableService.modifyOrderStatus(orderTable);
+                session.removeAttribute("comment_token");
+                result.setCodeAndMsg(ResultEnum.INSERT_SUCCESS_MESS);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.setCodeAndMsg(ResultEnum.INSERT_FAILED_MESS);
+            }
+        }
+
+        return result;
+    }*/
 
     @RequestMapping("/test_success")
-    public ModelAndView test_success(Comment comment) {
+    public ModelAndView test_success(Comment comment, OrderTable orderTable) {
         ModelAndView mv = new ModelAndView("comment_success");
         mv.addObject("comment", comment);
+        mv.addObject("orderTable", orderTable);
         return mv;
     }
 
     @RequestMapping("/comment/comment_show")
     public ModelAndView comment_show(Comment comment) {
         ModelAndView mv = new ModelAndView("comment_show");
+        System.out.println("order_id-------------" + comment.getOrder_id());
         CommentVo commentVo = commentService.findCommentById(comment);
+
         mv.addObject("commentVo", commentVo);
         return mv;
     }
+
+    @RequestMapping("/comment/add_comment_show")
+    public ModelAndView add_comment_show(Comment comment) {
+        ModelAndView mv = new ModelAndView("add_comment_show");
+        System.out.println("order_id-------------" + comment.getOrder_id());
+        CommentVo commentVo = commentService.findByGoodsIdAndOrderId(comment);
+        System.out.println("CommentVo----------------" + commentVo);
+//        System.out.println("goodsName----------------"+commentVo.getGoods().getName());
+        mv.addObject("commentVo", commentVo);
+        return mv;
+    }
+
+    @ResponseBody
+    @RequestMapping("/comment/addContent")
+    public ResultEntity<String> comment_addContent(Comment comment) {
+        ResultEntity<String> result = new ResultEntity<>();
+        Comment commentById = commentService.findByCommentId(comment);
+        commentById.setAdd_content(comment.getAdd_content());
+        try {
+            OrderTable orderTable = new OrderTable();
+            orderTable.setStatus(5);
+            commentService.saveComment(commentById);
+            orderTableService.modifyOrderStatus(orderTable);
+            result.setCodeAndMsg(ResultEnum.INSERT_SUCCESS_MESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setCodeAndMsg(ResultEnum.INSERT_FAILED_MESS);
+        }
+        return result;
+    }
+
 
 }

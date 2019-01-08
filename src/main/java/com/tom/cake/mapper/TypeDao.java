@@ -25,4 +25,6 @@ public interface TypeDao {
     List<TypeVo> selectTypesForChild();
 
     List<TypeVo> selectTypesForGoods();
+
+    List<TypeVo> selectByTypeId(Type type);
 }

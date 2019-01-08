@@ -50,4 +50,9 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> findSearchGoods(Goods goods) {
         return goodsDao.searchGoods(goods);
     }
+
+    @Override
+    public List<Goods> findAllGoodsStarLQ3() {
+        return goodsDao.selectAllGoodsStarLQ3();
+    }
 }

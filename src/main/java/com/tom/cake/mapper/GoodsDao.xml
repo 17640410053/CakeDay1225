@@ -146,5 +146,12 @@
 
     </select>
     <!--     ORDER BY price-->
+
+
+    <select id="selectAllGoodsStarLQ3" resultType="Goods">
+        select *
+        from cake_day1225.goods
+        where star >= 3
+    </select>
 </mapper>
 

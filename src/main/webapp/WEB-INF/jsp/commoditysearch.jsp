@@ -31,7 +31,7 @@
                             <c:forEach items="${typeVo.typesList}" var="type">
                                 <dd>
 
-                                    <a href="javascript:;">${type.name}</a>
+                                    <a href="<c:url value="/type/typeSearch?type_id=${type.type_id}"/>">${type.name}</a>
 
                                 </dd>
                             </c:forEach>
@@ -54,12 +54,14 @@
                     </div>
                     <div class="cont-list layui-clear" id="list-cont">
 
-                            <c:forEach items="${searchGoods}" var="star">
-                                <div class="item">
+                        <c:forEach items="${searchGoods}" var="star">
+                            <div class="item">
+                                <a href="<c:url value="/details?goods_id=${star.goods_id}"/>">
                                     <div class="img">
-                                        <a href="">
 
-                                            <img src="<c:url value="/cakeImg/${star.img}"/>" style="width: 280px;height: 280px;"></a>
+
+                                        <img src="<c:url value="/cakeImg/${star.img}"/>"
+                                             style="width: 280px;height: 280px;">
                                     </div>
                                     <div class="text">
                                         <p class="title">${star.name}</p>
@@ -68,8 +70,9 @@
                                             <span class="nub">1266付款</span>
                                         </p>
                                     </div>
-                                </div>
-                            </c:forEach>
+                                </a>
+                            </div>
+                        </c:forEach>
 
 
                         <%--

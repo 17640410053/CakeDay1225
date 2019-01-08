@@ -13,4 +13,6 @@ public interface TypeService {
     List<TypeVo> findForChild();
 
     List<TypeVo> findForGoods();
+
+    List<TypeVo> findByTypeId(Type type);
 }

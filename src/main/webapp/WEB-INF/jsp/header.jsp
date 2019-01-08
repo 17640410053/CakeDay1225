@@ -39,7 +39,7 @@
                 <div class="sp-cart"><a href="<c:url value="/shopcart"/>">购物车</a><span>2</span></div>
             </div>
         </c:if>
-        <c:if test="${user==null}">
+        <c:if test="${sessionScope.user==null}">
             <div class="sn-quick-menu">
                 <div class="login"><a href="<c:url value="/user/login"/>">登录</a></div>
                 <div class="login"><a href="/user/register">注册</a></div>
@@ -56,17 +56,23 @@
     <div class="headerLayout w1200">
         <div class="headerCon">
             <h1 class="mallLogo">
-                <a href="#" title="母婴商城">
-                    <img src="<c:url value="/res/static/img/logo.png"/>">
+                <a href="<c:url value="/index"/>" title="Cake商城">
+                    <%--<img src="<c:url value="/cakeImg/cake1.png"/>" height="80">--%>
+                    <h3 ><span style="color: #cfb2f6;">熊喵</span><span>蛋糕</span></h3>
                 </a>
             </h1>
             <div class="mallSearch">
                 <form action="" class="layui-form" novalidate>
-                    <input type="text" name="title" required lay-verify="required" autocomplete="off"
-                           class="layui-input" placeholder="请输入需要的商品">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">
-                        <i class="layui-icon layui-icon-search"></i>
-                    </button>
+                    <div style="width: 450px; height: 38px;">
+                        <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                                  class="layui-input" placeholder="请输入需要的商品" style="width: 420px;float: left">
+                        <div style="width: 14px;float: right;">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo_search"
+                                    style="border-right: 4px #cfb2f6 solid;padding-right: -10px">
+                                <i class="layui-icon layui-icon-search"></i>
+                            </button>
+                        </div>
+                    </div>
                     <input type="hidden" name="" value="">
                 </form>
             </div>
@@ -92,7 +98,7 @@
     }).use(['jquery', 'form'], function () {
         var $ = layui.$, form = layui.form;
         //监听提交
-        form.on('submit(formDemo)', function (data) {
+        form.on('submit(formDemo_search)', function (data) {
             $.post('/searchGoods', data.field, function (data) {
                 if (data.code === 0) {
                     location.href = "/commoditySearch";

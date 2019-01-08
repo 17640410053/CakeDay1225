@@ -43,7 +43,6 @@ public class OrderController extends BaseController {
     }
 
     /**
-     *
      * @param num=3 确认收货
      * @return
      */
@@ -236,17 +235,41 @@ public class OrderController extends BaseController {
 
 
     @RequestMapping("/comment_goods")
-    public ModelAndView comment_goods(Goods goods) {
+    public ModelAndView comment_goods(Goods goods, HttpSession session, OrderTable orderTable) {
         ModelAndView mv = new ModelAndView("comment_goods");
         goods = goodsService.findByGoods(goods);
+        String comment_token = UUID.randomUUID().toString();
+        session.setAttribute("comment_token", comment_token);
+        mv.addObject("c_token", comment_token);
         mv.addObject("goods", goods);
+        mv.addObject("orderTable", orderTable);
+        mv.addObject("title", "商品评价");
         return mv;
     }
 
-    @RequestMapping("/submit_comment")
-    public ModelAndView submit_comment(Comment comment, HttpSession session) {
-        ModelAndView mv = new ModelAndView("comment_goods");
-        Integer user_id = getUser(session).getUser_id();
-        return mv;
-    }
+   /* @RequestMapping("/submit_comment")
+    @ResponseBody
+    public ResultEntity<String> submit_comment(Comment comment, HttpSession session, OrderTable orderTable, String comment_token) {
+        System.out.println("comment_token--------------------" + comment_token);
+        ResultEntity<String> result = new ResultEntity<>();
+        String sessionToken = (String) session.getAttribute("comment_token");
+        if (comment_token.equals("") || !comment_token.equals(sessionToken)) {
+            result.setCodeAndMsg(ResultEnum.DATA_IS_REPETITION);
+            return result;
+        }
+        if (sessionToken.equals(comment_token)) {
+            try {
+                //成功后移除session
+                orderTable.setStatus(4);
+                orderTableService.modifyOrderStatus(orderTable);
+                session.removeAttribute("comment_token");
+                result.setCodeAndMsg(ResultEnum.INSERT_SUCCESS_MESS);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.setCodeAndMsg(ResultEnum.INSERT_FAILED_MESS);
+            }
+        }
+
+        return result;
+    }*/
 }
