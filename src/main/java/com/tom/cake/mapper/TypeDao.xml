@@ -171,5 +171,14 @@
                  INNER JOIN type t ON g.type_id = t.type_id
         WHERE t.type_id = #{type_id}
     </select>
+
+
+    <select id="selectAllPage" parameterType="map" resultType="Type">
+        select * from cake_day1225.type LIMIT #{start},#{end}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(*) typeCount from cake_day1225.type
+    </select>
 </mapper>
 

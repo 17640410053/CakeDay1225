@@ -47,6 +47,7 @@
                         <a class="active" href="javascript:;" event='volume'>销量</a>
                         <a href="javascript:;" event='price'>价格</a>
                         <a href="javascript:;" event='newprod'>新品</a>
+                        <a href="" event='newprod'>新品</a>
                         <a href="javascript:;" event='collection'>收藏</a>
                     </div>
                     <div class="prod-number">
@@ -54,24 +55,29 @@
                     </div>
                     <div class="cont-list layui-clear" id="list-cont">
 
-                        <c:forEach items="${searchGoods}" var="star">
-                            <div class="item">
-                                <a href="<c:url value="/details?goods_id=${star.goods_id}"/>">
-                                    <div class="img">
+                        <c:forEach items="${byType}" var="type">
+
+                            <c:forEach items="${type.goodsList}" var="g">
 
 
-                                        <img src="<c:url value="/cakeImg/${star.img}"/>"
-                                             style="width: 280px;height: 280px;">
-                                    </div>
-                                    <div class="text">
-                                        <p class="title">${star.name}</p>
-                                        <p class="price">
-                                            <span class="pri">￥${star.price}</span>
-                                            <span class="nub">1266付款</span>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
+                                <div class="item">
+                                    <a href="<c:url value="/details?goods_id=${g.goods_id}"/>">
+                                        <div class="img">
+
+                                            <img src="<c:url value="/cakeImg/${g.img}"/>"
+                                                 style="width: 280px;height: 280px;">
+
+                                        </div>
+                                        <div class="text">
+                                            <p class="title">${g.name}</p>
+                                            <p class="price">
+                                                <span class="pri">￥${g.price}</span>
+                                                <span class="nub">1266付款</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>
                         </c:forEach>
 
 
@@ -296,8 +302,11 @@
         // }
         // })
 
-        $('.sort a').on('click', function () {
+        $('.sort a').on('click', function (obj) {
             $(this).addClass('active').siblings().removeClass('active');
+            var event = obj.event;
+
+
         })
         $('.list-box dt').on('click', function () {
             if ($(this).attr('off')) {

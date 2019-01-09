@@ -10,4 +10,6 @@ public interface UsersService {
     Users findByMailAndPassword(Users users);
 
     void modifyUsersInfo(Users users);
+
+    void saveUser(Users users);
 }

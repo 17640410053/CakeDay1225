@@ -29,7 +29,6 @@
     </div>
 
 
-
     <div class="cart w1200">
         <form class="layui-form" action="">
             <div class="layui-form-item">
@@ -41,7 +40,8 @@
                             <option value="${a.address_id}">${a.name.replace(","," - ")}&nbsp;&nbsp;${a.phone}</option>
                         </c:forEach>
                     </select>
-                    <a href=""><span style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>
+                    <a href="<c:url value="/user/self_info"/>"><span
+                            style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>
                 </div>
 
             </div>
@@ -98,7 +98,7 @@
 
                                     <div class="item-cont">
                                         <a href="javascript:;">
-                                            <img src="<c:url value="/cakeImg/${orderDetail.img}"/>"  alt=""></a>
+                                            <img src="<c:url value="/cakeImg/${orderDetail.img}"/>" alt=""></a>
                                         <div class="text">
                                             <div class="title">${orderDetail.name}</div>
                                             <p><span>雪过天晴后的第一口呼吸，甜蜜清新得不落俗套。</span></p>

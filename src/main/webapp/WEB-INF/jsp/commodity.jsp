@@ -31,7 +31,7 @@
                             <c:forEach items="${typeVo.typesList}" var="type">
                                 <dd>
 
-                                    <a href="<c:url value="/type/typeSearch?type_id=${type.type_id}"/>">${type.name}</a>
+                                    <a href="<c:url value="/type/commodity_type?type_id=${type.type_id}"/>">${type.name}</a>
 
                                 </dd>
                             </c:forEach>
@@ -55,24 +55,24 @@
                     <div class="cont-list layui-clear" id="list-cont">
 
                         <c:forEach items="${byStar}" var="star">
-                            <c:forEach items="${star}" var="s">
 
 
-                                <div class="item">
-                                    <div class="img">
-                                        <a href="">
-                                                <%--<img src="<c:url value="/cakeImg/${star.img}"/>" style="width: 280px;height: 280px;">--%>
-                                        </a>
-                                    </div>
-                                    <div class="text">
-                                        <p class="title">${star.name}</p>
-                                        <p class="price">
-                                            <span class="pri">￥</span>
-                                            <span class="nub">1266付款</span>
-                                        </p>
-                                    </div>
+                            <div class="item">
+                                <div class="img">
+                                    <a href="">
+                                        <img src="<c:url value="/cakeImg/${star.img}"/>"
+                                             style="width: 280px;height: 280px;">
+                                    </a>
                                 </div>
-                            </c:forEach>
+                                <div class="text">
+                                    <p class="title">${star.name}</p>
+                                    <p class="price">
+                                        <span class="pri">￥${star.price}</span>
+                                        <span class="nub">1266付款</span>
+                                    </p>
+                                </div>
+                            </div>
+
                         </c:forEach>
 
 

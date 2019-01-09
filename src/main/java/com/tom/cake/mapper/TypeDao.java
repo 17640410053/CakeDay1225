@@ -1,12 +1,12 @@
 package com.tom.cake.mapper;
 
+import com.tom.cake.model.Type;
 import com.tom.cake.vo.TypeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import com.tom.cake.model.Type;
+import java.util.Map;
 
 @Mapper
 public interface TypeDao {
@@ -27,4 +27,9 @@ public interface TypeDao {
     List<TypeVo> selectTypesForGoods();
 
     List<TypeVo> selectByTypeId(Type type);
+
+
+    List<Type> selectAllPage(Map map);
+
+    Long selectCount();
 }

@@ -10,6 +10,15 @@ public class Address {
     private Integer level;
     private Date createTime;
     private Integer defaultAddress;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getAddress_id() {
         return address_id;

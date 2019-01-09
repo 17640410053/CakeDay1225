@@ -162,5 +162,34 @@
     </select>
 
 
+    <insert id="insertUser">
+        insert into cake_day1225.users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id!=null">`user_id`,</if>
+            <if test="username!=null">`username`,</if>
+            <if test="password!=null">`password`,</if>
+            <if test="phone!=null">`phone`,</if>
+            <if test="mail!=null">`mail`,</if>
+            <if test="birth!=null">`birth`,</if>
+            <if test="gender!=null">`gender`,</if>
+            <if test="image!=null">`image`,</if>
+            <if test="token!=null">`token`,</if>
+            <if test="createTime!=null">`createtime`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id!=null">#{user_id},</if>
+            <if test="username!=null">#{username},</if>
+            <if test="password!=null">#{password},</if>
+            <if test="phone!=null">#{phone},</if>
+            <if test="mail!=null">#{mail},</if>
+            <if test="birth!=null">#{birth},</if>
+            <if test="gender!=null">#{gender},</if>
+            <if test="image!=null">#{image},</if>
+            <if test="token!=null">#{token},</if>
+            <if test="createTime!=null">#{createTime},</if>
+        </trim>
+    </insert>
+
 </mapper>
 

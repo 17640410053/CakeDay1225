@@ -7,6 +7,8 @@ public enum ResultEnum {
      */
     UPDATE_SUCCESS_MESS(0, "修改成功"),
     INSERT_SUCCESS_MESS(0, "添加成功"),
+    REGISTER_SUCCESS(2001,"注册成功"),
+    REGISTER_FAILED(5000,"注册失败"),
     UPLOAD_SUCCESS_MESS(0, "上传成功"),
     UPLOAD_FAILED_MESS(500, "上传失败"),
     LOGIN_SUCCESS_MESS(0, "登录成功"),

@@ -6,9 +6,12 @@ import com.bilibili.yl.util.VerifyUtils;
 import com.tom.cake.constant.ResultEntity;
 import com.tom.cake.constant.ResultEnum;
 import com.tom.cake.model.Address;
+import com.tom.cake.model.TP_Tree;
 import com.tom.cake.model.Users;
 import com.tom.cake.service.AddressService;
+import com.tom.cake.service.TP_TreeService;
 import com.tom.cake.service.UsersService;
+import com.tom.cake.service.impl.TP_TreeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -34,10 +38,22 @@ public class UserController extends BaseController {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private TP_TreeService treeService;
+
 
     @RequestMapping("/user/login")
-    public String test() {
-        return "login";
+    public ModelAndView test() {
+        ModelAndView mv = new ModelAndView("login");
+        mv.addObject("title", "登录");
+        return mv;
+    }
+
+    @RequestMapping("/user/register")
+    public ModelAndView register() {
+        ModelAndView mv = new ModelAndView("register");
+        mv.addObject("title", "注册");
+        return mv;
     }
 
     /**
@@ -86,6 +102,88 @@ public class UserController extends BaseController {
                         session.setAttribute("user", isExists);
                     } else {
                         result.setCodeAndMsg(ResultEnum.LOGIN_FAILED_MESS);
+                    }
+                } else {
+                    result.setCodeAndMsg(ResultEnum.VERIFY_CODE_FAILED);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 注册
+     *
+     * @param users
+     * @param pnum
+     * @param verify
+     * @param session
+     * @return
+     */
+
+
+    @RequestMapping("/register")
+    @ResponseBody
+    public ResultEntity<String> testRegister(Users users, String pnum, String verify, HttpSession session) {
+        ResultEntity<String> result = new ResultEntity<>();
+        if (users.getUsername() != null) {//用户名密码注册
+            users.setPassword(MD5Utils.MD5Encode(users.getPassword(), "utf-8"));
+            Users isExists = usersService.findOne(users);
+            if (isExists != null) {
+                result.setCodeAndMsg(ResultEnum.USER_IS_EXIST);//code=0
+            } else {
+                try {
+                    usersService.saveUser(users);
+                    result.setCodeAndMsg(ResultEnum.REGISTER_SUCCESS);//code=500,用户名可用
+                } catch (Exception e) {
+                    result.setCodeAndMsg(ResultEnum.REGISTER_FAILED);
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            if (users.getPassword() == null) {//邮箱验证码注册
+                Users isExists = usersService.findByMail(users);
+                String code1 = (String) session.getAttribute("code");
+                if (isExists != null) {
+                    result.setCodeAndMsg(ResultEnum.USER_IS_EXIST);
+//                    if (pnum.equals(code1)) {
+//                        result.setCodeAndMsg(ResultEnum.LOGIN_SUCCESS_MESS);
+//                        session.setAttribute("user", isExists);
+//                        session.removeAttribute("code");
+//                    } else {
+//                        result.setCodeAndMsg(ResultEnum.LOGIN_FAILED_MESS);
+//                    }
+                    return result;
+                } else {
+                    if (pnum.equals(code1)) {
+                        try {
+                            usersService.saveUser(users);
+                            result.setCodeAndMsg(ResultEnum.REGISTER_SUCCESS);//邮箱可用
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            result.setCodeAndMsg(ResultEnum.REGISTER_FAILED);
+                        }
+                    } else {
+                        result.setCodeAndMsg(ResultEnum.VERIFY_CODE_FAILED);
+                    }
+
+                }
+            } else {//邮箱密码注册
+                users.setPassword(MD5Utils.MD5Encode(users.getPassword(), "utf-8"));
+                if (verify != null && !verify.equals("") && verify.equalsIgnoreCase(session.getAttribute("verify").toString())) {
+                    Users isExists = usersService.findByMailAndPassword(users);
+                    if (isExists != null) {
+                        result.setCodeAndMsg(ResultEnum.USER_IS_EXIST);
+                        return result;
+                    } else {
+                        try {
+                            usersService.saveUser(users);
+                            result.setCodeAndMsg(ResultEnum.REGISTER_SUCCESS);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            result.setCodeAndMsg(ResultEnum.REGISTER_FAILED);
+                        }
                     }
                 } else {
                     result.setCodeAndMsg(ResultEnum.VERIFY_CODE_FAILED);
@@ -220,6 +318,17 @@ public class UserController extends BaseController {
             result.setCodeAndMsg(ResultEnum.VERIFY_CODE_FAILED);
         }
         return result;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/add_address")
+    public ResultEntity<String> add_address(Address address) {
+        ResultEntity<String> result = new ResultEntity<>();
+        addressService.saveAddress(address);
+        return result;
+
+
     }
 
 

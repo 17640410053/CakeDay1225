@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 import com.tom.cake.mapper.TypeDao;
 
@@ -56,4 +57,15 @@ public class TypeServiceImpl implements TypeService {
     public List<TypeVo> findByTypeId(Type type) {
         return typeDao.selectByTypeId(type);
     }
+
+    @Override
+    public List<Type> findAllPage(Map map) {
+        return typeDao.selectAllPage(map);
+    }
+
+    @Override
+    public Long findCount() {
+        return typeDao.selectCount();
+    }
+
 }

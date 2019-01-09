@@ -14,6 +14,27 @@ public class Users {
     private String token;
     private Date createTime;
 
+    public Users() {
+    }
+
+    public Users(Integer user_id, String username, String password, String phone, String mail, Date birth, Integer gender, String image, String token, Date createTime) {
+        this.user_id = user_id;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.mail = mail;
+        this.birth = birth;
+        this.gender = gender;
+        this.image = image;
+        this.token = token;
+        this.createTime = createTime;
+    }
+
+    public Users(Integer user_id, String username) {
+        this.user_id = user_id;
+        this.username = username;
+    }
+
     public Integer getUser_id() {
         return user_id;
     }

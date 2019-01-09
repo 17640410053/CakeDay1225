@@ -40,4 +40,14 @@ public class AddressServiceImpl implements AddressService {
     public List<Address> findAllAddressByUsersId(Address address) {
         return addressDao.selectAllAddressByUsersId(address);
     }
+
+    @Override
+    public void saveAddress(Address address) {
+        addressDao.insertAddress(address);
+    }
+
+    @Override
+    public Address findByAddress_id(Address address) {
+        return addressDao.selectByAddressId(address);
+    }
 }

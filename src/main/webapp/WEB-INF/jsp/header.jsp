@@ -42,7 +42,7 @@
         <c:if test="${sessionScope.user==null}">
             <div class="sn-quick-menu">
                 <div class="login"><a href="<c:url value="/user/login"/>">登录</a></div>
-                <div class="login"><a href="/user/register">注册</a></div>
+                <div class="login"><a href="<c:url value="/user/register"/>">注册</a></div>
                 <div class="sp-cart"><a href="<c:url value="/shopcart"/>">购物车</a><span>2</span></div>
             </div>
         </c:if>

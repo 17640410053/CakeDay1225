@@ -9,4 +9,8 @@ public interface AddressService {
     Address findByUsersId(Address address);
 
     List<Address> findAllAddressByUsersId(Address address);
+
+    void saveAddress(Address address);
+
+    Address findByAddress_id(Address address);
 }

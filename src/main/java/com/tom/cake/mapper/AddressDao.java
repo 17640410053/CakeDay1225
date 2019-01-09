@@ -1,11 +1,10 @@
 package com.tom.cake.mapper;
 
+import com.tom.cake.model.Address;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import com.tom.cake.model.Address;
 
 @Mapper
 public interface AddressDao {
@@ -20,4 +19,8 @@ public interface AddressDao {
     Address selectByUsersId(Address address);
 
     List<Address> selectAllAddressByUsersId(Address address);
+
+    void insertAddress(Address address);
+
+    Address selectByAddressId(Address address);
 }

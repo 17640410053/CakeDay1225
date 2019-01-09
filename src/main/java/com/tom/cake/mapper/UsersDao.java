@@ -24,4 +24,6 @@ public interface UsersDao {
     Users selectByMailAndPassword(Users users);
 
     void updateUsersInfo(Users users);
+
+    void insertUser(Users  users);
 }

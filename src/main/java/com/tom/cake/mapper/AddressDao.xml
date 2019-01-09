@@ -104,5 +104,34 @@
         from cake_day1225.address
         where user_id = #{user_id}
     </select>
+
+    <insert id="insertAddress" useGeneratedKeys="true" keyProperty="address_id">
+        insert  into cake_day1225.address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="address_id!=null">`address_id`,</if>
+        <if test="name!=null">`name`,</if>
+        <if test="phone!=null">`phone`,</if>
+        <if test="user_id!=null">`user_id`,</if>
+        <if test="level!=null">`level`,</if>
+        <if test="createTime!=null">`create_time`,</if>
+        <if test="defaultAddress!=null">`default_address`,</if>
+        <if test="username!=null">`username`,</if>
+    </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="address_id!=null">#{address_id},</if>
+            <if test="name!=null">#{name},</if>
+            <if test="phone!=null">#{phone},</if>
+            <if test="user_id!=null">#{user_id},</if>
+            <if test="level!=null">#{level},</if>
+            <if test="createTime!=null">#{createTime},</if>
+            <if test="defaultAddress!=null">#{defaultAddress},</if>
+            <if test="username!=null">#{username},</if>
+        </trim>
+    </insert>
+
+    <select id="selectByAddressId" resultType="Address">
+        select * from cake_day1225.address where address_id=#{address_id}
+    </select>
 </mapper>
 

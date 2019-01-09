@@ -18,7 +18,7 @@
                 <div class="inner-cont2">
                     <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
                     <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
+                    <a href="information.html">Cake资讯</a>
                     <a href="about.html">关于我们</a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                                 <div class="title">${type.name}</div>
                                 <p>
                                     <c:forEach items="${type.typesList}" var="typeChild">
-                                        <a href="#">${typeChild.name}</a>
+                                        <a href="<c:url value="/type/commodity_type?type_id=${typeChild.type_id}"/>">${typeChild.name}</a>
                                     </c:forEach>
 
                                 </p>
