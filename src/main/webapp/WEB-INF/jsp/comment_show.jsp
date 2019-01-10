@@ -102,12 +102,7 @@
                     <img src="/cakeImg/${commentVo.goods.img}" alt="" style="height: 100px;width: 100px;">
                 </div>
             </div>
-            <%-- int g = s%10;
-                    int sw = s/10%10;
-                    int b = s/100%10;
-                    int q = s/1000%10;
 
-                    --%>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">描述相符</label>
@@ -150,11 +145,10 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">物流服务
-                    <%--   ${(commentVo.star/10%10).intValue()}
-                       ${commentVo.star.toString().substring(1,2)=='4'}--%>
+
                 </label>
 
-                <%--<fmt:formatNumber value="${commentVo.star/10%10}" maxFractionDigits="0"/>--%>
+
                 <div class="layui-input-block" id="test1">
                     <c:choose>
                         <c:when test="${commentVo.star.toString().substring(1,2)=='5'}">
@@ -263,8 +257,7 @@
         base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
-        // $("#test1").html($("#test").html());
-        // $("#test2").html($("#test").html());
+
 
     })
     ;

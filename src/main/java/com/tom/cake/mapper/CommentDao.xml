@@ -12,7 +12,7 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
-    <resultMap id="commentGoodsMapper" type="com.tom.cake.vo.CommentVo">
+    <resultMap id="commentGoodsMapper" type="com.tom.cake.vo.CommentVo"> <!--这里哪有用户呀，搞错-->
         <id column="comm_id" property="comm_id"/>
         <result column="content" property="content"/>
         <result column="add_content" property="add_content"/>
@@ -242,7 +242,7 @@
     </select>
 
 
-    <select id="selectByGoodsId" resultMap="commentGoodsMapper">
+    <select id="selectByGoodsId" resultMap="commentGoodsByGoodsIdMapper">
         SELECT `comment`.comm_id,
         `comment`.content,
         `comment`.user_id,

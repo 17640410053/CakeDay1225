@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 import com.tom.cake.mapper.AddressDao;
 
@@ -39,6 +40,16 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<Address> findAllAddressByUsersId(Address address) {
         return addressDao.selectAllAddressByUsersId(address);
+    }
+
+    @Override
+    public List<Address> findAllAddressByUsersIdPage(Map map) {
+        return addressDao.selectAllAddressByUsersIdPage(map);
+    }
+
+    @Override
+    public Long findCount(Address address) {
+        return addressDao.selectCount(address);
     }
 
     @Override

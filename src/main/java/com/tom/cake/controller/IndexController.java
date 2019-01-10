@@ -103,7 +103,7 @@ public class IndexController {
         List<Goods> byStar = goodsService.findByStar(goods);
 
         List<Goods> goodsStarLQ3 = goodsService.findAllGoodsStarLQ3();
-        mv.addObject("goodsStarLQ3",goodsStarLQ3);
+        mv.addObject("goodsStarLQ3", goodsStarLQ3);
         mv.addObject("byStar0", byStar.get(0));
         mv.addObject("byStar1", byStar.get(1));
         mv.addObject("byStar2", byStar.get(2));
@@ -118,7 +118,7 @@ public class IndexController {
     @RequestMapping("/details")
     public ModelAndView details(Goods goods, HttpSession session) {
         ModelAndView mv = new ModelAndView("details");
-        Users user = (Users) session.getAttribute("user");
+        Users user = (Users) session.getAttribute("user"); //为什么详情页要session
         goods = goodsService.findByGoods(goods);
         goods.setStar(8);
         List<Goods> byStar = goodsService.findByStar(goods);
@@ -133,7 +133,10 @@ public class IndexController {
         comment.setGoods_id(goods.getGoods_id());
         List<CommentVo> commentVoList = commentService.findByGoodsId(comment);
         System.out.println("commentVoList.size：————————" + commentVoList.size());
-
+        for (CommentVo commentVo : commentVoList) {
+//            System.out.println("user"+commentVo.getUsers());
+//            System.out.println("user/img-------" + commentVo.getUsers().getImage());
+        }/**/
         comment.setStar(5);
         List<CommentVo> goodCommentVoList = commentService.findByGoodsId(comment);
         comment.setStar(3);

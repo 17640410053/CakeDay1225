@@ -261,42 +261,37 @@
             </div>
         </form>
 
-        <script>
-            //Demo
-            layui.use(['form', 'jquery'], function () {
-                var form = layui.form;
-                var $ = layui.$;
-                //监听提交
-                form.on('submit(formDemo_addContent)', function (data) {
-                    layer.msg(JSON.stringify(data.field));
-                    // return false;
-                    $.post("/comment/addContent", data.field, function (res) {
-                        if (res.code === 0) {
-                            alert(res.msg + "请重新登录~~");
-                            location.href = "/user/login";
-                        } else {
-                            layer.msg(res.msg)
-                        }
-                    })
-                    return false;
-                });
-            });
-        </script>
+
     </div>
 
 </div>
 <script type="text/javascript">
     layui.config({
         base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['mm', 'jquery', 'element', 'car'], function () {
-        var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
-        // $("#test1").html($("#test").html());
-        // $("#test2").html($("#test").html());
+    }).use(['mm', 'jquery', 'element', 'car','form'], function () {
+        var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car,form = layui.form;
+
+
+        //监听提交
+        form.on('submit(formDemo_addContent)', function (data) {
+
+            $.post("/comment/addContent", data.field, function (res) {
+                if (res.code === 0) {
+                    alert(res.msg + "请重新登录~~");
+                    location.href = "/user/login";
+                } else {
+                    layer.msg(res.msg)
+                }
+            })
+            return false;
+        });
 
     })
     ;
 
 </script>
+
+
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 
 

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AddressController extends BaseController {
@@ -65,15 +67,22 @@ public class AddressController extends BaseController {
 
     @ResponseBody
     @RequestMapping("/address/findAllAddressByUserId")
-    public ResultEntity<List<Address>> findAllAddressByUserId(HttpSession session) {
-
+    public ResultEntity<List<Address>> findAllAddressByUserId(HttpSession session, Integer page, Integer limit) {
         ResultEntity<List<Address>> result = new ResultEntity<>();
         Integer user_id = getUser(session).getUser_id();
         Address address = new Address();
         address.setUser_id(user_id);
-        List<Address> addressList = addressService.findAllAddressByUsersId(address);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("user_id", user_id);
+        map.put("start", (page - 1) * limit);
+        map.put("end", limit);
+        List<Address> addressList = addressService.findAllAddressByUsersIdPage(map);
+
+        Long count = addressService.findCount(address);
+//        List<Address> addressList = addressService.findAllAddressByUsersId(address);
         result.setCodeAndMsg(ResultEnum.SELECT_SUCCESS);
         result.setData(addressList);
+        result.setCount(count);
         return result;
     }
 

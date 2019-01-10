@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AddressDao {
@@ -19,6 +20,10 @@ public interface AddressDao {
     Address selectByUsersId(Address address);
 
     List<Address> selectAllAddressByUsersId(Address address);
+
+    List<Address> selectAllAddressByUsersIdPage(Map map);
+
+    Long selectCount(Address address);
 
     void insertAddress(Address address);
 

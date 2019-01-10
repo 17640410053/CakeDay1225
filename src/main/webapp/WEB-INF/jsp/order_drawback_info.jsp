@@ -186,26 +186,7 @@
         </form>
 
 
-        <script>
 
-            //Demo
-            layui.use('form', function () {
-                var form = layui.form;
-                form.render();
-                //监听提交
-                //监听提交
-                form.on('submit(formDemo)', function (data) {
-                    $.post('/order/order_drawback_commit', data.field, function (data) {
-                        if (data.code === 0) {
-                            location.href = "/order/order_drawback_success";
-                        } else {
-                            layer.msg("网络连接错误，请稍后再试");
-                        }
-                    });
-                    return false;
-                });
-            });
-        </script>
     </div>
 
 </div>
@@ -219,6 +200,26 @@
     })
     ;
 
+</script>
+<script>
+
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+        //监听提交
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.post('/order/order_drawback_commit', data.field, function (data) {
+                if (data.code === 0) {
+                    location.href = "/order/order_drawback_success";
+                } else {
+                    layer.msg("网络连接错误，请稍后再试");
+                }
+            });
+            return false;
+        });
+    });
 </script>
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 

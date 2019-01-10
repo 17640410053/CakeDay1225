@@ -10,7 +10,7 @@
 <jsp:include page="header.jsp"/>
 <div class="context">
     <div class="layui-row">
-        <div class="layui-col-md2 layui-col-md-offset3"><%--style="margin-right: -100px"--%>
+        <div class="layui-col-md2 layui-col-md-offset3">
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-this"><a>个人信息</a></li>
                 <li class="layui-nav-item"><a>修改密码</a></li>
@@ -94,27 +94,6 @@
 
                     </form>
 
-                    <script>
-                        //Demo
-                        layui.use('form', function () {
-                            var form = layui.form;
-
-                            //监听提交
-                            // form.on('submit(formDemo)', function (data) {
-                            //     layer.msg(JSON.stringify(data.field));
-                            //     return false;
-                            // });
-                        });
-                    </script>
-
-
-                    <script>
-                        layui.use('form', function () {
-                            var form = layui.form;
-
-                            //各种基于事件的操作，下面会有进一步介绍
-                        });
-                    </script>
 
                 </div>
             </div>
@@ -155,29 +134,7 @@
                         </div>
 
                     </form>
-                    <script>
 
-                    </script>
-                    <script>
-                        //Demo
-                        layui.use(['form', 'jquery'], function () {
-                            var form = layui.form;
-                            var $ = layui.$;
-                            //监听提交
-                            form.on('submit(formDemo_changePassword)', function (data) {
-                                layer.msg(JSON.stringify(data.field));
-                                $.post("/user/change_password", data.field, function (res) {
-                                    if (res.code === 0) {
-                                        alert(res.msg + "请重新登录~~");
-                                        location.href = "/user/login";
-                                    } else {
-                                        layer.msg(res.msg)
-                                    }
-                                })
-                                return false;
-                            });
-                        });
-                    </script>
                 </div>
             </div>
             <div class="layui-card">
@@ -192,29 +149,7 @@
                         <button type="button" class="layui-btn" id="test1">
                             <i class="layui-icon">&#xe67c;</i>上传图片
                         </button>
-                        <script>
-                            layui.use(['upload', 'jquery'], function () {
-                                var upload = layui.upload;
-                                var $ = layui.$;
-                                /**
-                                 *这个要写上jQuery的引用，不然会报没有定义$
-                                 */
-                                    //执行实例
-                                var uploadInst = upload.render({
-                                        elem: '#test1' //绑定元素
-                                        , url: '/user/change_userImg/' //上传接口
-                                        , done: function (res) {
-                                            //上传完毕回调
-                                            layer.msg(res.msg);
-                                            $("#userImg").attr("src", "/img/userImg/" + res.data);
-                                            $("#user_Img_1").attr("src", "/img/userImg/" + res.data);
-                                        }
-                                        , error: function () {
-                                            //请求异常回调
-                                        }
-                                    });
-                            });
-                        </script>
+
                     </div>
 
                 </div>
@@ -260,73 +195,10 @@
 
                     </form>
 
-                    <script>
-                        //Demo
-                        layui.use(['form', 'jquery', 'element'], function () {
-                            var form = layui.form;
-                            var $ = layui.$;
-                            var find = $("#find");
 
-                            find.on("click", function () {
-                                var mail = $("[name = 'mail']:eq(0)");
-                                if (!/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(mail.val())) {
-                                    layer.msg("请输入正确的邮箱");
-                                    return false;
-                                }
-                                var obj = this;
-                                $.ajax({
-                                    type: "POST",
-                                    url: "/send",
-                                    data: {mail: mail.val()},
-                                    dataType: "json",//返回的
-                                    success: function (data) {
-                                        if (data.code === 0) {
-                                            find.addClass("layui-btn-disabled");
-                                            find.attr('disabled', "true");
-                                            settime(obj);
-                                        }
-                                        layer.msg(data.msg);
-                                    },
-                                    error: function (msg) {
-                                        console.log(msg);
-                                    }
-                                });
-
-                            });
-                            var countdown = 60;
-
-                            function settime(obj) {
-                                if (countdown === 0) {
-                                    obj.removeAttribute("disabled");
-                                    obj.classList.remove("layui-btn-disabled");
-                                    obj.value = "获取验证码";
-                                    countdown = 60;
-                                    return;
-                                } else {
-
-                                    obj.value = "重新发送(" + countdown + ")";
-                                    countdown--;
-                                }
-                                setTimeout(function () {
-                                        settime(obj)
-                                    }
-                                    , 1000)
-                            }
-
-
-                            //监听提交
-                            form.on('submit(formDemoMail)', function (data) {
-                                // layer.msg(JSON.stringify(data.field));
-                                $.post("/bindMail", data.field, function (data) {
-                                    layer.msg(data.msg)
-                                })
-                                return false;
-                            });
-                        });
-                    </script>
                 </div>
             </div>
-            <div class="layui-card" style="width: 800px;">
+            <div class="layui-card" style="width: 850px;">
                 <div class="layui-card-header">地址管理</div>
                 <div class="layui-card-body">
                     <%--这里写你的地址管理代码--%>
@@ -336,42 +208,14 @@
                            lay-filter="test">
                         <thead>
                         <tr>
-                            <th lay-data="{field:'address_id', width:80, sort: true}">ID</th>
-                            <th lay-data="{field:'name', width:80}">用户名</th>
-                            <th lay-data="{field:'username', width:80, sort: true}">性别</th>
-                            <th lay-data="{field:'city'}">城市</th>
-                            <th lay-data="{field:'sign'}">签名</th>
-                            <th lay-data="{field:'experience', sort: true}">积分</th>
-                            <th lay-data="{field:'score', sort: true}">评分</th>
-                            <th lay-data="{field:'classify'}">职业</th>
-                            <th lay-data="{field:'wealth', sort: true}">财富</th>
+                            <th lay-data="{field:'address_id', width:80, sort: true}">地址id</th>
+                            <th lay-data="{field:'name', width:180}">地址</th>
+                            <th lay-data="{field:'username', width:180}">用户名</th>
+                            <th lay-data="{field:'phone',width:280}">联系方式</th>
                         </tr>
                         </thead>
                     </table>
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="150">
-                            <col width="200">
-                            <col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>联系人</th>
-                            <th>手机号</th>
-                            <th>地址</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tBody">
-                        <c:forEach items="${addressList}" var="a">
-                            <tr>
-                                <td>${a.username}</td>
-                                <td>${a.phone}</td>
-                                <td>${a.name}</td>
-                            </tr>
-                        </c:forEach>
 
-                        </tbody>
-                    </table>
                     <br>
                     <p>地址添加</p>
                     <form class="layui-form" action="">
@@ -407,10 +251,7 @@
                             <div class="layui-input-inline">
                                 <select name="province" lay-filter="test1" id="province" lay-verify="required">
                                     <option value="">请选择省份</option>
-                                    <%--         <option value="1">上海</option>
-                                             <option value="2">江苏</option>
-                                             <option value="3">湖南</option>
-                                             <option value="4">四川</option>--%>
+
                                 </select>
                             </div>
                             <div class="layui-input-inline" id="city1" style="display: none">
@@ -423,9 +264,7 @@
                                     <option value="">请选择县/城镇</option>
                                 </select>
                             </div>
-                            <%--<div class="layui-input-block">--%>
-                            <%--<textarea name="name" placeholder="请输入地址" required class="layui-textarea"></textarea>--%>
-                            <%--</div>--%>
+
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
@@ -435,154 +274,6 @@
                         </div>
                     </form>
 
-                    <script>
-                        //Demo
-                        layui.use(['form', 'jquery', 'table'], function () {
-                            var form = layui.form;
-                            var $ = layui.$;
-                            var table = layui.table;
-                            var provinceItem, cityItem, countryItem;
-
-                            $.post('/address/findProvince', function (msg) {
-                                var provinceList = $("[name='province']"), item = "";
-                                //首先拿到值首先要做的是清空，不然以前的数据都还在，这里，我们用html直接替换掉
-                                console.log(msg.data);
-                                //这里拿到数据，赋值给全局的变量
-                                //从这里开始完全都是jq，跟ajax没有任何关系
-                                if (msg.data !== null) { //如果传入的数据不是空的就进行渲染
-                                    provinceItem = msg.data;
-                                    item += "<option value=\"\">请选择省份</option>"; //先添加一条基本的
-                                    //然后循环遍历,city是msg.data里面的就是相当于foreach的var吗?------对呢
-                                    $.each(msg.data, function (index, province) { //这里我用each循环，msg.data是你的list，index是第几个，city是你的对象
-                                        item += "<option value=\"" + province.id + "\">" + province.name + "</option>"; //继续拼接就好了
-                                    });
-                                    //--那个传到后台的数据要是string哟，因为你数据库存的是地址，不是外键哦
-                                    //--也就是说要用cityname来传值
-                                    //--差不多哟
-                                    // bilibili丶教主 2019/1/9 17:33:29
-                                    //而且要把他拼成一串
-                                    // 循环完了就渲染
-                                    provinceList.html(item);
-                                }
-                                //layui的select还必须由layui自己重新加载一次，这是layui特有的
-                                form.render('select'); //刷新select选择框渲染
-                            });
-
-                            form.on('select(test1)', function (data) {
-
-                                $('#city1').hide();
-                                $('#country1').hide();
-                                console.log(data);
-                                console.log(data.elem); //得到select原始DOM对象
-                                console.log(data.value); //得到被选中的值
-                                console.log(data.othis); //得到美化后的DOM对象
-
-                                // $.ajax({
-                                //     url: "/address/findCity",
-                                //     dataType: "json",
-                                //     data: {pid: data.value},
-                                //     success: function () {
-                                //
-                                //     }
-                                // });
-
-                                $.post("/address/findCityOrCountry", {pid: data.value}, function (msg) {
-                                    var cityList = $('#city'), item = "";
-                                    //首先拿到值首先要做的是清空，不然以前的数据都还在，这里，我们用html直接替换掉
-                                    console.log(msg.data);
-                                    //这里拿到数据，赋值给全局的变量
-                                    cityItem = msg.data;
-                                    //从这里开始完全都是jq，跟ajax没有任何关系
-                                    if (msg.data !== null) { //如果传入的数据不是空的就进行渲染
-                                        item += "<option value=\"\">请选择城市</option>"; //先添加一条基本的
-                                        //然后循环遍历,city是msg.data里面的就是相当于foreach的var吗?------对呢
-                                        $.each(msg.data, function (index, city) { //这里我用each循环，msg.data是你的list，index是第几个，city是你的对象
-                                            item += "<option value=\"" + city.id + "\">" + city.name + "</option>"; //继续拼接就好了
-                                        });
-                                        //--那个传到后台的数据要是string哟，因为你数据库存的是地址，不是外键哦
-                                        //--也就是说要用cityname来传值
-                                        //--差不多哟
-                                        // bilibili丶教主 2019/1/9 17:33:29
-                                        //而且要把他拼成一串
-                                        // 循环完了就渲染
-                                        cityList.html(item);
-                                    }
-                                    //layui的select还必须由layui自己重新加载一次，这是layui特有的
-                                    form.render('select'); //刷新select选择框渲染
-                                    $('#city1').show();//你知道怎么去除那个隐藏的属性吗 --直接.show吖
-                                    //.hidden是隐藏
-                                    // $('#country1').css("display","none");
-
-                                })
-                            });
-
-                            //有bug的，怎么改
-                            form.on('select(test2)', function (data) {
-                                console.log(data.value);
-                                $.post("/address/findCityOrCountry", {pid: data.value}, function (msg) {
-                                    var countryList = $("[name = 'country']"), item = "";
-                                    if (msg.data !== null) {
-                                        countryItem = msg.data;
-                                        item += "<option value=\"\">请选择县/城镇</option>";
-
-                                        $.each(msg.data, function (index, country) {
-                                            item += "<option value=\"" + country.id + "\">" + country.name + "</option>";
-                                        });
-                                        countryList.html(item);
-                                    }
-                                    form.render("select");
-                                    $("#country1").show();
-
-
-                                })
-                            });
-
-
-                            //监听提交
-                            form.on('submit(formDemoAddress)', function (data) {
-                                //你想一下怎么取拿值，就是string类型的
-                                //拿不到，我们就想其他办法，又不是只有这一个方法
-                                //首先你前台是有数据的，不过是局部的，那么我改成全局的不就好了
-                                // console.log(data.field); //有id去遍历找
-                                // console.log(countryItem);
-                                var provinceName = "";
-                                $.each(provinceItem, function (index, province) {
-                                    if (province.id == data.field['province']) {
-                                        provinceName += province.name;
-                                    }
-                                });
-                                var cityName = "";
-                                $.each(cityItem, function (index, city) {
-                                    if (city.id == data.field['city']) {
-                                        //用表单里面的数据id去与获得的cityList比较
-                                        /*{username: "123", phone: "13342235110", province: "3", city: "38", country: "417"}
-                                           city: "38"
-                                           country: "417"
-                                           phone: "13342235110"
-                                           province: "3"
-                                           username: "123"
-                                          */
-                                        cityName += city.name;
-                                    }
-                                });
-                                var countryName = "";
-                                $.each(countryItem, function (index, country) {
-                                    if (country.id == data.field['country']) {
-                                        countryName += country.name;
-                                    }
-                                });
-                                var address = provinceName + "-" + cityName + "-" + countryName;
-                                console.log(address);
-                                data.field['name'] = address;
-                                //ajax请求
-                                $.post("/address/addAddress", data.field, function (res) {
-                                    layer.msg(res.msg);
-                                    table.reload();
-                                })
-                                return false;
-                            });
-                        });
-                    </script>
 
                 </div>
             </div>
@@ -620,9 +311,9 @@
 </style>
 <script>
     layui.use(['layer', 'element'], function () {
-        const $ = layui.$;
+        var $ = layui.$;
         //默认开启第一个item详情
-        const item = $('.item-detail .layui-card');
+        var item = $('.item-detail .layui-card');
         item.eq(0).show();
         // 菜单标签遍历点击事件
         $('.layui-nav-item').each(function () {
@@ -636,5 +327,242 @@
             });
         });
     })
+</script>
+
+<script>
+    //Demo
+    layui.use(['form', 'jquery', 'table'], function () {
+        var form = layui.form;
+        var $ = layui.$;
+        var table = layui.table;
+        var provinceItem, cityItem, countryItem;
+
+        $.post('/address/findProvince', function (msg) {
+            var provinceList = $("[name='province']"), item = "";
+            //首先拿到值首先要做的是清空，不然以前的数据都还在，这里，我们用html直接替换掉
+            console.log(msg.data);
+            //这里拿到数据，赋值给全局的变量
+            //从这里开始完全都是jq，跟ajax没有任何关系
+            if (msg.data !== null) { //如果传入的数据不是空的就进行渲染
+                provinceItem = msg.data;
+                item += "<option value=\"\">请选择省份</option>"; //先添加一条基本的
+                //然后循环遍历,city是msg.data里面的就是相当于foreach的var吗?------对呢
+                $.each(msg.data, function (index, province) { //这里我用each循环，msg.data是你的list，index是第几个，city是你的对象
+                    item += "<option value=\"" + province.id + "\">" + province.name + "</option>"; //继续拼接就好了
+                });
+                //--那个传到后台的数据要是string哟，因为你数据库存的是地址，不是外键哦
+                //--也就是说要用cityname来传值
+                //--差不多哟
+                // bilibili丶教主 2019/1/9 17:33:29
+                //而且要把他拼成一串
+                // 循环完了就渲染
+                provinceList.html(item);
+            }
+            //layui的select还必须由layui自己重新加载一次，这是layui特有的
+            form.render('select'); //刷新select选择框渲染
+        });
+
+        form.on('select(test1)', function (data) {
+
+            $('#city1').hide();
+            $('#country1').hide();
+            console.log(data);
+            console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值
+            console.log(data.othis); //得到美化后的DOM对象
+
+
+            $.post("/address/findCityOrCountry", {pid: data.value}, function (msg) {
+                var cityList = $('#city'), item = "";
+                //首先拿到值首先要做的是清空，不然以前的数据都还在，这里，我们用html直接替换掉
+                console.log(msg.data);
+                //这里拿到数据，赋值给全局的变量
+                cityItem = msg.data;
+                //从这里开始完全都是jq，跟ajax没有任何关系
+                if (msg.data !== null) { //如果传入的数据不是空的就进行渲染
+                    item += "<option value=\"\">请选择城市</option>"; //先添加一条基本的
+                    //然后循环遍历,city是msg.data里面的就是相当于foreach的var吗?------对呢
+                    $.each(msg.data, function (index, city) { //这里我用each循环，msg.data是你的list，index是第几个，city是你的对象
+                        item += "<option value=\"" + city.id + "\">" + city.name + "</option>"; //继续拼接就好了
+                    });
+                    //--那个传到后台的数据要是string哟，因为你数据库存的是地址，不是外键哦
+                    //--也就是说要用cityname来传值
+                    //--差不多哟
+                    // bilibili丶教主 2019/1/9 17:33:29
+                    //而且要把他拼成一串
+                    // 循环完了就渲染
+                    cityList.html(item);
+                }
+                //layui的select还必须由layui自己重新加载一次，这是layui特有的
+                form.render('select'); //刷新select选择框渲染
+                $('#city1').show();//你知道怎么去除那个隐藏的属性吗 --直接.show吖
+                //.hidden是隐藏
+                // $('#country1').css("display","none");
+
+            })
+        });
+
+        //有bug的，怎么改
+        form.on('select(test2)', function (data) {
+            console.log(data.value);
+            $.post("/address/findCityOrCountry", {pid: data.value}, function (msg) {
+                var countryList = $("[name = 'country']"), item = "";
+                if (msg.data !== null) {
+                    countryItem = msg.data;
+                    item += "<option value=\"\">请选择县/城镇</option>";
+
+                    $.each(msg.data, function (index, country) {
+                        item += "<option value=\"" + country.id + "\">" + country.name + "</option>";
+                    });
+                    countryList.html(item);
+                }
+                form.render("select");
+                $("#country1").show();
+
+
+            })
+        });
+
+
+        //监听提交
+        form.on('submit(formDemoAddress)', function (data) {
+            //你想一下怎么取拿值，就是string类型的
+            //拿不到，我们就想其他办法，又不是只有这一个方法
+            //首先你前台是有数据的，不过是局部的，那么我改成全局的不就好了
+            // console.log(data.field); //有id去遍历找
+            // console.log(countryItem);
+            var provinceName = "";
+            $.each(provinceItem, function (index, province) {
+                if (province.id == data.field['province']) {
+                    provinceName += province.name;
+                }
+            });
+            var cityName = "";
+            $.each(cityItem, function (index, city) {
+                if (city.id == data.field['city']) {
+                    //用表单里面的数据id去与获得的cityList比较
+                    /*{username: "123", phone: "13342235110", province: "3", city: "38", country: "417"}
+                       city: "38"
+                       country: "417"
+                       phone: "13342235110"
+                       province: "3"
+                       username: "123"
+                      */
+                    cityName += city.name;
+                }
+            });
+            var countryName = "";
+            $.each(countryItem, function (index, country) {
+                if (country.id == data.field['country']) {
+                    countryName += country.name;
+                }
+            });
+            var address = provinceName + "-" + cityName + "-" + countryName;
+            console.log(address);
+            data.field['name'] = address;
+            //ajax请求
+            $.post("/address/addAddress", data.field, function (res) {
+                layer.msg(res.msg);
+                table.reload('test');
+            })
+            return false;
+        });
+    });
+</script>
+<script>
+    //Demo
+    layui.use(['upload', 'form', 'jquery', 'element'], function () {
+        var upload = layui.upload;
+        var form = layui.form;
+        var $ = layui.$;
+        var find = $("#find");
+        /**
+         *这个要写上jQuery的引用，不然会报没有定义$
+         */
+            //执行实例
+        var uploadInst = upload.render({
+                elem: '#test1' //绑定元素
+                , url: '/user/change_userImg/' //上传接口
+                , done: function (res) {
+                    //上传完毕回调
+                    layer.msg(res.msg);
+                    $("#userImg").attr("src", "/img/userImg/" + res.data);
+                    $("#user_Img_1").attr("src", "/img/userImg/" + res.data);
+                }
+                , error: function () {
+                    //请求异常回调
+                }
+            });
+
+
+        //监听提交
+        form.on('submit(formDemo_changePassword)', function (data) {
+
+            $.post("/user/change_password", data.field, function (res) {
+                if (res.code === 0) {
+                    alert(res.msg + "请重新登录~~");
+                    location.href = "/user/login";
+                } else {
+                    layer.msg(res.msg)
+                }
+            })
+            return false;
+        });
+        find.on("click", function () {
+            var mail = $("[name = 'mail']:eq(0)");
+            if (!/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(mail.val())) {
+                layer.msg("请输入正确的邮箱");
+                return false;
+            }
+            var obj = this;
+            $.ajax({
+                type: "POST",
+                url: "/send",
+                data: {mail: mail.val()},
+                dataType: "json",//返回的
+                success: function (data) {
+                    if (data.code === 0) {
+                        find.addClass("layui-btn-disabled");
+                        find.attr('disabled', "true");
+                        settime(obj);
+                    }
+                    layer.msg(data.msg);
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+
+        });
+        var countdown = 60;
+
+        function settime(obj) {
+            if (countdown === 0) {
+                obj.removeAttribute("disabled");
+                obj.classList.remove("layui-btn-disabled");
+                obj.value = "获取验证码";
+                countdown = 60;
+                return;
+            } else {
+
+                obj.value = "重新发送(" + countdown + ")";
+                countdown--;
+            }
+            setTimeout(function () {
+                    settime(obj)
+                }
+                , 1000)
+        }
+
+
+        //监听提交
+        form.on('submit(formDemoMail)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            $.post("/bindMail", data.field, function (data) {
+                layer.msg(data.msg)
+            })
+            return false;
+        });
+    });
 </script>
 <jsp:include page="footer.jsp"/>

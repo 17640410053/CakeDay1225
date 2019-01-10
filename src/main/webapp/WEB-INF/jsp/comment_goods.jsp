@@ -119,64 +119,8 @@
 
                     <div id="test5"></div>
                     <input type="text" id="number5" name="star5" value="" style="display: none">
-                    <script>
-                        layui.use(['rate'], function () {
-                            var rate = layui.rate;
 
-                            //自定义文本
-                            rate.render({
-                                elem: '#test5'
-                                , value: 5
-                                , text: true
-                                , setText: function (value) { //自定义文本的回调
-                                    var arrs = {
-                                        '1': '极差'
-                                        , '2': '差'
-                                        , '3': '中等'
-                                        , '4': '好'
-                                        , '5': '极好'
-                                    };
-                                    this.span.text(arrs[value] || (value + "星"));
-                                    $("#number5").val(value);
-                                }
-                            })
-                            rate.render({
-                                elem: '#test3'
-                                , value: 5
-                                , text: true
-                                , setText: function (value) { //自定义文本的回调
-                                    var arrs = {
-                                        '1': '极差'
-                                        , '2': '差'
-                                        , '3': '中等'
-                                        , '4': '好'
-                                        , '5': '极好'
-                                    };
-                                    this.span.text(arrs[value] || (value + "星"));
-                                    $("#number3").val(value);
-                                }
-                            })
-                            rate.render({
-                                elem: '#test4'
-                                , value: 5
-                                , text: true
-                                , setText: function (value) { //自定义文本的回调
-                                    var arrs = {
-                                        '1': '极差'
-                                        , '2': '差'
-                                        , '3': '中等'
-                                        , '4': '好'
-                                        , '5': '极好'
-                                    };
-                                    this.span.text(arrs[value] || (value + "星"));
-                                    $("#number4").val(value);
-                                }
-                            })
 
-                        });
-                    </script>
-
-                    <%--<a href=""><span style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>--%>
                 </div>
             </div>
 
@@ -218,60 +162,7 @@
             </div>
 
 
-            <%--      <button class="layui-btn test" lay-data="{url: '/upload/'}">上传图片</button>
-                  <button class="layui-btn test" lay-data="{url: '/upload/', accept: 'file'}">上传文件</button>
 
-                  <button type="button" class="layui-btn" id="test1">
-                      <i class="layui-icon">&#xe67c;</i>上传图片
-                  </button>
-
-                  <button onclick="location.replace(document.referrer)" type="button" class="layui-btn layui-btn-primary">
-                      &nbsp;返回 &nbsp;
-                  </button>--%>
-
-            <%--     <script>
-                     layui.use('upload', function () {
-                         var upload = layui.upload;
-
-                         //执行实例
-                         var uploadInst = upload.render({
-                             elem: '#test1' //绑定元素
-                             , url: '/upload/' //上传接口
-                             , done: function (res) {
-                                 //上传完毕回调
-                                 alert(res.msg)
-                             }
-                             , error: function () {
-                                 // alert(res.msg)
-                                 //请求异常回调
-                             }
-                         });
-
-                         upload.render({
-                             elem: '.test'
-                             , done: function (res, index, upload) {
-                                 //获取当前触发上传的元素，一般用于 elem 绑定 class 的情况，注意：此乃 layui 2.1.0 新增
-                                 var item = this.item;
-                             }
-                         })
-                     });
-                 </script>--%>
-
-            <%--把下面的内容提到上面，效果一样--%>
-            <%--    <div class="layui-upload ">
-
-                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                        预览图：
-                        <div class="layui-upload-list" id="imgs">
-                        </div>
-                    </blockquote>
-
-
-                </div>
-                <button type="button" class="layui-btn layui-btn-normal" id="sele_imgs">选择文件</button>
-                <button type="button" class="layui-btn" id="upload_imgs" disabled>开始上传</button>
-
-                <button type="button" class="layui-btn layui-btn-danger" id="dele_imgs">删除选中图片</button>--%>
             <script id="img_template" type="text/html">
                 <div class="upload-img" filename="{{ d.index }}">
                     <input type="checkbox" name="" lay-skin="primary">
@@ -281,8 +172,6 @@
             <br>
             <br>
             <br>
-            <%--  <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-              <button type="reset" class="layui-btn layui-btn-primary">重置</button>--%>
 
         </form>
         <script>
@@ -377,6 +266,64 @@
 
             });
         </script>
+
+        <script>
+            layui.use(['rate'], function () {
+                var rate = layui.rate;
+
+                //自定义文本
+                rate.render({
+                    elem: '#test5'
+                    , value: 5
+                    , text: true
+                    , setText: function (value) { //自定义文本的回调
+                        var arrs = {
+                            '1': '极差'
+                            , '2': '差'
+                            , '3': '中等'
+                            , '4': '好'
+                            , '5': '极好'
+                        };
+                        this.span.text(arrs[value] || (value + "星"));
+                        $("#number5").val(value);
+                    }
+                })
+                rate.render({
+                    elem: '#test3'
+                    , value: 5
+                    , text: true
+                    , setText: function (value) { //自定义文本的回调
+                        var arrs = {
+                            '1': '极差'
+                            , '2': '差'
+                            , '3': '中等'
+                            , '4': '好'
+                            , '5': '极好'
+                        };
+                        this.span.text(arrs[value] || (value + "星"));
+                        $("#number3").val(value);
+                    }
+                })
+                rate.render({
+                    elem: '#test4'
+                    , value: 5
+                    , text: true
+                    , setText: function (value) { //自定义文本的回调
+                        var arrs = {
+                            '1': '极差'
+                            , '2': '差'
+                            , '3': '中等'
+                            , '4': '好'
+                            , '5': '极好'
+                        };
+                        this.span.text(arrs[value] || (value + "星"));
+                        $("#number4").val(value);
+                    }
+                })
+
+            });
+        </script>
+
         <script>
             //Demo
             layui.use('form', function () {
@@ -396,34 +343,7 @@
                         }
                     });
                     return false;
-                    /*  layer.msg(JSON.stringify(data.field));
-                                       return false;
-                                       $.ajax({
-                                           url: '/submit_comment',
-                                           type: 'post',
-                                           dataType: 'json',
-                                           data: data.field,
-                                           beforeSend: function () { //触发ajax请求开始时执行
-                                               $("#tijiao").attr("disabled", "true"); //改变提交按钮上的文字并将按钮设置为不可点击
-                                           },
-                                           success: function (result) {
-                                               console.log(result);
-                                               if (result.code === 0) {
-                                                   layer.msg("更新组织信息成功!", {time: 2000, icon: 1});
-                                                   location.href = "/test_success?comm_id=" + result.data;
-                                               } else {
-                                                   layer.msg(result.msg, {time: 2000, icon: 2}, function () {
-                                                       $("#tijiao").removeAttr("disabled"); //改变提交按钮上的文字并将按钮设置为可点击
-                                                   });
-                                               }
-                                           },
-                                           error: function () {
-                                               layer.msg(result.msg, {time: 2000, icon: 2}, function () {
-                                                   $("#tijiao").removeAttr("disabled"); //改变提交按钮上的文字并将按钮设置为可点击
-                                               });
-                                           }
-                                       });
-                                       return false;*/
+
 
 
                 });
@@ -432,115 +352,6 @@
             });
         </script>
 
-        <%--这个也是好的--%>
-        <%--  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-
-                
-              <legend>图片信息</legend>
-
-          </fieldset>
-           
-           
-          <div class="layui-upload">
-               
-              <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
-               
-               
-              <div class="layui-upload-list">
-                     
-                  <table class="layui-table">
-                           
-                      <thead>
-                             
-                      <tr>
-                          <th>文件名</th>
-                                 
-                          <th>大小</th>
-                                 
-                          <th>状态</th>
-                                 
-                          <th>操作</th>
-                               
-                      </tr>
-                      </thead>
-                           
-                      <tbody id="demoList"></tbody>
-                         
-                  </table>
-                   
-              </div>
-               
-              <button type="button" class="layui-btn" id="testListAction">开始上传</button>
-               
-              <button type="button" class="layui-btn" id="back">返回</button>
-          </div>
-
-          <script>
-
-              layui.use('upload', function () {
-                  var $ = layui.jquery
-                      , upload = layui.upload;
-                  // var id = $("#agendaId").val();
-                  //多文件列表示例
-                  var demoListView = $('#demoList')
-                      , uploadListIns = upload.render({
-                      elem: '#testList'
-                      , url: '/fileUploadFiles/'
-                      , accept: 'file'
-                      , data: {}   //可放扩展数据  key-value
-                      , multiple: true
-                      , auto: false
-                      , bindAction: '#testListAction'
-                      , choose: function (obj) {
-                          var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
-                          //读取本地文件
-                          obj.preview(function (index, file, result) {
-                              var tr = $(['<tr id="upload-' + index + '">'
-                                  , '<td>' + file.name + '</td>'
-                                  , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
-                                  , '<td>等待上传</td>'
-                                  , '<td>'
-                                  , '<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
-                                  , '<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
-                                  , '</td>'
-                                  , '</tr>'].join(''));
-
-                              //单个重传
-                              tr.find('.demo-reload').on('click', function () {
-                                  obj.upload(index, file);
-                              });
-
-                              //删除
-                              tr.find('.demo-delete').on('click', function () {
-                                  delete files[index]; //删除对应的文件
-                                  tr.remove();
-                                  uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
-                              });
-
-                              demoListView.append(tr);
-                          });
-                      }
-                      , done: function (res, index, upload) {
-                          if (res.code === 0) {
-                              alert(res.data);
-                          } //上传成功
-                          var tr = demoListView.find('tr#upload-' + index)
-                              , tds = tr.children();
-                          tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-                          tds.eq(3).html(''); //清空操作
-                          return delete this.files[index]; //删除文件队列已经上传成功的文件
-
-                      } //code为后台传回来的数据，具体多少自己定，
-
-                      //后台只能传回json格式数据，不然会走error函数；
-
-                      , error: function (index, upload) {
-
-                      }
-                  });
-              })
-          </script>
-  --%>
 
     </div>
 

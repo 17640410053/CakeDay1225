@@ -114,10 +114,7 @@
                 </div>
             </div>
             <div class="detail test3">
-                <%--<h4>详情</h4>--%>
-                <%--<div class="item">--%>
-                <%--<img src="<c:url value="/res/static/img/details_imgbig.jpg"/>">--%>
-                <%--</div>--%>
+
 
 
                 <div class="layui-tab">
@@ -174,49 +171,7 @@
                                                     </div>
                                                 </div>
                                             </c:forEach>
-                                            <%--layui.code--%>
-                                            <%--          <table class="layui-table" lay-skin="line">
-                                                          <colgroup>
-                                                              <col width="150">
-                                                              <col width="200">
-                                                              <col>
-                                                          </colgroup>
-                                                          &lt;%&ndash;    <thead>
-                                                              <tr>
-                                                                  <th>昵称</th>
-                                                                  <th>加入时间</th>
-                                                                  <th>签名</th>
-                                                              </tr>
-                                                              </thead>&ndash;%&gt;
-                                                          <tbody>
-                                                          <c:forEach items="${commentVoList}" var="commentVo">
 
-
-                                                              <tr>
-                                                                  <td>
-                                                                      <div><img src="/img/userImg/${commentVo.users.image}"
-                                                                                alt=""
-                                                                                style="height: 35px;width: 35px;border-radius: 50%">
-                                                                          <span>${commentVo.users.username}</span>
-                                                                      </div>
-                                                                  </td>
-                                                                  <td>${commentVo.content}
-                                                                      <c:forEach items="${commentVo.img}" var="commImg">
-                                                                          <img src="/upload/${commImg}" alt=""
-                                                                               style="height: 60px;width: 60px;">
-                                                                      </c:forEach>
-                                                                      <span> ${commentVo.createTime}</span>
-                                                                  </td>
-                                                                  <td>人生就像是一场修行</td>
-                                                              </tr>
-                                                          </c:forEach>
-                                                          &lt;%&ndash;             <tr>
-                                                                           <td>许闲心</td>
-                                                                           <td>2016-11-28</td>
-                                                                           <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                                                                       </tr>&ndash;%&gt;
-                                                          </tbody>
-                                                      </table>--%>
                                         </div>
                                         <div class="layui-tab-item">
 
@@ -451,13 +406,5 @@
 </script>
 
 
-<%--
 
-layer.open({
-  title: '在线调试'
-  ,content: '可以填写任意的layer代码'
-});
-  layer.alert('酷毙了', {icon: 1});
-
-  --%>
 <jsp:include page="footer.jsp"/>
