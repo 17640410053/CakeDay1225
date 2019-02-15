@@ -15,10 +15,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
         </div>
         <div class="OrderList">
             <div class="order-content" id="list-cont">
-                <c:forEach items="${orderVos}" var="order" >
+                <c:forEach items="${orderVos}" var="order">
                     <c:forEach items="${order.orderDetailList}" var="orderDetail" varStatus="i">
                         <ul class="item-content layui-clear" id="cart-list-${orderDetail.goods_id}">
                             <li class="th th-chk">
@@ -78,7 +78,7 @@
                             <li class="th th-item">
                                 <div class="item-cont">
                                     <a href="javascript:;">
-                                        <img src="<c:url value="/cakeImg/${orderDetail.goods.img}"/>"  alt=""></a>
+                                        <img src="<c:url value="/cakeImg/${orderDetail.goods.img}"/>" alt=""></a>
                                     <div class="text">
                                         <div class="title">${orderDetail.goods.name}</div>
                                     </div>
@@ -111,7 +111,9 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <%--<button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>--%>
-                    <a href="<c:url value="/order/order_list"/>"><button type="button" class="layui-btn layui-btn-primary">返回</button></a>
+                    <a href="<c:url value="/order/order_list"/>">
+                        <button type="button" class="layui-btn layui-btn-primary">返回</button>
+                    </a>
                 </div>
             </div>
 
@@ -148,9 +150,6 @@
         </form>
 
 
-
-
-
         <script>
 
             //Demo
@@ -159,19 +158,19 @@
                 form.render();
                 //监听提交
                 form.on('submit(formDemo)', function (data) {
-                    $.post('/addOrder', data.field, function (msg) {
+                    $.post('${pageContext.request.contextPath}/addOrder', data.field, function (msg) {
                         if (msg.code === 0) {
                             layer.msg(msg.msg);
                             /**
                              * 在这儿写成功登陆的话去主页
                              * */
-                            location.href = "/order/pay_order?order_id=" + msg.data;
+                            location.href = "${pageContext.request.contextPath}/order/pay_order?order_id=" + msg.data;
                         } else {
                             layer.msg(msg.msg);
                         }
                     });
 
-                    layer.msg(JSON.stringify(data.field));
+                    // layer.msg(JSON.stringify(data.field));
                     return false;
                 });
             });
@@ -181,7 +180,7 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 

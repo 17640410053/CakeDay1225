@@ -61,10 +61,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">商品</label>
                 <div class="layui-input-block">
-                    <img src="/cakeImg/${goods.img}" alt="" style="height: 100px;width: 100px;">
+                    <img src="<c:url value="/cakeImg/${goods.img}"/>" alt="" style="height: 100px;width: 100px;">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -199,7 +199,7 @@
                 var uploadInst = upload.render({
                     elem: '#sele_imgs'  //开始
                     , acceptMime: 'image/*'
-                    , url: '/fileUploadFiles/'
+                    , url: '${pageContext.request.contextPath}/fileUploadFiles/'
                     , auto: false
                     , bindAction: '#upload_imgs'
                     , multiple: true
@@ -334,10 +334,10 @@
                     data.field['order_id']='${orderTable.order_id}';
                     data.field['comment_token'] = '${c_token}';
 
-                    $.post('/submit_comment', data.field, function (msg) {
+                    $.post('${pageContext.request.contextPath}/submit_comment', data.field, function (msg) {
                         if (msg.code === 0) {
                             layer.msg(msg.msg);
-                            location.href = "/test_success?comm_id=" + msg.count+"&order_id="+msg.data;
+                            location.href = "${pageContext.request.contextPath}/test_success?comm_id=" + msg.count+"&order_id="+msg.data;
                         } else {
                             layer.msg(msg.msg);
                         }
@@ -358,7 +358,7 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 

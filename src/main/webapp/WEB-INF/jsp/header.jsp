@@ -80,7 +80,7 @@
     </div>
 </div>
 <script></script>
-<script>
+<%--<script>
     //Demo
     layui.use('form', function () {
         var form = layui.form;
@@ -90,18 +90,18 @@
             return false;
         });
     });
-</script>
+</script>--%>
 
 <script type="text/javascript">
     layui.config({
-        base: '/res/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['jquery', 'form'], function () {
         var $ = layui.$, form = layui.form;
         //监听提交
         form.on('submit(formDemo_search)', function (data) {
-            $.post('/searchGoods', data.field, function (data) {
+            $.post('${pageContext.request.contextPath}/searchGoods', data.field, function (data) {
                 if (data.code === 0) {
-                    location.href = "/commoditySearch";
+                    location.href = "${pageContext.request.contextPath}/commoditySearch";
                 } else {
                     layer.alert("网络连接错误，请稍后再试");
                 }

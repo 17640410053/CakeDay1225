@@ -15,10 +15,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -192,7 +192,7 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car','jquery'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
       /*  var $ = layui.$;
@@ -302,7 +302,7 @@
                 layer.confirm('你确定要删除吗', {
                     yes: function (index, layero) {
                         layer.close(index);
-                        $.post("/deleteAllGoods", {}, function (data) {
+                        $.post("${pageContext.request.contextPath}/deleteAllGoods", {}, function (data) {
                             layer.alert(data.msg)
                         });
                         for (var i = 0; i < uls.length; i++) {
@@ -356,15 +356,17 @@
         //这个总价还要处理下
         switch (num) {
             case 1:
-                $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
+                $.post("${pageContext.request.contextPath}/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
                     if (num === 1 && data.code === 1010) {
                         $('.Quantity-input').val(10)
-                        layer.alert(data.msg);
+                        layer.msg(data.msg);
+                    }else {
+                        layer.msg(data.msg);
                     }
                 });
                 break;
             case 2:
-                $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
+                $.post("${pageContext.request.contextPath}/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
                     if (num === 2 && data.code === 101) {
                         if (data.count === 0) {
                             $('.pieces-total').html("￥0.00");
@@ -378,13 +380,13 @@
                         }
                         $('#cart-list-' + id).remove();
                     } else {
-                        layer.alert(data.msg);
+                        layer.msg(data.msg);
                     }
                 });
                 break;
             case 3:
                 if (confirm("确认要删除吗?")) {
-                    $.post("/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
+                    $.post("${pageContext.request.contextPath}/addGoodsToCart", {goods_id: id, money: price, num: num}, function (data) {
                         if (data.code === 0) {
                             if (data.count === 0) {
                                 $('.pieces-total').html("￥0.00");
@@ -399,7 +401,7 @@
                             }
                             $('#cart-list-' + id).remove();
                         } else {
-                            layer.alert(data.msg);
+                            layer.msg(data.msg);
                         }
                     });
                 }

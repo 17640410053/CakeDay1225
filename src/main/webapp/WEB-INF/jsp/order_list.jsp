@@ -15,10 +15,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -28,58 +28,7 @@
         <p>蛋糕、糖果、点心9折起</p>
     </div>
 
-    <%--    <div class="w1200" >
-            <form class="layui-form" action="">
-                <div class="layui-form-item">
-                    <label class="layui-form-label" style="margin-left: -20px;font-size: larger">收货地址</label>
-                    <div class="layui-input-block" style="width: 700px">
-                        <select name="address_id"   lay-verify="required">
-                           &lt;%&ndash; <option value=""></option>
-                            <option value="0">北京</option>
-                            <option value="1">上海</option>
-                            <option value="2">广州</option>
-                            <option value="3">深圳</option>
-                            <option value="4">杭州</option>&ndash;%&gt;
-                               <c:forEach items="${addressList}" var="a" varStatus="ai">
-                                   <option value="${a.id}">${a.name}&nbsp;&nbsp;${a.phone}&nbsp;&nbsp;${a.detail}</option>
-                               </c:forEach>
-                        </select>
-                        <a href=""><span  style="margin-right: -100px;margin-top: -30px;float: right">添加收货地址</span></a>
-                    </div>
 
-                </div>
-            &lt;%&ndash;    <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>&ndash;%&gt;
-            </form>
-
-            <script>
-
-                //Demo
-                layui.use('form', function(){
-                    var form = layui.form;
-                    form.render();
-                    //监听提交
-                    form.on('submit(formDemo)', function(data){
-                        layer.msg(JSON.stringify(data.field));
-                        return false;
-                    });
-                });
-            </script>
-         &lt;%&ndash;   <select name="address_id" id="address" style="width:60%;height: 25px" class="form-control">
-                <c:forEach items="${addressList}" var="a" varStatus="ai">
-                    <option value="${a.id}">${a.name}&nbsp;&nbsp;${a.phone}&nbsp;&nbsp;${a.detail}</option>
-                </c:forEach>
-            </select>
-            <c:if test="${empty addressList}">
-                <a href="/address/showAddress">添加收货地址</a>
-            </c:if>
-            <h3>精选品质</h3>
-            <p>蛋糕、糖果、点心9折起</p>&ndash;%&gt;
-        </div>--%>
 
     <div class="cart w1200">
 
@@ -686,45 +635,8 @@
 </div>
 
 
-<!-- 模版导入数据 -->
-<!-- <script type="text/html" id="demo">
-{{# layui.each(d.infoList,function(index,item){}}
-<ul class="item-content layui-clear">
-<li class="th th-chk">
-<div class="select-all">
-<div class="cart-checkbox">
-<input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all" value="true">
-</div>
-</div>
-</li>
-<li class="th th-item">
-<div class="item-cont">
-<a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
-<div class="text">
-<div class="title">宝宝T恤棉质小衫</div>
-<p><span>粉色</span> <span>130</span>cm</p>
-</div>
-</div>
-</li>
-<li class="th th-price">
-<span class="th-su">189.00</span>
-</li>
-<li class="th th-amount">
-<div class="box-btn layui-clear">
-<div class="less layui-btn">-</div>
-<input class="Quantity-input" type="" name="" value="1" disabled="disabled">
-<div class="add layui-btn">+</div>
-</div>
-</li>
-<li class="th th-sum">
-<span class="sum">189.00</span>
-</li>
-<li class="th th-op">
-<span class="dele-btn">删除</span>
-</li>
-</ul>
-{{# });}}
-</script> -->
+
+
 
 
 <script>
@@ -735,13 +647,13 @@
         form.render();
         //监听提交
         form.on('submit(formDemo)', function (data) {
-            $.post('/addOrder', data.field, function (msg) {
+            $.post('${pageContext.request.contextPath}/addOrder', data.field, function (msg) {
                 if (msg.code === 0) {
                     layer.msg(msg.msg);
                     /**
                      * 在这儿写成功登陆的话去主页
                      * */
-                    location.href = "/order/pay_order?order_id=" + msg.data;
+                    location.href = "${pageContext.request.contextPath}/order/pay_order?order_id=" + msg.data;
                 } else {
                     layer.msg(msg.msg);
                 }

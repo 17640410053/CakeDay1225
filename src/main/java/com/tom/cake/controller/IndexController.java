@@ -39,6 +39,7 @@ public class IndexController {
     @RequestMapping("/index")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("index");
+        mv.addObject("title", "主页");
         /**
          * 商品分类及具体分类
          */
@@ -155,12 +156,20 @@ public class IndexController {
         mv.addObject("imgCommentVoList", imgCommentVoList);
         mv.addObject("byStar", byStar);
         mv.addObject("goods", goods);
+        mv.addObject("title", "商品详情");
         return mv;
     }
 
     @RequestMapping("/test")
     public ModelAndView test() {
         return new ModelAndView("test1");
+    }
+
+    @RequestMapping("/404")
+    public ModelAndView error() {
+        ModelAndView modelAndView = new ModelAndView("404");
+        modelAndView.addObject("title", "404");
+        return modelAndView;
     }
 
     @RequestMapping("/img_show")

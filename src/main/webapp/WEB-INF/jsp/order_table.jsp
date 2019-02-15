@@ -16,9 +16,9 @@
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
                     <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -131,11 +131,10 @@
 
             <div class="FloatBarHolder layui-clear">
 
-                <%--<div class="th Settlement">--%>
-                <%--<button class="layui-btn settle-accounts" onclick="goOrder()">提交定单</button>--%>
+
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>
+                        <button class="layui-btn" lay-submit lay-filter="orderForm">提交定单</button>
                         <button type="button" class="layui-btn layui-btn-primary">返回</button>
                     </div>
                 </div>
@@ -154,17 +153,17 @@
                 var form = layui.form;
                 form.render();
                 //监听提交
-                form.on('submit(formDemo)', function (data) {
-                    $.post('/addOrder', data.field, function (msg) {
+                form.on('submit(orderForm)', function (data) {
+                    $.post('${pageContext.request.contextPath}/addOrder', data.field, function (msg) {
                         if (msg.code === 0) {
                             layer.msg(msg.msg);
-                            location.href = "/order/pay_order?order_id=" + msg.data;
+                            location.href = "${pageContext.request.contextPath}/order/pay_order?order_id=" + msg.data;
                         } else {
                             layer.msg(msg.msg);
                         }
                     });
 
-                    layer.msg(JSON.stringify(data.field));
+                    // layer.msg(JSON.stringify(data.field));
                     return false;
                 });
             });
@@ -174,145 +173,13 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 
-        // 模版导入数据
-        // var html = demo.innerHTML,
-        // listCont = document.getElementById('list-cont');
-        // mm.request({
-        //   url: '../json/shopcart.json',
-        //   success : function(res){
-        //     listCont.innerHTML = mm.renderHtml(html,res)
-        //     element.render();
-        //     car.init()
-        //   },
-        //   error: function(res){
-        //     console.log(res);
-        //   }
-        // })
-        //
-        // car.init();
 
-        /*var uls = document.getElementById('list-cont').getElementsByTagName('ul');//每一行
-        var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
-        var checkAll = document.getElementsByClassName('check-all'); //全选框
-        var SelectedPieces = document.getElementsByClassName('Selected-pieces')[0];//总件数
-        var piecesTotal = document.getElementsByClassName('pieces-total')[0];//总价
-        var batchdeletion = document.getElementsByClassName('batch-deletion')[0]//批量删除按钮
-        /!*计算*!/
-        function getTotal() {
-            var seleted = 0, price = 0;
-            for (var i = 0; i < uls.length; i++) {
-                if (uls[i].getElementsByTagName('input')[0].checked) {
-                    seleted += parseInt(uls[i].getElementsByClassName('Quantity-input')[0].value);
-                    price += parseFloat(uls[i].getElementsByClassName('sum')[0].innerHTML);
-                }
-            }
-            SelectedPieces.innerHTML = seleted;
-            piecesTotal.innerHTML = '￥' + price.toFixed(2);
-        }
 
-        function fn1() {
-            alert(1)
-        }
 
-        // 小计
-        function getSubTotal(ul) {
-            var unitprice = parseFloat(ul.getElementsByClassName('th-su')[0].innerHTML);
-            var count = parseInt(ul.getElementsByClassName('Quantity-input')[0].value);
-            var SubTotal = parseFloat(unitprice * count)
-            ul.getElementsByClassName('sum')[0].innerHTML = SubTotal.toFixed(2);
-        }
-
-        /!*全选框功能*!/
-
-        for (var i = 0; i < checkInputs.length; i++) {
-            checkInputs[i].onclick = function () {
-                if (this.className === 'check-all check') {
-                    for (var j = 0; j < checkInputs.length; j++) {
-                        checkInputs[j].checked = this.checked;
-                    }
-                }
-                if (this.checked === false) {
-                    for (var k = 0; k < checkAll.length; k++) {
-                        checkAll[k].checked = false;
-                    }
-                }
-                getTotal()
-            }
-        }
-
-        for (var i = 0; i < uls.length; i++) {
-            uls[i].onclick = function (e) {
-                e = e || window.event;
-                var el = e.srcElement;
-                var cls = el.className;
-                var input = this.getElementsByClassName('Quantity-input')[0];
-                var less = this.getElementsByClassName('less')[0];
-                var val = parseInt(input.value);
-                var that = this;
-                switch (cls) {
-                    case 'add layui-btn':
-                        if (val < 10) {
-                            input.value = val + 1;
-                        }
-                        getSubTotal(this);
-                        break;
-                    case 'less layui-btn':
-                        if (val > 1) {
-                            input.value = val - 1;
-                        }
-                        getSubTotal(this);
-                        break;
-                    case 'dele-btn':
-                        getSubTotal(this);
-                        break;
-                }
-                getTotal()
-            }
-        }
-
-        batchdeletion.onclick = function () {
-            if (SelectedPieces.innerHTML != 0) {
-                layer.confirm('你确定要删除吗', {
-                    yes: function (index, layero) {
-                        layer.close(index);
-                        $.post("/deleteAllGoods", {}, function (data) {
-                            layer.alert(data.msg)
-                        });
-                        for (var i = 0; i < uls.length; i++) {
-                            var input = uls[i].getElementsByTagName('input')[0];
-                            if (input.checked) {
-                                uls[i].parentNode.removeChild(uls[i]);
-                                i--;
-                            }
-                        }
-                        getTotal()
-                    }
-
-                })
-            } else {
-                layer.msg('请选择商品')
-            }
-
-        }
-
-        checkAll[0].checked = true;
-        checkAll[0].onclick();
-
-        /!*
-                $('.settle-accounts').on('click', function () {
-                    // layer.alert("啦啦啦");
-                    $.post("/order/addOrder", {}, function (data) {
-
-                    })
-                })*!/
-
-        function test(num) {
-            layer.alert("123" + num);
-        }*/
 
 
     })

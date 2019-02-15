@@ -50,12 +50,15 @@ public class CommodityController {
         goods.setStar(8);
         List<Goods> byStar = goodsService.findByStar(goods);
         mv.addObject("byStar", byStar);
+        mv.addObject("title","所有商品");
+
         return mv;
     }
 
     @RequestMapping("/commoditySearch")
     public ModelAndView commoditySearch() {
         ModelAndView mv = new ModelAndView("commoditysearch");
+        mv.addObject("title","搜索商品");
         List<TypeVo> typeVoList = typeService.findForChild();
         mv.addObject("typeVoList", typeVoList);
         mv.addObject("searchGoods", searchGoods);

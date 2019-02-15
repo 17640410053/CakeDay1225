@@ -15,10 +15,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <c:if test="${orderVos.get(0).status != -2}">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button class="layui-btn" lay-submit lay-filter="drawbackForm">立即提交</button>
                     </c:if>
                     <c:if test="${orderVos.get(0).status == -2}">
                         <a class="layui-btn"
@@ -188,11 +188,11 @@
                 form.render();
                 //监听提交
                 //监听提交
-                form.on('submit(formDemo)', function (data) {
+                form.on('submit(drawbackForm)', function (data) {
                     data.field['drawback_token'] = '${sessionScope.order_token}';
-                    $.post('/order/order_drawback_commit', data.field, function (data) {
+                    $.post('${pageContext.request.contextPath}/order/order_drawback_commit', data.field, function (data) {
                         if (data.code === 0) {
-                            location.href = "/order/order_drawback_success";
+                            location.href = "${pageContext.request.contextPath}/order/order_drawback_success";
                         } else {
                             layer.msg(data.msg);
                         }
@@ -206,7 +206,7 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 

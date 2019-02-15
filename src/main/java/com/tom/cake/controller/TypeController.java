@@ -31,6 +31,8 @@ public class TypeController extends BaseController {
         List<TypeVo> typeVoList = typeService.findForChild();
         mv.addObject("typeVoList", typeVoList);
         mv.addObject("byType", byType);
+        mv.addObject("title","商品分类");
+
         return mv;
 
     }

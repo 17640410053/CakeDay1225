@@ -39,6 +39,7 @@ public class OrderController extends BaseController {
         ModelAndView mv = new ModelAndView("pay_order");
         OrderTable order = orderTableService.findByOrderId(orderTable);
         mv.addObject("order", order);
+        mv.addObject("title", "订单支付");
         return mv;
     }
 
@@ -100,7 +101,7 @@ public class OrderController extends BaseController {
         //waitEstimateOrderList
         orderTable.setStatus(3);
         List<OrderTable> waitEstimateOrderList = orderTableService.findAllOrdersByUId(orderTable);
-
+        mv.addObject("title", "订单列表");
         mv.addObject("orderList", orderList);
         mv.addObject("waitPayOrderList", waitPayOrderList);
         mv.addObject("waitSendOrderList", waitSendOrderList);
@@ -113,6 +114,8 @@ public class OrderController extends BaseController {
     @RequestMapping("/order_info")
     public ModelAndView info(OrderTable orderTable, Integer num) {
         ModelAndView mv = new ModelAndView("order_info");
+        mv.addObject("title","订单详情");
+
         List<OrderTableVo> orderVos = orderTableService.findManyByOrderId(orderTable);
         mv.addObject("orderVos", orderVos);
         if (num != null) {
@@ -122,6 +125,8 @@ public class OrderController extends BaseController {
             if (result.getCode() == 0) {
                 orderVos = orderTableService.findManyByOrderId(orderTable);
             }
+            mv.addObject("title","订单评论");
+
             mv.addObject("orderVos", orderVos);
             return mv;
         }

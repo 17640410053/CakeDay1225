@@ -64,10 +64,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">商品</label>
                 <div class="layui-input-block">
-                    <img src="/cakeImg/${commentVo.goods.img}" alt="" style="height: 100px;width: 100px;">
+                    <img src="<c:url value="/cakeImg/${commentVo.goods.img}"/>" alt="" style="height: 100px;width: 100px;">
                 </div>
             </div>
 
@@ -223,13 +223,13 @@
                               style="resize: none">${commentVo.content}</textarea>
                 </div>
             </div>
-            <div class="layui-form-item">
+       <%--     <div class="layui-form-item">
                 <label class="layui-form-label">追加评论</label>
                 <div class="layui-input-block">
                     <textarea name="content" class="layui-textarea" readonly
                               style="resize: none">${commentVo.add_content}</textarea>
                 </div>
-            </div>
+            </div>--%>
             <c:if test="${!empty commentVo.img}">
                 <div class="layui-form-item">
                     <label class="layui-form-label">评论照片</label>
@@ -254,7 +254,7 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 

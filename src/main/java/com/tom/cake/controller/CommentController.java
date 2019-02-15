@@ -88,7 +88,7 @@ public class CommentController extends BaseController {
                     String fileType = fileName.substring(fileName.lastIndexOf(".")); //获取后缀名
                     String newName = new Date().getTime() + fileType;
 //                    File file2 = new File(savePath, newName); //新建一个文件
-                    String savePath = path + newName;
+                    String savePath = path +"/"+ newName;
                     stringBuffer.append(newName);//拼接文件名
                     System.out.println(savePath);
                     file[i].transferTo(new File(savePath));
@@ -246,6 +246,8 @@ public class CommentController extends BaseController {
         CommentVo commentVo = commentService.findCommentById(comment);
 
         mv.addObject("commentVo", commentVo);
+        mv.addObject("title","查看评论");
+
         return mv;
     }
 
@@ -255,6 +257,8 @@ public class CommentController extends BaseController {
         System.out.println("order_id-------------" + comment.getOrder_id());
         CommentVo commentVo = commentService.findByGoodsIdAndOrderId(comment);
         System.out.println("CommentVo----------------" + commentVo);
+        mv.addObject("title","追加评论");
+
 //        System.out.println("goodsName----------------"+commentVo.getGoods().getName());
         mv.addObject("commentVo", commentVo);
         return mv;

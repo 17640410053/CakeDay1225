@@ -13,9 +13,9 @@
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
                     <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -56,25 +56,25 @@
 
                         <c:forEach items="${byStar}" var="star">
 
+                            <a href="<c:url value="/details?goods_id=${star.goods_id}"/>">
+                                <div class="item">
+                                    <div class="img">
 
-                            <div class="item">
-                                <div class="img">
-                                    <a href="">
                                         <img src="<c:url value="/cakeImg/${star.img}"/>"
                                              style="width: 280px;height: 280px;">
-                                    </a>
-                                </div>
-                                <div class="text">
-                                    <p class="title">${star.name}</p>
-                                    <p class="price">
-                                        <span class="pri">￥${star.price}</span>
-                                        <span class="nub">1266付款</span>
-                                    </p>
-                                </div>
-                            </div>
 
+                                    </div>
+                                    <div class="text">
+                                        <p class="title">${star.name}</p>
+                                        <p class="price">
+                                            <span class="pri">￥${star.price}</span>
+                                            <span class="nub">1266付款</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </a>
                         </c:forEach>
-
 
 
                     </div>
@@ -88,7 +88,7 @@
 <script>
 
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'laypage', 'jquery'], function () {
         var laypage = layui.laypage, $ = layui.$,
             mm = layui.mm;
@@ -98,14 +98,16 @@
         });
 
 
-
-
         $('.sort a').on('click', function (obj) {
             $(this).addClass('active').siblings().removeClass('active');
             var event = obj.event;
-
-
-        })
+            //todo
+            //1.排序和搜索条件一起
+            // $.post("/goods/orderByPrice",function (res) {
+            //
+            // })
+            // alert(123)
+        });
         $('.list-box dt').on('click', function () {
             if ($(this).attr('off')) {
                 $(this).removeClass('active').siblings('dd').show()

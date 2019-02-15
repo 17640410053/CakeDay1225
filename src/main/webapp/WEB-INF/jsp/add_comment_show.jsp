@@ -64,10 +64,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -267,18 +267,22 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['mm', 'jquery', 'element', 'car','form'], function () {
-        var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car,form = layui.form;
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['mm', 'jquery', 'element', 'car', 'form'], function () {
+        var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car, form = layui.form;
 
+        /**
+         *todo
+         * 1.修改成功后跳转的路径
+         * 2.修改ordertable中的每个的按钮的对应跳转路径，改为一致的并且正确的
+         */
 
         //监听提交
         form.on('submit(formDemo_addContent)', function (data) {
 
-            $.post("/comment/addContent", data.field, function (res) {
+            $.post("${pageContext.request.contextPath}/comment/addContent", data.field, function (res) {
                 if (res.code === 0) {
-                    alert(res.msg + "请重新登录~~");
-                    location.href = "/user/login";
+                    location.href = "${pageContext.request.contextPath}/user/login";
                 } else {
                     layer.msg(res.msg)
                 }

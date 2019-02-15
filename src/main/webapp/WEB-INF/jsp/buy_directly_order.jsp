@@ -16,9 +16,9 @@
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
                     <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
 
 
                                     <div class="item-cont">
-                                        <a href="javascript:;"><img src="/cakeImg/${orderDetail.img}" alt=""></a>
+                                        <a href="javascript:;"><img src="${pageContext.request.contextPath}/cakeImg/${orderDetail.img}" alt=""></a>
                                         <div class="text">
                                             <div class="title">${orderDetail.name}</div>
                                             <p><span>雪过天晴后的第一口呼吸，甜蜜清新得不落俗套。</span></p>
@@ -134,7 +134,7 @@
                 <%--<button class="layui-btn settle-accounts" onclick="goOrder()">提交定单</button>--%>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">提交定单</button>
+                        <button class="layui-btn" lay-submit lay-filter="submitOrderDemo">提交定单</button>
                         <button type="button" class="layui-btn layui-btn-primary">返回</button>
                     </div>
                 </div>
@@ -153,14 +153,14 @@
                 var form = layui.form;
                 form.render();
                 //监听提交
-                form.on('submit(formDemo)', function (data) {
-                    $.post('/addOrder', data.field, function (msg) {
+                form.on('submit(submitOrderDemo)', function (data) {
+                    $.post('${pageContext.request.contextPath}/addOrder', data.field, function (msg) {
                         if (msg.code === 0) {
                             layer.msg(msg.msg);
                             /**
                              * 在这儿写成功登陆的话去主页
                              * */
-                            location.href = "/order/pay_order?order_id=" + msg.data;
+                            location.href = "${pageContext.request.contextPath}/order/pay_order?order_id=" + msg.data;
                         } else {
                             layer.msg(msg.msg);
                         }
@@ -176,7 +176,7 @@
 </div>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'jquery', 'element', 'car'], function () {
         var mm = layui.mm, $ = layui.$, element = layui.element, car = layui.car;
 

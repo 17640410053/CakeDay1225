@@ -82,6 +82,8 @@ public class CartController extends BaseController {
     public ModelAndView shopcart(HttpSession session) {
         Users user = getUser(session);
         ModelAndView mv = new ModelAndView("shopcart");
+        mv.addObject("title","购物车");
+
         Cart cart = new Cart();
         cart.setUser_id(user.getUser_id());
         List<CartVo> usersCart = cartService.findForUsersCart(cart);
@@ -132,6 +134,8 @@ public class CartController extends BaseController {
         Long countMoney = cartService.countMoney(cart);
         mv.addObject("cartOrder", usersCart);
         mv.addObject("countMoney", countMoney);
+        mv.addObject("title","订单");
+
         return mv;
     }
 

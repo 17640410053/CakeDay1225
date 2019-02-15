@@ -25,7 +25,7 @@
             <span>|</span>
             <a href="javascript:;">售后服务</a>
             <span>|</span>
-            <a href="javascript:;">母婴资讯</a>
+            <a href="javascript:;">Cake资讯</a>
             <span>|</span>
             <a href="javascript:;">关于货源</a>
         </p>

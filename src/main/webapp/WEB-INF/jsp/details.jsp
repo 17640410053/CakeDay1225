@@ -33,10 +33,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                                 江西&nbsp;&nbsp;南昌&nbsp;&nbsp;东湖区
                             </c:if>
                             <c:if test="${address!=null}">
-                                ${address.name.split(",")[0]}&nbsp;&nbsp;${address.name.split(",")[1]}&nbsp;&nbsp;${address.name.split(",")[2]}
+                                ${address.name.split("-")[0]}&nbsp;&nbsp;${address.name.split("-")[1]}&nbsp;&nbsp;${address.name.split("-")[2]}
                             </c:if>
                         </strong>
                         </p>
@@ -92,7 +92,7 @@
                         <a href="<c:url value="/ordertable?goods_id=${goods.goods_id}"/>">
                             <button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button>
                         </a>
-                        <button class="layui-btn  layui-btn-danger car-btn"><i
+                        <button class="layui-btn layui-btn-danger car-btn"><i
                                 class="layui-icon layui-icon-cart-simple"></i>加入购物车
                         </button>
                     </div>
@@ -162,7 +162,7 @@
                                                                      alt="" style="margin-left: 10px">
                                                             </c:forEach>
                                                         </p>
-                                                        <div style="height: 100%;margin-top: 15px">人生就像是一场修行
+                                                        <div style="height: 100%;margin-top: 15px">
                                                             <p>${commentVo.content}</p>
                                                         </div>
                                                     </div>
@@ -329,7 +329,7 @@
 <script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script type="text/javascript">
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录 这是一个入口，下面有一个入口，可能layer冲突
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录 这是一个入口，下面有一个入口，可能layer冲突
     }).use(['mm', 'jquery', 'layer', 'element'], function () {
         var mm = layui.mm,
             $ = layui.$;
@@ -345,9 +345,7 @@
             $('.number-cont input').val(cur)
         });
         $('.car-btn').click(function () {
-            layer.alert("啦啦啦");
-        }, function () {
-            $.post("/addCart", {goods_id:${goods.goods_id}, money:${goods.price}}, function (data) {
+            $.post("${pageContext.request.contextPath}/addCart", {goods_id:${goods.goods_id}, money:${goods.price}}, function (data) {
                 // layer.alert("啦啦啦");
                 layer.msg(data.msg);
             })
@@ -392,18 +390,7 @@
         }
     });
 </script>
-<script>
-    // layui.use(['element', 'layer'], function () {
-    //     var element = layui.element, $ = layui.$, layer = layui.layer;
-    //     $(".car-btn").click(function () {
-    //         console.log(123);
-    //         layer.msg('酷毙了');//是哪个按钮
-    //     })
-    // });
-    /*   $(function () {
 
-       })*/
-</script>
 
 
 

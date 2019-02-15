@@ -204,14 +204,13 @@
                     <%--这里写你的地址管理代码--%>
 
                     <table class="layui-table"
-                           lay-data="{height:315, url:'/address/findAllAddressByUserId/', page:true, id:'test'}"
+                           lay-data="{url:'${pageContext.request.contextPath}/address/findAllAddressByUserId/', page:true, id:'test'}"
                            lay-filter="test">
                         <thead>
                         <tr>
-                            <th lay-data="{field:'address_id', width:80, sort: true}">地址id</th>
-                            <th lay-data="{field:'name', width:180}">地址</th>
-                            <th lay-data="{field:'username', width:180}">用户名</th>
-                            <th lay-data="{field:'phone',width:280}">联系方式</th>
+                            <th lay-data="{field:'name'}">地址</th>
+                            <th lay-data="{field:'username'}">用户名</th>
+                            <th lay-data="{field:'phone'}">联系方式</th>
                         </tr>
                         </thead>
                     </table>
@@ -337,7 +336,7 @@
         var table = layui.table;
         var provinceItem, cityItem, countryItem;
 
-        $.post('/address/findProvince', function (msg) {
+        $.post('${pageContext.request.contextPath}/address/findProvince', function (msg) {
             var provinceList = $("[name='province']"), item = "";
             //首先拿到值首先要做的是清空，不然以前的数据都还在，这里，我们用html直接替换掉
             console.log(msg.data);
@@ -372,7 +371,7 @@
             console.log(data.othis); //得到美化后的DOM对象
 
 
-            $.post("/address/findCityOrCountry", {pid: data.value}, function (msg) {
+            $.post("${pageContext.request.contextPath}/address/findCityOrCountry", {pid: data.value}, function (msg) {
                 var cityList = $('#city'), item = "";
                 //首先拿到值首先要做的是清空，不然以前的数据都还在，这里，我们用html直接替换掉
                 console.log(msg.data);
@@ -405,7 +404,7 @@
         //有bug的，怎么改
         form.on('select(test2)', function (data) {
             console.log(data.value);
-            $.post("/address/findCityOrCountry", {pid: data.value}, function (msg) {
+            $.post("${pageContext.request.contextPath}/address/findCityOrCountry", {pid: data.value}, function (msg) {
                 var countryList = $("[name = 'country']"), item = "";
                 if (msg.data !== null) {
                     countryItem = msg.data;
@@ -461,7 +460,7 @@
             console.log(address);
             data.field['name'] = address;
             //ajax请求
-            $.post("/address/addAddress", data.field, function (res) {
+            $.post("${pageContext.request.contextPath}/address/addAddress", data.field, function (res) {
                 layer.msg(res.msg);
                 table.reload('test');
             })
@@ -482,12 +481,12 @@
             //执行实例
         var uploadInst = upload.render({
                 elem: '#test1' //绑定元素
-                , url: '/user/change_userImg/' //上传接口
+                , url: '${pageContext.request.contextPath}/user/change_userImg/' //上传接口
                 , done: function (res) {
                     //上传完毕回调
                     layer.msg(res.msg);
-                    $("#userImg").attr("src", "/img/userImg/" + res.data);
-                    $("#user_Img_1").attr("src", "/img/userImg/" + res.data);
+                    $("#userImg").attr("src", "${pageContext.request.contextPath}/img/userImg/" + res.data);
+                    $("#user_Img_1").attr("src", "${pageContext.request.contextPath}/img/userImg/" + res.data);
                 }
                 , error: function () {
                     //请求异常回调
@@ -498,10 +497,10 @@
         //监听提交
         form.on('submit(formDemo_changePassword)', function (data) {
 
-            $.post("/user/change_password", data.field, function (res) {
+            $.post("${pageContext.request.contextPath}/user/change_password", data.field, function (res) {
                 if (res.code === 0) {
                     alert(res.msg + "请重新登录~~");
-                    location.href = "/user/login";
+                    location.href = "${pageContext.request.contextPath}/user/login";
                 } else {
                     layer.msg(res.msg)
                 }
@@ -517,7 +516,7 @@
             var obj = this;
             $.ajax({
                 type: "POST",
-                url: "/send",
+                url: "${pageContext.request.contextPath}/send",
                 data: {mail: mail.val()},
                 dataType: "json",//返回的
                 success: function (data) {
@@ -558,7 +557,7 @@
         //监听提交
         form.on('submit(formDemoMail)', function (data) {
             // layer.msg(JSON.stringify(data.field));
-            $.post("/bindMail", data.field, function (data) {
+            $.post("${pageContext.request.contextPath}/bindMail", data.field, function (data) {
                 layer.msg(data.msg)
             })
             return false;

@@ -15,10 +15,10 @@
         <div class="inner-cont0">
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
-                    <a href="commodity.html" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -194,10 +194,10 @@
 
         var order_id = document.getElementById('order_id').textContent;
         settle.onclick = function () {
-            $.post("/order/pay_response", {order_id: "${order.order_id}", num: 1}, function (data) {
+            $.post("${pageContext.request.contextPath}/order/pay_response", {order_id: "${order.order_id}", num: 1}, function (data) {
                 if (data.code === 0) {
                     layer.msg("支付成功");
-                    location.href = "/order/order_info?order_id=${order.order_id}" ;
+                    location.href = "${pageContext.request.contextPath}/order/order_info?order_id=${order.order_id}" ;
                     /**
                      <%--* todo 这儿不知道可不可以用el表达式？？可以！！order_id用${order.order_id}?--%>
                      *  跳转到详情页面

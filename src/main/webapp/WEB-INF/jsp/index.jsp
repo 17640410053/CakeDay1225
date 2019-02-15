@@ -17,9 +17,9 @@
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
                     <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">Cake资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -181,136 +181,6 @@
                     </div>
                 </c:forEach>
 
-                <%--   <div class="list-item">
-                       <a href="javascript:;"><img src="<c:url value="/res/static/img/more2.jpg"/>"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="/res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="/res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="/res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="/res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more1.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more2.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>
-                   <div class="list-item">
-                       <a href="javascript:;"><img src="../res/static/img/more3.jpg"></a>
-                       <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-                       <span>￥100.00</span>
-                   </div>--%>
             </div>
         </div>
     </div>
@@ -318,7 +188,7 @@
 <script type="text/javascript">
 
     layui.config({
-        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['mm', 'carousel'], function () {
         var carousel = layui.carousel,
             mm = layui.mm;
@@ -330,22 +200,7 @@
             , indicator: 'none'
         }
         carousel.render(option);
-        // 模版引擎导入
-        // var ins = carousel.render(option);
-        // var html = demo.innerHTML;
-        // var listCont = document.getElementById('list-cont');
-        // // console.log(layui.router("#/about.html"))
-        //  mm.request({
-        //    url: '../json/index.json',
-        //    success : function(res){
-        //      console.log(res)
-        //      listCont.innerHTML = mm.renderHtml(html,res)
-        //      ins.reload(option);
-        //    },
-        //    error: function(res){
-        //      console.log(res);
-        //    }
-        //  })
+
 
 
     });

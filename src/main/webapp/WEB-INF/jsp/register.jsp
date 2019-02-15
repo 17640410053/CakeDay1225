@@ -16,9 +16,9 @@
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
                     <a href="<c:url value="/commodity"/>" class="active">所有商品</a>
-                    <a href="buytoday.html">今日团购</a>
-                    <a href="information.html">母婴资讯</a>
-                    <a href="about.html">关于我们</a>
+                    <a href="javascript:;">今日团购</a>
+                    <a href="javascript:;">Cake资讯</a>
+                    <a href="javascript:;">关于我们</a>
                 </div>
             </div>
         </div>
@@ -136,7 +136,7 @@
 
 <script type="text/javascript">
     layui.config({
-        base: '/res/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
+        base: '${pageContext.request.contextPath}/res/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['jquery', 'form', 'element'], function () {
         var $ = layui.$, form = layui.form;
         var find = $("#find");
@@ -151,7 +151,7 @@
             var obj = this;
             $.ajax({
                 type: "POST",
-                url: "/send",
+                url: "${pageContext.request.contextPath}/send",
                 data: {mail: mail.val()},
                 dataType: "json",//返回的
                 success: function (data) {
@@ -189,14 +189,14 @@
 
         //监听提交
         form.on('submit(register-for-code)', function (data) {
-            $.post('/register', data.field, function (msg) {
+            $.post('${pageContext.request.contextPath}/register', data.field, function (msg) {
                 if (msg.code === 2001) {
                     layer.msg(msg.msg);
 
                     /**
                      * 在这儿写成功登陆的话去主页
                      * */
-                    location.href = "/user/login";
+                    location.href = "${pageContext.request.contextPath}/user/login";
                 } else {
                     layer.msg(msg.msg, {time: 2000, icon: 2});
                     // layer.msg(msg.msg);
@@ -206,13 +206,13 @@
         });
         //监听提交
         form.on('submit(register-for-name)', function (data) {
-            $.post('/register', data.field, function (msg) {
+            $.post('${pageContext.request.contextPath}/register', data.field, function (msg) {
                 if (msg.code === 2001) {
                     layer.msg(msg.msg);
                     /**
                      * 在这儿写成功登陆的话去主页
                      * */
-                    location.href = "/user/login";
+                    location.href = "${pageContext.request.contextPath}/user/login";
                 } else {
                     // layer.msg(msg.msg);
                     layer.msg(msg.msg, {time: 2000, icon: 2});
@@ -224,10 +224,10 @@
 
         //监听提交
         form.on('submit(register-for-pass)', function (data) {
-            $.post('/register', data.field, function (msg) {
+            $.post('${pageContext.request.contextPath}/register', data.field, function (msg) {
                 if (msg.code === 2001) {
                     layer.msg(msg.msg);
-                    location.href = "/user/login";
+                    location.href = "${pageContext.request.contextPath}/user/login";
                 } else {
                     // layer.msg(msg.msg);
                     layer.msg(msg.msg, {time: 2000, icon: 2});
@@ -240,7 +240,7 @@
         //
         //2.点击验证码 更新验证码
         $("#page-code").click(function () {
-            $("#page-code").attr("src", "/verifyCode?time=" + new Date());
+            $("#page-code").attr("src", "${pageContext.request.contextPath}/verifyCode?time=" + new Date());
             /*加个/,这样就不会前面加user了*/
         });
     })
