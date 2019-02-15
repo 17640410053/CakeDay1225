@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.cake.mapper.TP_TreeDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.tom.cake.model.TP_Tree">
+        <result column="id" property="id"/>
+        <result column="pid" property="pid"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `pid`,
+        `name`,
+        `type`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO t_p__tree (`id`, `pid`, `name`, `type`)
+        VALUES (#{pojo.id}, #{pojo.pid}, #{pojo.name}, #{pojo.type})
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO t_p__tree
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.pid!=null">`pid`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.type!=null">`type`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.pid!=null">#{pojo.pid},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.type!=null">#{pojo.type},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO t_p__tree (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.pid},
+            #{pojo.name},
+            #{pojo.type}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE t_p__tree
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.pid != null">`pid` = #{pojo.pid},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.type != null">`type` = #{pojo.type}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <select id="selectProvince" resultType="TP_Tree">
+        select *
+        from tp_tree
+        where type = 1
+    </select>
+
+    <select id="selectCityOrCountry" resultType="TP_Tree">
+        select *
+        from tp_tree
+        where pid = #{pid}
+    </select>
+
+
+</mapper>
+
